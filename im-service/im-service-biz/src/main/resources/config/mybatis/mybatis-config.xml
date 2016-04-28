@@ -5,5 +5,7 @@
 <configuration>
     <mappers>
         <mapper resource="config/mybatis/UserDao.xml"/>
+        <mapper resource="config/mybatis/DiagnoseDao.xml"/>
+        <mapper resource="config/mybatis/WatchDao.xml"/>
     </mappers>
 </configuration>

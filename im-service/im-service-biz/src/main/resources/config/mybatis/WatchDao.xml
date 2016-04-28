@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.WatchDao">
+
+    <sql id = "keys">
+        Name,  EvaluationPerson,  EvaluationTime,  Question1,  Comment1,  Question2,  Comment2,
+        Question3,  Comment3,  Question4,  Comment4,  Question5,  Comment5 ,  Question6,
+        Comment6 ,  Question7,  Comment7 ,  Question8,  Comment8 ,  Question9,  Comment9 ,
+        Question10,  Comment10 ,  Question11,  Comment11 ,  Question12,  Comment12 ,
+        Question13,  Comment13 ,  Question14,  Comment14 ,  Question15,  Comment15 ,
+        Question16,  Comment16 , Question17,  Comment17 ,  Question18,  Comment18 ,
+        Question19,  Comment19 , Question20,  Comment20 ,  Question21,  Comment21,  Question22,  Comment22,
+        Question23,  Comment23,  Question24,  Comment24 ,  Question25,  Comment25 , Question26,  Comment26 ,
+        Question27,  Comment27,  Question28,  Comment28,  Question29,  Comment29,
+        Question30,  Comment30,  Question31,  Comment31,  Question32,  Comment32,
+        Question33,  Comment33 ,  Question34,  Comment34,  Question35,  Comment35,
+        Question36,  Comment36,  Question37,  Comment37,  Question38,  Comment38,
+        Question39,  Comment39,  Question40,  Comment40,  Question41,  Comment41,
+        Question42,  Comment42,  Question43,  Comment43,  Question44,  Comment44,
+        Question45,  Comment45,  Question46,  Comment46,  Question47,  Comment47,
+        Question48,  Comment48,  Question49,  Comment49,  Question50,  Comment50,
+        Question51,  Comment51,  Question52,  Comment52,  Question53,  Comment53,
+        Question54,  Comment54,  Question55,  Comment55,  Question56,  Comment56,
+        Question57,  Comment57
+    </sql>
+
+    <insert id="addWatchForm" parameterType="WatchForm">
+        INSERT INTO test.watchForm
+        (<include refid="keys"/>)
+        VALUES (#{name},#{evaluationPerson},#{evaluationTime},#{question1},#{comment1},#{question2},#{comment2},#{question3},#{comment3},#{question4},#{comment4},
+        #{question5},#{comment5},#{question6},#{comment6},#{question7},#{comment7},#{question8},#{comment8 },#{question9},#{comment9 },#{question10},#{comment10 },
+        #{question11},#{comment11},#{question12},#{comment12 },#{question13},#{comment13 },#{question14},#{comment14},#{question15},#{comment15 },#{question16},#{comment16},#{question17},#{comment17},
+        #{question18},#{comment18},#{question19},#{comment19 },#{question20},#{comment20},#{question21},#{comment21},#{question22},#{comment22},#{question23},#{comment23},#{question24},#{comment24 },#{question25},
+        #{comment25 },#{question26}, #{comment26 },#{question27},#{comment27},#{question28},#{comment28},#{question29},#{comment29},#{question30},#{comment30},#{question31},#{comment31},#{question32},
+        #{comment32},#{question33},#{comment33 },#{question34},#{comment34},#{question35},#{comment35},#{question36},#{comment36},#{question37},#{comment37},#{question38},
+        #{comment38},#{question39},#{comment39},#{question40},#{comment40},#{question41},#{comment41},#{question42},#{comment42},#{question43},#{comment43},#{question44},
+        #{comment44},#{question45},#{comment45},#{question46},#{comment46},#{question47},#{comment47},#{question48},#{comment48},#{question49},#{comment49},#{question50},
+        #{comment50},#{question51},#{comment51},#{question52},#{comment52},#{question53},#{comment53},#{question54},#{comment54},#{question55},#{comment55},#{question56},
+        #{comment56},#{question57},#{comment57});
+    </insert>
+
+    <select id="queryLastWatchFormByName" resultType="WatchForm">
+        SELECT * FROM test.watchForm where Name = #{name} order by id desc limit 1
+    </select>
+
+</mapper>
