@@ -58,7 +58,7 @@ public class DiagnoseController extends AjaxBase{
 
     @RequestMapping(value = "/getLastStudyForm", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResult getLastStudyForm(@RequestParam(value = "name") String name) {
+    public ServiceResult getLastStudyForm() {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(diagnoseService.queryLastStudyFormByName("黑仔二号"));
