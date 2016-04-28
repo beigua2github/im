@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="Cache-Control" content="no-cache"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 <meta name="format-detection" content="telephone=no"/>
@@ -146,8 +146,16 @@ function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
     return currentdate;
 }
 
+function change_checked_to_one(checkbox_id)
+{          
+            //让checkbox多选框变成单选
+    $(':checkbox[name=chkItem]').removeAttr('checked');
+    $(checkbox_id).attr('checked','checked');                                                
+}
 
-$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
+
+
+//$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
 
 $('#title_txt').html("("+qs_id+"/18)&nbsp;单选题");
 $('#content_txt').html(qs_array[qs_id-1]);
@@ -169,12 +177,24 @@ $('#content_txt').html(qs_array[qs_id-1]);
     });
 
 
-function change_checked_to_one(checkbox_id)
-{          
-            //让checkbox多选框变成单选
-    $(':checkbox[name=chkItem]').removeAttr('checked');
-    $(checkbox_id).attr('checked','checked');                                                
-}
+$(document).ready(function () {
+    $(".ts_mask").fadeIn(1000);//等待获取上次数据
+    
+    $.ajax({
+            type: "GET",
+            url: "../starsea/HelloWeb/getLastStudyForm",
+            data: {
+                name:"heizai"
+            },
+            dataType: "json",
+            success:function(data){ //成功的处理函数
+                now_score = data['msg']['msg']['now_score'];
+                //alert(now_score);
+                $("#checkboxFourInput"+now_score[qs_id-1]).attr("checked",'true');
+                $(".ts_mask").fadeOut(1000);
+            }
+        });
+
 
 //点击下一题判断语句
     $("#botton_next").click(function()
@@ -269,7 +289,7 @@ function change_checked_to_one(checkbox_id)
                 qs_id++;
                 $('#title_txt').html("("+qs_id+"/18)&nbsp;单选题");
                 $('#content_txt').html(qs_array[qs_id-1]);
-                change_checked_to_one("#checkboxFourInput"+pre_score[qs_id-1]);
+                change_checked_to_one("#checkboxFourInput"+now_score[qs_id-1]);
                 //$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
             }
         }
@@ -323,7 +343,8 @@ function change_checked_to_one(checkbox_id)
             }
         }            
     });
-	
+
+});	
     
   </script>
 </body>
