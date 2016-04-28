@@ -69,46 +69,4 @@ public class UserServiceImpl implements UserService{
         return userDao.addUser(userEntity);
     }
 
-    @Override
-    public int addStudyForm(StudyForm studyForm){
-        return userDao.addStudyFormByTeacher(studyForm);
-    }
-
-    @Override
-    public List<StudyForm> queryStudyForm(){
-
-        return userDao.queryStudyFormByTeacher();
-    }
-
-    @Override
-    public StudyFormDto queryLastStudyFormByName(String name){
-
-        StudyForm studyForm = userDao.queryLastStudyFormByName(name);
-        StudyFormDto studyFormDto = new StudyFormDto();
-        if(studyForm != null){
-            studyFormDto = Transformer.convertWatchFormDtoFromStudyForm(studyForm);
-        }
-
-        return studyFormDto;
-
-    }
-
-    @Override
-    public  int addWatchForm(WatchForm watchForm){
-
-        return userDao.addWatchForm(watchForm);
-    }
-
-
-
-    @Override
-    public WatchFormDto queryLastWatchFormByName(String name) {
-        WatchForm watchForm = userDao.queryLastWatchFormByName(name);
-        WatchFormDto watchFormDto = new WatchFormDto();
-        if(watchForm!=null){
-            watchFormDto =  Transformer.convertWatchFormDtoFromWatchForm(watchForm);
-        }
-        return watchFormDto;
-    }
-
 }

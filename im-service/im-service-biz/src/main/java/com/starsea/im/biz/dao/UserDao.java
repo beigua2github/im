@@ -28,18 +28,4 @@ public interface UserDao {
     @DataSource("write")
     public int addUser(UserEntity user);
 
-    @DataSource("write")
-    public int addStudyFormByTeacher(StudyForm studyForm);
-
-    @DataSource("read")
-    public List<StudyForm> queryStudyFormByTeacher();
-
-    @DataSource("read")
-    public StudyForm queryLastStudyFormByName(String name);
-
-    @DataSource("write")
-    public  int addWatchForm(WatchForm watchForm);
-
-    @DataSource("read")
-    public WatchForm queryLastWatchFormByName(String name);
 }

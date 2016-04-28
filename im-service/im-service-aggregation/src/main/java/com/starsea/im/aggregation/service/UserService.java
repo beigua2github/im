@@ -35,21 +35,4 @@ public interface UserService{
     @DataSource(DataSourceType.WRITE)
     public int addUser(UserEntity userEntity);
 
-    @DataSource(DataSourceType.WRITE)
-    public int addStudyForm(StudyForm studyForm);
-
-    @DataSource(DataSourceType.READ)
-    public List<StudyForm> queryStudyForm();
-
-    @DataSource(DataSourceType.READ)
-    public StudyFormDto queryLastStudyFormByName(String name);
-
-
-    @DataSource(DataSourceType.WRITE)
-    public  int addWatchForm(WatchForm watchForm);
-
-    @DataSource(DataSourceType.READ)
-    public WatchFormDto queryLastWatchFormByName(String name);
-
-
     }

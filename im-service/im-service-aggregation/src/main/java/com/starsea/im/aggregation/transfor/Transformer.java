@@ -194,7 +194,7 @@ public class Transformer {
 
     public static StudyFormDto convertWatchFormDtoFromStudyForm(StudyForm studyForm){
 
-        int[] now_score = new int[57];
+        int[] now_score = new int[18];
         StudyFormDto studyFormDto = new StudyFormDto();
         studyFormDto.setName(studyForm.getName());
         studyFormDto.setAge(studyForm.getAge());
@@ -221,6 +221,7 @@ public class Transformer {
         now_score[14] = studyForm.getQuestion15();
         now_score[15] = studyForm.getQuestion16();
         now_score[16] = studyForm.getQuestion17();
+        now_score[17] = studyForm.getQuestion18();
         studyFormDto.setNow_score(now_score);
         return studyFormDto;
 

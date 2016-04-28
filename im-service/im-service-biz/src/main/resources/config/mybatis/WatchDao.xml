@@ -4,52 +4,33 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.starsea.im.biz.dao.UserDao">
+<mapper namespace="com.starsea.im.biz.dao.WatchDao">
 
-
-    <select id="queryUser"  resultType="userEntity">
-        <![CDATA[
-        select * from student WHERE id = #{id}
-    ]]>
-    </select>
-
-    <select id="queryUsers"  resultType="userEntity">
-        <![CDATA[
-        select * from student
-    ]]>
-    </select>
-
-    <insert id="addUser" parameterType="userEntity">
-        insert into student(email,password) values(#{email},#{password})
-    </insert>
-
-
-<<<<<<< HEAD
-    <insert id="addStudyFormByTeacher" parameterType="StudyForm">
-    INSERT INTO test.StudyForm_Teacher(NAME, Age, Sex, Class, School, Organization, EvaluationPerson, EvaluationTime,
-     Question1, Question2, Question3, Question4, Question5, Question6,
-     Question7, Question8, Question9, Question10, Question11, Question12,
-     Question13, Question14, Question15, Question16, Question17, Question18)
-    VALUES (#{name}, #{age}, #{sex}, #{banji},
-    #{school}, #{organization}, #{evaluationPerson},
-     #{evaluationTime}, #{Question1}, #{Question2},
-     #{Question3}, #{Question4}, #{Question5}, #{Question6},
-     #{Question7}, #{Question8}, #{Question9}, #{Question10},
-     #{Question11}, #{Question12}, #{Question13}, #{Question14},
-      #{Question15}, #{Question16}, #{Question17}, #{Question18});
-    </insert>
-
-    <select id="queryStudyFormByTeacher" resultType="StudyForm">
-        SELECT * FROM test.StudyForm_Teacher
-    </select>
-
-    <select id="queryLastStudyFormByName" resultType="StudyForm">
-       SELECT * FROM test.StudyForm_Teacher where Name = #{name} order by id desc limit 1
-    </select>
+    <sql id = "keys">
+        Name,  EvaluationPerson,  EvaluationTime,  Question1,  Comment1,  Question2,  Comment2,
+        Question3,  Comment3,  Question4,  Comment4,  Question5,  Comment5 ,  Question6,
+        Comment6 ,  Question7,  Comment7 ,  Question8,  Comment8 ,  Question9,  Comment9 ,
+        Question10,  Comment10 ,  Question11,  Comment11 ,  Question12,  Comment12 ,
+        Question13,  Comment13 ,  Question14,  Comment14 ,  Question15,  Comment15 ,
+        Question16,  Comment16 , Question17,  Comment17 ,  Question18,  Comment18 ,
+        Question19,  Comment19 , Question20,  Comment20 ,  Question21,  Comment21,  Question22,  Comment22,
+        Question23,  Comment23,  Question24,  Comment24 ,  Question25,  Comment25 , Question26,  Comment26 ,
+        Question27,  Comment27,  Question28,  Comment28,  Question29,  Comment29,
+        Question30,  Comment30,  Question31,  Comment31,  Question32,  Comment32,
+        Question33,  Comment33 ,  Question34,  Comment34,  Question35,  Comment35,
+        Question36,  Comment36,  Question37,  Comment37,  Question38,  Comment38,
+        Question39,  Comment39,  Question40,  Comment40,  Question41,  Comment41,
+        Question42,  Comment42,  Question43,  Comment43,  Question44,  Comment44,
+        Question45,  Comment45,  Question46,  Comment46,  Question47,  Comment47,
+        Question48,  Comment48,  Question49,  Comment49,  Question50,  Comment50,
+        Question51,  Comment51,  Question52,  Comment52,  Question53,  Comment53,
+        Question54,  Comment54,  Question55,  Comment55,  Question56,  Comment56,
+        Question57,  Comment57
+    </sql>
 
     <insert id="addWatchForm" parameterType="WatchForm">
         INSERT INTO test.watchForm
-        (<include refid="keys_watch"/>)
+        (<include refid="keys"/>)
         VALUES (#{name},#{evaluationPerson},#{evaluationTime},#{question1},#{comment1},#{question2},#{comment2},#{question3},#{comment3},#{question4},#{comment4},
         #{question5},#{comment5},#{question6},#{comment6},#{question7},#{comment7},#{question8},#{comment8 },#{question9},#{comment9 },#{question10},#{comment10 },
         #{question11},#{comment11},#{question12},#{comment12 },#{question13},#{comment13 },#{question14},#{comment14},#{question15},#{comment15 },#{question16},#{comment16},#{question17},#{comment17},
@@ -66,6 +47,4 @@
         SELECT * FROM test.watchForm where Name = #{name} order by id desc limit 1
     </select>
 
-=======
->>>>>>> mcc
 </mapper>
