@@ -1,5 +1,6 @@
 package com.starsea.im.aggregation.transfor;
 
+import com.starsea.im.aggregation.dto.StudyFormDto;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.entity.StudyForm;
 import com.starsea.im.biz.entity.WatchForm;
@@ -188,6 +189,40 @@ public class Transformer {
 
 
         return watchForm;
+
+    }
+
+    public static StudyFormDto convertWatchFormDtoFromStudyForm(StudyForm studyForm){
+
+        int[] now_score = new int[57];
+        StudyFormDto studyFormDto = new StudyFormDto();
+        studyFormDto.setName(studyForm.getName());
+        studyFormDto.setAge(studyForm.getAge());
+        studyFormDto.setSex(studyForm.getSex());
+        studyFormDto.setBanji(studyForm.getBanji());
+        studyFormDto.setSchool(studyForm.getSchool());
+        studyFormDto.setOrganization(studyForm.getOrganization());
+        studyFormDto.setEvaluationTime(timeStampToDate(String.valueOf(studyForm.getEvaluationTime().getTime()), null));
+
+        now_score[0] = studyForm.getQuestion1();
+        now_score[1] = studyForm.getQuestion2();
+        now_score[2] = studyForm.getQuestion3();
+        now_score[3] = studyForm.getQuestion4();
+        now_score[4] = studyForm.getQuestion5();
+        now_score[5] = studyForm.getQuestion6();
+        now_score[6] = studyForm.getQuestion7();
+        now_score[7] = studyForm.getQuestion8();
+        now_score[8] = studyForm.getQuestion9();
+        now_score[9] = studyForm.getQuestion10();
+        now_score[10] = studyForm.getQuestion11();
+        now_score[11] = studyForm.getQuestion12();
+        now_score[12] = studyForm.getQuestion13();
+        now_score[13] = studyForm.getQuestion14();
+        now_score[14] = studyForm.getQuestion15();
+        now_score[15] = studyForm.getQuestion16();
+        now_score[16] = studyForm.getQuestion17();
+        studyFormDto.setNow_score(now_score);
+        return studyFormDto;
 
     }
 

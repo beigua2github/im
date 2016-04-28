@@ -2,6 +2,7 @@ package com.starsea.im.aggregation.service;
 
 import com.starsea.im.aggregation.constant.DataSourceType;
 import com.starsea.im.aggregation.dto.SearchDto;
+import com.starsea.im.aggregation.dto.StudyFormDto;
 import com.starsea.im.aggregation.dto.UserDto;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.annotation.DataSource;
@@ -39,6 +40,9 @@ public interface UserService{
 
     @DataSource(DataSourceType.READ)
     public List<StudyForm> queryStudyForm();
+
+    @DataSource(DataSourceType.READ)
+    public StudyFormDto queryLastStudyFormByName(String name);
 
 
     @DataSource(DataSourceType.WRITE)

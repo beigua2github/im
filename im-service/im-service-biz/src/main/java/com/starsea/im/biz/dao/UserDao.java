@@ -34,6 +34,9 @@ public interface UserDao {
     @DataSource("read")
     public List<StudyForm> queryStudyFormByTeacher();
 
+    @DataSource("read")
+    public StudyForm queryLastStudyFormByName(String name);
+
     @DataSource("write")
     public  int addWatchForm(WatchForm watchForm);
 

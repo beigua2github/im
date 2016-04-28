@@ -3,6 +3,7 @@ package com.starsea.im.aggregation.service.impl;
 import com.google.common.collect.Lists;
 import com.starsea.im.aggregation.aop.LogParams;
 import com.starsea.im.aggregation.dto.SearchDto;
+import com.starsea.im.aggregation.dto.StudyFormDto;
 import com.starsea.im.aggregation.dto.UserDto;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.aggregation.transfor.Transformer;
@@ -80,10 +81,25 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public StudyFormDto queryLastStudyFormByName(String name){
+
+        StudyForm studyForm = userDao.queryLastStudyFormByName(name);
+        StudyFormDto studyFormDto = new StudyFormDto();
+        if(studyForm != null){
+            studyFormDto = Transformer.convertWatchFormDtoFromStudyForm(studyForm);
+        }
+
+        return studyFormDto;
+
+    }
+
+    @Override
     public  int addWatchForm(WatchForm watchForm){
 
         return userDao.addWatchForm(watchForm);
     }
+
+
 
     @Override
     public WatchFormDto queryLastWatchFormByName(String name) {

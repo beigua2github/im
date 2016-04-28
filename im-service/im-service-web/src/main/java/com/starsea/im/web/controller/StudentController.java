@@ -62,11 +62,18 @@ public class StudentController extends AjaxBase {
 
         StudyForm studyForm = Transformer.enrichStudyForm(name, sex, myClass, school, organization, evaluationPerson, evaluationTime, hc);
         serviceResult.setMsg(userService.addStudyForm(studyForm));
-        int length = hc.length;
         return setResponseData(serviceResult);
     }
 
 
+    @RequestMapping(value = "/getLastStudyForm", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult getLastStudyForm() {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(userService.queryLastStudyFormByName("黑仔二号"));
+        return setResponseData(serviceResult);
+    }
 
     @RequestMapping(value = "/getStudyForm", method = RequestMethod.GET)
     @ResponseBody
@@ -97,7 +104,7 @@ public class StudentController extends AjaxBase {
 
     @RequestMapping(value = "/getWatchForm", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResult getWatchForm() {
+    public ServiceResult getWatchForm(@RequestParam(value = "name") String name) {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(userService.queryLastWatchFormByName("黑仔一号"));
