@@ -265,7 +265,7 @@
 
         $.ajax({
             type: "GET",
-            url: "../starsea/HelloWeb/getWatchForm",
+            url: "../starsea/watch/getLastWatchForm",
             data: {
                 name:"heizai"
             },
@@ -330,10 +330,10 @@
                 if(1 == one_click)
                 {
                     one_click++;
-                    $(".ts_mask").fadeIn(1000);//提示正在提交数据
+                    $(".ts_mask2").fadeIn(1000);//提示正在提交数据
                     //调用ajax传数据给后台
                     $.ajax({
-                        url: '../starsea/HelloWeb/addWatch',
+                        url: '../starsea/watch/addWatch',
                         data: {
                             name: "黑仔一号",
                             evaluationPerson: "黑仔一号的爸爸",
@@ -347,7 +347,7 @@
                         success: function (data) {
                             console.log(data);
                             if (data.code == 200) {
-                                $(".ts_mask").fadeOut(1000);
+                                $(".ts_mask2").fadeOut(1000);
                                 //alert("success");
                                 window.location.href = '../watch-finish.html';
                             }

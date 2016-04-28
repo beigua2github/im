@@ -124,6 +124,7 @@ $(".qd").click(function(){
 
 <script>
 //以下定义的是需要用到的变量
+var one_click = 1;
 var qs_id = 1;//问题的编号
 var qs_array = new Array("尝试将正学习的知识与自身经验联系起来","阅读中，能找到要点","考试镇静，该做对的题目基本都能做对","上课常走神，不能认真听老师在讲什么*","会通过联系相关情境去学习新知识、新原理","考试、写作文或做作业时，常因不能理解老师的意思而出错*","考试时，常常因担心考砸而不能专心考试*","课堂上，全神贯注听课或做作业","学习不得诀窍，比如不会做标记、编写小标题等*","对于名词、语法规则、公式等，通过理解来记忆，不死记硬背","复习充分，考试时不慌不忙","学习时，专心致志，心无旁骛","学习时，不能将所学内容各要点联系起来*","知道如何学习不同的课程","学习时情绪紧张*","学习时，不能集中注意力*","通过画图或示意图等帮助理解正在学习的内容","做作业时，常迷失于细节，记不住主旨*");//用于存问题的数组
 var pre_score = new Array(1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3);
@@ -246,14 +247,15 @@ $(document).ready(function () {
         {
             var score_add = 0;
             //提交给后台
-            if(qs_id == 18)
+            if(qs_id == 18 && one_click == 1)
             {
+                one_click++;
                 for (var i = 0; i < 18; i++) {
                     score_add += now_score[i];
                 }
                 score_add = Math.ceil(score_add * 1.0);
                 $.ajax({
-                    url: '../starsea/HelloWeb/addForm',
+                    url: '../starsea/diagnose/addStudyForm',
                     data: {
                         myName:"黑仔二号",
                         sex:"男",
@@ -289,6 +291,10 @@ $(document).ready(function () {
                 qs_id++;
                 $('#title_txt').html("("+qs_id+"/18)&nbsp;单选题");
                 $('#content_txt').html(qs_array[qs_id-1]);
+                if(qs_id == 18)
+                {
+                    document.getElementById("botton_next").innerHTML = "提交";
+                }
                 change_checked_to_one("#checkboxFourInput"+now_score[qs_id-1]);
                 //$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
             }
