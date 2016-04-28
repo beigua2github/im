@@ -317,6 +317,10 @@
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
                 $('#content_txt').html(qs_array[qs_id - 1]);
                 set_pre_value();
+                if(qs_id == 57)
+                {
+                    document.getElementById("botton_next").innerHTML = "提交";
+                }
             }
             else if (qs_id == 58) {
                 if(1 == one_click)
@@ -369,6 +373,11 @@
 
             document.getElementById("comment").value = "";//将备注清空
 
+            if (qs_id ==  57)
+            {
+                document.getElementById("botton_next").innerHTML = "下一步";
+            }
+
             if (qs_id > 1) {
                 qs_id--;
             } //保证不小于1
@@ -400,6 +409,16 @@
     });
 </script>
 
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--<script>
+    $(document).ready(function () {
+        wx.config({
+            debug: false,
+            appid: "wx9b08b42b34258af7",
+
+        });
+    });
+</script>-->
 
 </body>
 </html>
