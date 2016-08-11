@@ -19,7 +19,6 @@
     <link href="static/css/mrgc_style.css" rel="stylesheet" type="text/css"/>
 
     <style type="text/css">
-
         /* SELECT W/IMAGE */
         select#selectTravelCity {
             width: 14em;
@@ -41,29 +40,23 @@
             color: #000099;
             cursor: pointer;
         }
-
         select#selectTravelCity option {
             font-size: 1em;
             padding: 0.2em 0.4em 0.2em 0.4em;
         }
-
         select#selectTravelCity option[selected] {
             font-weight: bold
         }
-
         select#selectTravelCity option:nth-child(even) {
             background-color: #f5f5f5;
         }
-
         select#selectTravelCity:hover {
             color: #101010;
             border: 1px solid #cdcdcd;
         }
-
         select#selectTravelCity:focus {
             box-shadow: 0 0 2px 1px #404040;
         }
-
         /*SELECT W/DOWN-ARROW*/
         select#selectPointOfInterest {
             width: 185pt;
@@ -88,36 +81,29 @@
             cursor: pointer;
             outline: none;
         }
-
         select#selectPointOfInterest option {
             padding: 4px 10px 4px 10px;
             font-size: 11pt;
             font-weight: normal;
         }
-
         select#selectPointOfInterest option[selected] {
             font-weight: bold
         }
-
         select#selectPointOfInterest option:nth-child(even) {
             background-color: #f5f5f5;
         }
-
         select#selectPointOfInterest:hover {
             font-weight: 700;
         }
-
         select#selectPointOfInterest:focus {
             box-shadow: inset 0 0 5px #000099;
             font-weight: 600;
         }
-
         /*LABEL FOR SELECT*/
         label#lblSelect {
             position: relative;
             display: inline-block;
         }
-
         /*DOWNWARD ARROW (25bc)*/
         label#lblSelect::after {
             content: "\25bc";
@@ -136,7 +122,6 @@
             border-radius: 0 6px 6px 0;
             pointer-events: none;
         }
-
         .words{ width:100%; height:40vw; margin:0 auto; border-radius:5px; background:#fff; position:relative;}
         .words textarea{ width:96%; height:36vw;  visibility:visible; background:#fff; margin-top:2vw; color:#999; margin-left:2%; overflow:hidden;}
     </style>
@@ -221,20 +206,20 @@
             <div class="qd2"></div>
         </div>
     </div>
+
 </div>
 
 <script>
-
     //以下是变量设定
     var one_click = 1;//确保只提交一次
     var qs_id = 1;//记录题号
     var qs_array = new Array("UUN理解力", "ID归纳", "DD演绎", "AS联想", "GR创造", "PV问题解决", "ST策略", "MC元认知", "ME记忆", "TH思考/思维", "EN享受", "PS热情", "PL喜悦", "IN兴趣", "QU安静", "GR感激", "PR自豪", "AD敬佩", "EN激励", "LV爱", "AM逗趣", "AG赞同", "AP欣赏", "NG沟通协商", "HL协助/照料/利他", "LE领导力", "PA参与", "SH分享", "CT专注/投入", "EX探索", "LA大笑", "QE提问", "AS回答", "EC执行", "AL倾听", "EP表达", "CM承诺", "TO目标导向", "RS耐挫", "HU幽默", "PT坚持性/恒心/毅力", "TH感同身受/善解人意", "HO希望感", "FL沉浸", "ER积极的情绪调节", "SG建议", "CP合作", "SR自控", "AC积极性", "RP责任心", "SA自觉性", "HN真诚", "AI主动性", "CO勇气", "CF自信", "SE自我效能感", "乐观/开朗");//用来记录题目
     //var pre_score = new Array("5", "6", "7", "3", "8", "-5", "6", "7", "-3", "8", "-5", "6", "-7", "3", "8", "5", "6", "7", "3", "8", "5", "6", "-7", "3", "-8", "5", "6", "7", "3", "8", "-5", "6", "7", "-3", "8", "-5", "6", "-7", "3", "8", "5", "6", "7", "3", "8", "5", "6", "-7", "3", "-8", "5", "6", "7", "3", "8", "-5", "6");//学生上一次的成绩
     var now_score = new Array();//用于记录学生的成绩
-
     //var pre_comment = new Array();
     var now_comment = new Array();//用于记录学生特别情况
-
+//    var userMessage={"name":""};//用于获取用户信息
+    var userName="bbb";
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
         var seperator1 = "-";
@@ -251,60 +236,68 @@
         return currentdate;
     }
     function set_pre_value() {
-        var score_join = now_score[qs_id - 1] + "分";
+        var score_join = now_score[qs_id - 1]? now_score[qs_id - 1]+ "分":"0分"; //防止now_score的值为null
         document.getElementById("selectPointOfInterest").value = score_join;
         document.getElementById("comment").value = now_comment[qs_id - 1];
     }
 
     $(document).ready(function () {
-        $(".ts_mask").fadeIn(1000);//等待获取上次数据
+        <!--判断用户有没有授权填写用户信息，没有的话弹出填写页面-->
+        /*
+        * 获取授权的操作
+        * var json;
+        * */
 
-        $(".qd").click(function () {
+//        $.ajax({//第一次发送 查询数据库请求 看有没有用户的微信ID  判断有没有注册
+//            type:"POST",
+//            url:"../starsea/",  //接口
+//            dataType:"json",
+//              data:{
+//                  id:'',
+//              }.
+//            success:function(data){
+//                json=data;
+//                if(没有记录，跳转){
+//                    window.location.href = '../userMessage.html';
+//                }
+//                else{ 执行后面的操作
+
+            $(".ts_mask").fadeIn(1000);//等待获取上次数据
+            $(".qd").click(function () {
             $(".ts_mask").fadeOut(1000);
-        });//使提示消失
-
-        $.ajax({
-            type: "GET",
-            url: "../starsea/watch/getLastWatchForm",
-            data: {
-                name:"黑仔一号"
-            },
-            dataType: "json",
-            success:function(data){ //成功的处理函数
-                console.log(data);
-                now_score = data['msg']['msg']['now_score'];
-                now_comment = data['msg']['msg']['now_comment'];
-                //alert(pre_score);
-                set_pre_value();
-                $(".ts_mask").fadeOut(1000);
-            }
-        });
-
+             });//使提示消失
+                $.ajax({
+                        type: "GET",
+                        url: "../starsea/watch/getLastWatchForm",
+                        data: {
+                         name:encodeURI("黑仔一号")
+                        },
+                dataType: "json",
+                success:function(data){ //成功的处理函数
+                    console.log(data);
+                    now_score = data['msg']['msg']['now_score'];
+                    now_comment = data['msg']['msg']['now_comment'];
+                    //alert(pre_score);
+                    set_pre_value();
+                    $(".ts_mask").fadeOut(1000);
+                }
+            });
         //点击下一题判断语句
         $("#botton_next").click(function () {
-
             var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
             now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
-
             now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
-
-
-
-
             if (qs_id <= 57) {
                 qs_id++;
             }//保证不超过57个成绩
-
             if(qs_id != 58)
             {
                 document.getElementById("comment").value = "";//将备注清空
             }
-
             if (qs_id <= 20) {
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
                 $('#content_txt').html(qs_array[qs_id - 1]);
                 set_pre_value();
-
             }
             else if (qs_id <= 30) {
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
@@ -320,12 +313,10 @@
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
                 $('#content_txt').html(qs_array[qs_id - 1]);
                 set_pre_value();
-
                 if(qs_id == 57)
                 {
                     document.getElementById("botton_next").innerHTML = "提交";
                 }
-
             }
             else if (qs_id == 58) {
                 if(1 == one_click)
@@ -361,30 +352,21 @@
                         }
                     });
                 }
-
             }
             else {
                 $(".ts_mask").fadeIn(1000);
             }
         });
-
         //点击上一题判断语句
         $("#botton_pre").click(function () {
-
             var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
             now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
-
             now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
-
             document.getElementById("comment").value = "";//将备注清空
-
-
             if (qs_id ==  57)
             {
                 document.getElementById("botton_next").innerHTML = "下一步";
             }
-
-
             if (qs_id > 1) {
                 qs_id--;
             } //保证不小于1
@@ -392,7 +374,6 @@
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
                 $('#content_txt').html(qs_array[qs_id - 1]);
                 set_pre_value();
-
             }
             else if (qs_id <= 30) {
                 $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
@@ -413,6 +394,9 @@
                 $(".ts_mask").fadeIn(1000);
             }
         });
+//              } //第一次ajax的回调函数的结束
+//          }
+//      });
     });
 </script>
 
@@ -422,7 +406,6 @@
         wx.config({
             debug: false,
             appid: "wx9b08b42b34258af7",
-
         });
     });
 </script>-->
