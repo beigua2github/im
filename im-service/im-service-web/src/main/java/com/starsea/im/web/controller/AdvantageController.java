@@ -57,6 +57,7 @@ public class AdvantageController extends AjaxBase {
     @RequestMapping(value = "/getAdvantageFormByName", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult getAdvantageFormByName(@RequestParam(value = "name",defaultValue = "小孟") String name ) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(advantageService.queryAdvantageFormByName(name));

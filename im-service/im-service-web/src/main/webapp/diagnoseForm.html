@@ -12,6 +12,7 @@
     <meta name="format-detection" content="email=no"/>
     <title></title>
     <link href="static/css/diagnose_style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
 </head>
 
 <body>
@@ -204,12 +205,14 @@
 
     $(document).ready(function () {
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
-
+        var child_name={name:""};//用于获取历史信息要查询的值
+        judgeCookie(child_name);
         $.ajax({
             type: "GET",
             url: "../starsea/diagnose/getLastStudyForm",
             data: {
-                name:"黑仔二号"
+                name:encodeURI("黑仔二号")
+                //name:encodeURI(child_name.name)
             },
             dataType: "json",
             success:function(data){ //成功的处理函数
@@ -284,6 +287,7 @@
                         url: '../starsea/diagnose/addStudyForm',
                         data: {
                             myName:"黑仔二号",
+                            age:"11",
                             sex:"男",
                             myClass:"1班",
                             school:"ejia",

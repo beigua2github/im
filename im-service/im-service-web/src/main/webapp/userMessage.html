@@ -7,6 +7,11 @@
     <link href="/static/open/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="/static/css/styles.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/open/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/cookie_openid.js"></script>
 </head>
 <body class="login-bg">
 <div class="header">
@@ -106,33 +111,7 @@
     </div>
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/js/jquery-1.11.0.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/static/open/bootstrap/js/bootstrap.min.js"></script>
-
 <script type = "text/javascript">
-    //用户获取cookie中的微信ID
-    function getCookie(cookie_name){
-        //test
-//        return false;
-//        return '123';
-        return 'oF3PcsnsrMiJzEwalZZbAfWQpxCI';
-
-        var alllCookie=document.cookie;
-        var cookie_pos=alllCookie.indexOf(cookie_name);
-        if(cookie_pos!=-1){
-            cookie_pos+=cookie_name+1;
-            var cookie_end=alllCookie.indexOf(";",cookie_pos);
-            if(cookie_end==-1){
-                cookie_end=alllCookie.length;
-            }
-            var value=alllCookie.substring(cookie_pos,cookie_end);
-            return value;
-        }
-        return false;
-    }
-
     $("#signupBtn").click(function() {
         var openid=getCookie('openid');
         var myName= $("#Name").val();
