@@ -11,13 +11,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
-
     <meta name="viewport" content="width=device-width">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script language="javascript" type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
     <link href="static/css/mrgc_style.css" rel="stylesheet" type="text/css"/>
-
     <style type="text/css">
         /* SELECT W/IMAGE */
         select#selectTravelCity {
@@ -218,8 +216,7 @@
     var now_score = new Array();//用于记录学生的成绩
     //var pre_comment = new Array();
     var now_comment = new Array();//用于记录学生特别情况
-//    var userMessage={"name":""};//用于获取用户信息
-    var userName="bbb";
+
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
         var seperator1 = "-";
@@ -240,164 +237,199 @@
         document.getElementById("selectPointOfInterest").value = score_join;
         document.getElementById("comment").value = now_comment[qs_id - 1];
     }
+    //用户获取cookie中的微信ID
+    function getCookie(cookie_name){
+        //test
+//        return false;
+//        return '123';
+        return 'oF3PcsnsrMiJzEwalZZbAfWQpxCI';
 
-    $(document).ready(function () {
-        <!--判断用户有没有授权填写用户信息，没有的话弹出填写页面-->
-        /*
-        * 获取授权的操作
-        * var json;
-        * */
-
-//        $.ajax({//第一次发送 查询数据库请求 看有没有用户的微信ID  判断有没有注册
-//            type:"POST",
-//            url:"../starsea/",  //接口
-//            dataType:"json",
-//              data:{
-//                  id:'',
-//              }.
-//            success:function(data){
-//                json=data;
-//                if(没有记录，跳转){
-//                    window.location.href = '../userMessage.html';
-//                }
-//                else{ 执行后面的操作
-
-            $(".ts_mask").fadeIn(1000);//等待获取上次数据
-            $(".qd").click(function () {
-            $(".ts_mask").fadeOut(1000);
-             });//使提示消失
-                $.ajax({
-                        type: "GET",
-                        url: "../starsea/watch/getLastWatchForm",
-                        data: {
-                         name:encodeURI("黑仔一号")
-                        },
+        var alllCookie=document.cookie;
+        var cookie_pos=alllCookie.indexOf(cookie_name);
+        if(cookie_pos!=-1){
+            cookie_pos+=cookie_name+1;
+            var cookie_end=alllCookie.indexOf(";",cookie_pos);
+            if(cookie_end==-1){
+                cookie_end=alllCookie.length;
+            }
+            var value=alllCookie.substring(cookie_pos,cookie_end);
+            return value;
+        }
+        return false;
+    }
+    //判断用户有没有openid和数据库中有没有记录
+    function judgeCookie(child_name) {
+        var cookie_id = getCookie("openid");
+        if (!cookie_id) {  //没有cookie，第一次访问，跳转值注册页面
+            var url = "";
+            //这个URL 是向open.weixin.qq.com发送授权请求，映射到后端的接口，获得openid，并设置到cookie中，响应
+            /*
+             * 处理授权的操作
+             * window.location.href =url;
+             */
+            window.location.href = '../../userMessage.html';
+        } else {//有cookie的话
+            $.ajax({//查询数据库请求 看有没有用户有没有填写注册信息
+                type: "POST",
+                //test
+                url: "../starsea/queryOpenId",  //查询数据库接口  测试接口
                 dataType: "json",
-                success:function(data){ //成功的处理函数
-                    console.log(data);
-                    now_score = data['msg']['msg']['now_score'];
-                    now_comment = data['msg']['msg']['now_comment'];
-                    //alert(pre_score);
-                    set_pre_value();
-                    $(".ts_mask").fadeOut(1000);
+                data: {
+                    openid: cookie_id
+                },
+                async:false,
+                success: function (data) {
+                    //如果有记录，ServiceResult的code为200，反之为500 返回的json为{code,{code,msg}}
+                    if (data['msg']['code'] == 500) { //没有记录，跳转至注册界面
+                        window.location.href = '../../userMessage.html';
+                    } else {//有记录 进行后面的操作
+                        child_name.name= data['msg']['msg'];
+                        //child_name= data['msg']['msg']['name'];//获取 返回的json数据中 孩子的名字
+                    }
                 }
             });
+        }
+    }
+
+    $(document).ready(function () {
+        var child_name={name:""};//用于获取历史信息要查询的值
+        judgeCookie(child_name);
+        $(".ts_mask").fadeIn(1000);//等待获取上次数据
+        $(".qd").click(function () {
+            $(".ts_mask").fadeOut(1000);
+        });//使提示消失
+        //获取历史信息
+        $.ajax({
+            type: "GET",
+            url: "../starsea/watch/getLastWatchForm",
+            data: {
+//               name: encodeURI("黑仔一号")//此值为child_name
+                name:encodeURI(child_name.name)
+            },
+            dataType: "json",
+            success: function(data){ //成功的处理函数
+//          console.log(data);
+                now_score = data['msg']['msg']['now_score'];
+                now_comment = data['msg']['msg']['now_comment'];
+                                //alert(pre_score);
+                set_pre_value();
+                $(".ts_mask").fadeOut(1000);
+            }
+        });
         //点击下一题判断语句
         $("#botton_next").click(function () {
-            var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
-            now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
-            now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
-            if (qs_id <= 57) {
-                qs_id++;
-            }//保证不超过57个成绩
-            if(qs_id != 58)
-            {
-                document.getElementById("comment").value = "";//将备注清空
-            }
-            if (qs_id <= 20) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id <= 30) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id <= 40) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;个性维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id  <= 57) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-                if(qs_id == 57)
-                {
-                    document.getElementById("botton_next").innerHTML = "提交";
-                }
-            }
-            else if (qs_id == 58) {
-                if(1 == one_click)
-                {
-                    one_click++;
-                    $(".ts_mask2").fadeIn(1000);//提示正在提交数据
-                    //调用ajax传数据给后台
-                    $.ajax({
-                        url: '../starsea/watch/addWatch',
-                        data: {
-                            name: "黑仔一号",
-                            evaluationPerson: "黑仔一号的爸爸",
-                            evaluationTime: getNowFormatDate(),
-                            now_score: now_score,
-                            now_comment: now_comment
-                        },
-                        type: 'post',
-                        cache: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
-                            if (data.code == 200) {
-                                $(".ts_mask2").fadeOut(1000);
-                                //alert("success");
-                                window.location.href = '../watchFinish.html';
+                            var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
+                            now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
+                            now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
+                            if (qs_id <= 57) {
+                                qs_id++;
+                            }//保证不超过57个成绩
+                            if(qs_id != 58)
+                            {
+                                document.getElementById("comment").value = "";//将备注清空
+                            }
+                            if (qs_id <= 20) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id <= 30) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id <= 40) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;个性维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id  <= 57) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                                if(qs_id == 57)
+                                {
+                                    document.getElementById("botton_next").innerHTML = "提交";
+                                }
+                            }
+                            else if (qs_id == 58) {
+                                if(1 == one_click)
+                                {
+                                    one_click++;
+                                    $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+                                    //调用ajax传数据给后台
+                                    $.ajax({
+                                        url: '../starsea/watch/addWatch',
+                                        data: {
+                                            name: "黑仔一号",
+                                            evaluationPerson: "黑仔一号的爸爸",
+                                            evaluationTime: getNowFormatDate(),
+                                            now_score: now_score,
+                                            now_comment: now_comment
+                                        },
+                                        type: 'post',
+                                        cache: false,
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            console.log(data);
+                                            if (data.code == 200) {
+                                                $(".ts_mask2").fadeOut(1000);
+                                                //alert("success");
+                                                window.location.href = '../watchFinish.html';
+                                            }
+                                            else {
+                                                alert("查询失败: " + data.msg);
+                                            }
+                                        },
+                                        error: function () {
+                                            alert("服务器处理异常");
+                                        }
+                                    });
+                                }
                             }
                             else {
-                                alert("查询失败: " + data.msg);
+                                $(".ts_mask").fadeIn(1000);
                             }
-                        },
-                        error: function () {
-                            alert("服务器处理异常");
-                        }
-                    });
-                }
-            }
-            else {
-                $(".ts_mask").fadeIn(1000);
-            }
-        });
+                        });
         //点击上一题判断语句
         $("#botton_pre").click(function () {
-            var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
-            now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
-            now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
-            document.getElementById("comment").value = "";//将备注清空
-            if (qs_id ==  57)
-            {
-                document.getElementById("botton_next").innerHTML = "下一步";
-            }
-            if (qs_id > 1) {
-                qs_id--;
-            } //保证不小于1
-            if (qs_id <= 20) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id <= 30) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id <= 40) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;个性维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else if (qs_id <= 57) {
-                $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
-                $('#content_txt').html(qs_array[qs_id - 1]);
-                set_pre_value();
-            }
-            else {
-                $(".ts_mask").fadeIn(1000);
-            }
-        });
-//              } //第一次ajax的回调函数的结束
-//          }
-//      });
-    });
+                            var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
+                            now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
+                            now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
+                            document.getElementById("comment").value = "";//将备注清空
+                            if (qs_id ==  57)
+                            {
+                                document.getElementById("botton_next").innerHTML = "下一步";
+                            }
+                            if (qs_id > 1) {
+                                qs_id--;
+                            } //保证不小于1
+                            if (qs_id <= 20) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;认知维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id <= 30) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;情绪维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id <= 40) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;个性维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else if (qs_id <= 57) {
+                                $('#title_txt').html("(" + qs_id + "/57)&nbsp;行为维度");
+                                $('#content_txt').html(qs_array[qs_id - 1]);
+                                set_pre_value();
+                            }
+                            else {
+                                $(".ts_mask").fadeIn(1000);
+                            }
+                        });
+});
+
 </script>
 
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
