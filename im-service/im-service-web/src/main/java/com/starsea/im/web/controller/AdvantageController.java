@@ -1,6 +1,7 @@
 package com.starsea.im.web.controller;
 
 import com.starsea.im.aggregation.service.AdvantageService;
+import com.starsea.im.aggregation.service.UtilService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
 import com.starsea.im.biz.entity.AdvantageForm;
@@ -22,6 +23,8 @@ public class AdvantageController extends AjaxBase {
 
     @Autowired
     AdvantageService advantageService;
+    @Autowired
+    UtilService utilService;
 
     @RequestMapping(value = "/addAdvantageForm", method = RequestMethod.POST)
     @ResponseBody
@@ -54,6 +57,7 @@ public class AdvantageController extends AjaxBase {
     @RequestMapping(value = "/getAdvantageFormByName", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult getAdvantageFormByName(@RequestParam(value = "name",defaultValue = "小孟") String name ) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(advantageService.queryAdvantageFormByName(name));

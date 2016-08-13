@@ -12,6 +12,7 @@
     <meta name="format-detection" content="email=no"/>
     <title></title>
     <link href="static/css/diagnose_style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
 </head>
 
 <body>
@@ -180,6 +181,8 @@
 
     $(document).ready(function () {
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
+        var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值
+        judgeCookie(child);
 
         now_score = pre_score;
 
@@ -187,7 +190,8 @@
             type: "GET",
             url: "../starsea/advantage/getAdvantageFormByName",
             data: {
-                name:"小孟"
+                name:child.openid
+                //name:encodeURI(child_name.name)
             },
             dataType: "json",
             success:function(data){ //成功的处理函数
@@ -247,11 +251,11 @@
                     $.ajax({
                         url: '../starsea/advantage/addAdvantageForm',
                         data: {
-                            school:"ejia",
-                            myClass:"ejia",
-                            name:"小花",
-                            sex:"男",
-                            age: age,
+                            school:child.school,
+                            myClass:child.myClass,
+                            name:child.name,
+                            sex:child.sex,
+                            age: child.age,
                             now_score: now_score
                         },
                         type: 'post',

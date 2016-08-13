@@ -33,12 +33,13 @@ public class Transformer {
         return sdf.format(new Date(Long.valueOf(timestamp)));
     }
 
-    public static StudyForm enrichStudyForm(String name, String sex, String myClass, String school, String organization, String evaluationPerson, String evaluationTime, int[] hc) throws ParseException {
+    public static StudyForm enrichStudyForm(String name,int age, String sex, String myClass, String school, String organization, String evaluationPerson, String evaluationTime, int[] hc) throws ParseException {
 
         StudyForm studyForm = new StudyForm();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(evaluationTime);
         studyForm.setName(name);
+        studyForm.setAge(age);
         studyForm.setSex(sex);
         studyForm.setBanji(myClass);
         studyForm.setSchool(school);

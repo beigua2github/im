@@ -1,5 +1,6 @@
 package com.starsea.im.web.controller;
 
+import com.starsea.im.aggregation.service.UtilService;
 import com.starsea.im.aggregation.service.impl.WatchService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.ParseException;
 
 /**
@@ -23,6 +26,8 @@ public class WatchController extends AjaxBase {
 
     @Autowired
     WatchService watchService;
+    @Autowired
+    UtilService utilService;
 
     @RequestMapping(value = "/addWatch", method = RequestMethod.POST)
     @ResponseBody
@@ -33,7 +38,6 @@ public class WatchController extends AjaxBase {
                                      @RequestParam(value = "now_score[]") int[] now_score,
                                      @RequestParam(value = "now_comment[]") String[] now_comment
     ) throws ParseException {
-
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         WatchForm watchForm = Transformer.enrichWatchForm(name, evaluationPerson, evaluationTime, now_score, now_comment);
@@ -44,6 +48,7 @@ public class WatchController extends AjaxBase {
     @RequestMapping(value = "/getLastWatchForm", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult getLastWatchForm(@RequestParam(value = "name",defaultValue = "黑仔一号") String name) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(watchService.queryLastWatchFormByName(name));
@@ -54,6 +59,7 @@ public class WatchController extends AjaxBase {
     @RequestMapping(value = "/getLastWatchFormByNameWeek", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult getLastWatchFormByNameWeek(@RequestParam(value = "name",defaultValue = "黑仔一号") String name) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(watchService.queryLastWatchFormByNameWeek(name));
@@ -64,6 +70,7 @@ public class WatchController extends AjaxBase {
     @RequestMapping(value = "/queryLastWatchFormByNameMonth", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult queryLastWatchFormByNameMonth(@RequestParam(value = "name",defaultValue = "黑仔一号") String name) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(watchService.queryLastWatchFormByNameMonth(name));
@@ -75,6 +82,7 @@ public class WatchController extends AjaxBase {
     public ServiceResult queryAvgWatchFormByNameDay(@RequestParam(value = "name",defaultValue = "黑仔一号") String name,
                                                     @RequestParam(value = "day",defaultValue = "7") int day
                                                     ) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(watchService.queryAvgWatchFormByNameDay(name,day));

@@ -1,6 +1,7 @@
 package com.starsea.im.web.controller;
 
 import com.starsea.im.aggregation.service.DiagnoseService;
+import com.starsea.im.aggregation.service.UtilService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
 import com.starsea.im.biz.entity.StudyForm;
@@ -23,12 +24,14 @@ public class DiagnoseController extends AjaxBase{
 
     @Autowired
     DiagnoseService diagnoseService;
-
+    @Autowired
+    UtilService utilService;
 
     @RequestMapping(value = "/addStudyForm", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addStudyForm(HttpServletRequest req,
                                  @RequestParam(value = "myName") String name,
+                                 @RequestParam(value = "age") int age,
                                  @RequestParam(value = "sex") String sex,
                                  @RequestParam(value = "myClass") String myClass,
                                  @RequestParam(value = "school") String school,
@@ -42,7 +45,7 @@ public class DiagnoseController extends AjaxBase{
         serviceResult.setCode(200);
         serviceResult.setMsg("ok");
 
-        StudyForm studyForm = Transformer.enrichStudyForm(name, sex, myClass, school, organization, evaluationPerson, evaluationTime, hc);
+        StudyForm studyForm = Transformer.enrichStudyForm(name,age, sex, myClass, school, organization, evaluationPerson, evaluationTime, hc);
         serviceResult.setMsg(diagnoseService.addStudyForm(studyForm));
         return setResponseData(serviceResult);
     }
@@ -59,6 +62,7 @@ public class DiagnoseController extends AjaxBase{
     @RequestMapping(value = "/getLastStudyForm", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult getLastStudyForm(@RequestParam(value = "name",defaultValue = "黑仔二号") String name) {
+        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(diagnoseService.queryLastStudyFormByName(name));
