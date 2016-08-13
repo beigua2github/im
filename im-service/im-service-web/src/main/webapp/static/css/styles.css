@@ -1,65 +1,17 @@
 body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: #f7f7f7;
-  position: relative;
-  margin: 0px;
-  font-size: 12px;
-  padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f7f7f7;
+    position: relative;
+    margin: 0px;
+    font-size: 12px;
+    padding: 0px;
 }
-@media only screen and (max-width: 1000px) {
-    body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: #f7f7f7;
-        position: relative;
-        margin: 0px;
-        font-size: 12px;
-        padding: 0px;
-        width:300px;
-    }
-}
+
 .page-content > .row {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 30px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    margin-top: 30px;
 }
-
-/* Footer */
-
-footer{
-   background-color:#2c3742;
-   box-shadow:inset 0px 0px 3px #111;
-   color:#fff;
-   font-size:14px;
-   line-height:25px;
-   padding:10px 0px 10px 0px;
-   bottom: 0px;
-}
-
-footer a{
-   color:#eee;
-   text-decoration:none;
-   border-bottom:1px dotted #888;
-}
-
-footer a:hover{
-   color:#aaa;
-   text-decoration:none;
-   border:0px;
-}
-
-footer hr{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border-top: #000 1px solid;
-	border-bottom: #212121 1px solid;
-}
-
-footer .copy{
-   font-size:13px;
-   margin:15px 0px;
-}
-
-/* Logo & Navigation */
 
 .header{
    height:50px;
@@ -86,7 +38,7 @@ footer .copy{
 .header .form{
    margin-top:10px;
    width:100%;
-   max-width:300px;
+   max-width:250px;
    margin:10px auto;
 }
 
@@ -173,7 +125,7 @@ footer .copy{
 }
 
 .header .dropdown-big{
-   min-width:300px;
+   min-width:200px;
 }
 
 .header .dropdown-big .dropdown-head{
@@ -234,7 +186,7 @@ footer .copy{
    border-left:1px solid #eee;
    border-top:1px solid #eee;
    border-right:2px solid #eee;
-   border-bottom:2px solid #eee; 
+   border-bottom:2px solid #eee;
 }
 
 .content-box-large {
@@ -496,8 +448,8 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6887c4), color-stop(100%,#4566a9));
   background: -webkit-linear-gradient(top, #6887c4 0%,#4566a9 100%);
   background: -o-linear-gradient(top, #6887c4 0%,#4566a9 100%);
-  background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%); 
-  background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%); 
+  background: -ms-linear-gradient(top, #6887c4 0%,#4566a9 100%);
+  background: linear-gradient(to bottom, #6887c4 0%,#4566a9 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6887c4', endColorstr='#4566a9',GradientType=0 );
   border: 1px solid #3B4868;
     border-radius: 3px 3px 3px 3px;
@@ -514,8 +466,8 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6887c4), color-stop(100%,#5773AC));
   background: -webkit-linear-gradient(top, #6887c4 0%,#5773AC 100%);
   background: -o-linear-gradient(top, #6887c4 0%,#5773AC 100%);
-  background: -ms-linear-gradient(top, #6887c4 0%,#5773AC 100%); 
-  background: linear-gradient(to bottom, #6887c4 0%,#5773AC 100%); 
+  background: -ms-linear-gradient(top, #6887c4 0%,#5773AC 100%);
+  background: linear-gradient(to bottom, #6887c4 0%,#5773AC 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6887c4', endColorstr='#5773AC',GradientType=0 );
 }
 .login-wrapper .box .social a.face_login span.face_icon{
@@ -590,22 +542,44 @@ body {
   clear:both;
 }
 
-/* Responsive CSS */
+ Responsive CSS
 
-/* Mobile phones */
-@media (max-width: 480px){
+ Mobile phones
+@media (max-width: 400px){
+    body{
+        width: 310px;
 
+    }
+    .container{
+        width:280px;
+    }
+    .header{
+        height:auto;
+        padding:15px 0px;
+        width:300px;
+    }
+    .header .logo{
+        text-align:center;
+        padding-bottom:10px;
+    }
+    .header .navbar .nav > li > a:hover{
+        background:#0fa6bc;
+        border-radius:5px;
+    }
+    .navbar-toggle {
+        margin-right:0px !important;
+    }
 }
 
-/* Tablets */
+ Tablets
 @media (max-width: 767px){
    .container{
-      width:100%;
+      width:90%;
    }
    .header{
       height:auto;
       padding:15px 0px;
-   }  
+   }
    .header .logo{
       text-align:center;
       padding-bottom:10px;
@@ -619,13 +593,13 @@ body {
    }
 }
 
-/* Desktop */
+ Desktop
 
 @media (max-width: 991px){
    .header{
       height:auto;
       padding:15px 0px;
-   }  
+   }
    .header .logo{
       text-align:center;
       padding-bottom:10px;
@@ -638,7 +612,7 @@ body {
       width:100%;
       float:none;
       position:relative;
-   }  
+   }
    .mainy{
       margin-left: 0px;
    }
@@ -658,5 +632,5 @@ body {
       border-bottom:0px;
       box-shadow:0px 0px 1px #0fa6bc;
       border-radius:10px;
-   }  
+   }
 }

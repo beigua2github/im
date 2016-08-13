@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <!-- Logo -->
                 <div class="logo">
-                    <h1><a href="index.html">Ejia</a></h1>
+                    <h1><a href="#">Ejia</a></h1>
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@
             success: function (data) {
                 if (data.code == 200) {
 //                    alert("success");
-                    window.location.href=document.referrer;
+//                    window.location.href=document.referrer;跳转到注册完成页面(还没写)
                 }
                 else {
                     alert("查询失败: " + data.msg);
