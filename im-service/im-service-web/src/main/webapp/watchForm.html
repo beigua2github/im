@@ -244,7 +244,7 @@
         $(".qd").click(function () {
             $(".ts_mask").fadeOut(1000);
         });//使提示消失
-        var child={openid:"",name:"",evaluationPerson:""};//用于获取历史信息要查询的值  和提交
+        var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值  和提交
         judgeCookie(child);
 
         //获取历史信息
@@ -252,8 +252,7 @@
             type: "GET",
             url: "../starsea/watch/getLastWatchForm",
             data: {
-//               name: encodeURI("黑仔一号")//此值为child_name
-                name:encodeURI(child.name)
+                name:child.openid
             },
             dataType: "json",
             success: function(data){ //成功的处理函数
@@ -310,8 +309,8 @@
                                     $.ajax({
                                         url: '../starsea/watch/addWatch',
                                         data: {
-                                            name: "黑仔一号",
-                                            evaluationPerson: "黑仔一号的爸爸",
+                                            name:child.openid,
+                                            evaluationPerson: child.evaluationPerson,
                                             evaluationTime: getNowFormatDate(),
                                             now_score: now_score,
                                             now_comment: now_comment

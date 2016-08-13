@@ -4,11 +4,11 @@
 //用户获取cookie中的微信ID
 function getCookie(cookie_name){
     //test
-        return false;
+    //    return false;
 //        return '123';
 //    alert(document.cookie);
 //    return 'oF3PcsnsrMiJzEwalZZbAfWQpxCI';
-
+//    alert(document.cookie);
     var alllCookie=document.cookie;
     var cookie_pos=alllCookie.indexOf(cookie_name);
     if(cookie_pos!=-1){
@@ -23,34 +23,37 @@ function getCookie(cookie_name){
     return false;
 }
 //判断用户有没有openid和数据库中有没有记录
-function judgeCookie(child_name) {
-    var cookie_id = getCookie("openid");
+function judgeCookie(child) {
+    var cookie_id = getCookie("openid").substring(6);
+    alert(cookie_id);
     if (!cookie_id) {  //没有cookie，第一次访问，跳转值注册页面
-        var url = "";
         //这个URL 是向open.weixin.qq.com发送授权请求，映射到后端的接口，获得openid，并设置到cookie中，响应
-
          //处理授权的操作
          window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9b08b42b34258af7&redirect_uri=http%3A%2F%2Fwww.elastictime.cn%2Fstarsea%2Fopenid&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 
-        //window.location.href = '../../userMessage.html';
     } else {//有cookie的话
-        child_name.openid=cookie_id;
+        child.openid=cookie_id;
         $.ajax({//查询数据库请求 看有没有用户有没有填写注册信息
-            type: "POST",
-            //test
-            url: "../starsea/queryOpenId",  //查询数据库接口  测试接口
+            type: "GET",
+            url: "../starsea/user/getUserByOpenId",  //查询数据库接口
             dataType: "json",
             data: {
-                openid: cookie_id
+                openId: cookie_id
             },
             async:false,
             success: function (data) {
                 //如果有记录，ServiceResult的code为200，反之为500 返回的json为{code,{code,msg}}
-                if (data['msg']['code'] == 500) { //没有记录，跳转至注册界面
+                if (data['msg']['msg']['openId']==null) { //没有记录，跳转至注册界面
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
-                    child_name.name= data['msg']['msg'];
-                    //child_name= data['msg']['msg']['name'];//获取 返回的json数据中 孩子的名字
+                    child.name= data['msg']['msg']['name'];
+                    child.evaluationPerson=data['msg']['msg']['evaluationPersion'];
+                    child.age=data['msg']['msg']['age'];
+                    child.sex=data['msg']['msg']['sex'];
+                    child.school=data['msg']['msg']['school'];
+                    child.myCladd=data['msg']['msg']['myClass'];
+                    child.organization=data['msg']['msg']['organization'];
+
                 }
             }
         });

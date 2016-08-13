@@ -205,13 +205,13 @@
 
     $(document).ready(function () {
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
-        var child_name={name:""};//用于获取历史信息要查询的值
-        judgeCookie(child_name);
+        var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值
+        judgeCookie(child);
         $.ajax({
             type: "GET",
             url: "../starsea/diagnose/getLastStudyForm",
             data: {
-                name:encodeURI("黑仔二号")
+                name:child.openid
                 //name:encodeURI(child_name.name)
             },
             dataType: "json",
@@ -286,13 +286,13 @@
                     $.ajax({
                         url: '../starsea/diagnose/addStudyForm',
                         data: {
-                            myName:"黑仔二号",
-                            age:"11",
-                            sex:"男",
-                            myClass:"1班",
-                            school:"ejia",
-                            organization:"ejia",
-                            evaluationPerson:"黑仔二号的爸爸",
+                            myName:child.name,
+                            age:child.age,
+                            sex:child.sex,
+                            myClass:child.myClass,
+                            school:child.school,
+                            organization:child.organization,
+                            evaluationPerson:child.evaluationPerson,
                             evaluationTime:getNowFormatDate(),
                             hc: now_score,
                             xf1: score_add

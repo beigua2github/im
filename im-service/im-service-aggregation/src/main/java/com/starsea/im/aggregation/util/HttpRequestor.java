@@ -1,4 +1,4 @@
-package com.starsea.im.web.controller;
+package com.starsea.im.aggregation.util;
 
 /**
  * Created by Administrator on 2016/8/13.

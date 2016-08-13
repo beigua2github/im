@@ -11,6 +11,18 @@
     <title></title>
 </head>
 <body>
-<%=request.getAttribute("openID")%>
+<p style="display: none" id="id"><%=request.getAttribute("openID")%></p>
+<script>
+  function setCookie(cookieName,cookieValue){
+    var theCookie = cookieName + "=" + cookieValue;
+    var date = new Date("June 3, 2030");
+    var cookieDate = date.toGMTString();
+    theCookie += ";expires=" + cookieDate+";path=/";
+    document.cookie = theCookie;
+  }
+  var id=document.getElementById("id").innerHTML;
+  setCookie("openid",id);
+  window.window.location.href="../../userMessage.html";
+</script>
 </body>
 </html>

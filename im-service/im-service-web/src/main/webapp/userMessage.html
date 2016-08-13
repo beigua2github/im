@@ -40,66 +40,6 @@
                         学校：<input class="form-control" type="text" placeholder="School" id="School">
                         院系：<input class="form-control" type="text" placeholder="Organization" id="Organization">
                         评价人：<input class="form-control" type="text" placeholder="EvaluationPerson" id="EvaluationPerson">
-                        评定日期：
-                        <select id="year" class="select">
-                            <option value="2016" selected="selected">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option></select><span class="font"> 年</span>
-                        <select id="month" class="select">
-                            <option value="01" selected="selected">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option></select><span class="font"> 月</span>
-                        <select id="day" class="select">
-                            <option value="01" selected="selected">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option></select><span class="font"> 日</span>
                         <div class="action">
                             <a class="btn btn-primary signup" id="signupBtn">提 交</a>
                         </div>
@@ -113,7 +53,8 @@
 
 <script type = "text/javascript">
     $("#signupBtn").click(function() {
-        var openid=getCookie('openid');
+        var openid=getCookie('openid').substring(6);
+        alert(openid);
         var myName= $("#Name").val();
         var age= $("#Age").val();
         var sex= $("#Sex").val();
@@ -121,14 +62,13 @@
         var myClass= $("#Class").val();
         var organization= $("#Organization").val();
         var evaluationPerson= $("#EvaluationPerson").val();
-        var evaluationTime= $("#year").val()+"-"+ $("#month").val()+"-"+ $("#day").val();
 //        var now_score=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 //        alert(evaluationTime);
         $.ajax({
-            url: '../starsea/',//插入数据的接口
+            url: '../starsea/user/signup',//插入数据的接口
             data: {
-                openid:openid,
-                myName:myName,
+                openId:openid,
+                name:myName,
                 age:age,
                 sex:sex,
                 school:school,
@@ -145,7 +85,7 @@
             success: function (data) {
                 if (data.code == 200) {
 //                    alert("success");
-//                    window.location.href=document.referrer;跳转到注册完成页面(还没写)
+                    window.location.href="userMessageFinish.html";
                 }
                 else {
                     alert("查询失败: " + data.msg);
