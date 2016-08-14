@@ -24,8 +24,8 @@ function getCookie(cookie_name){
 }
 //判断用户有没有openid和数据库中有没有记录
 function judgeCookie(child) {
-    var cookie_id = getCookie("openid").substring(6);
-    alert(cookie_id);
+    var cookie_id = getCookie("openid").substring(7);
+    //alert(cookie_id);
     if (!cookie_id) {  //没有cookie，第一次访问，跳转值注册页面
         //这个URL 是向open.weixin.qq.com发送授权请求，映射到后端的接口，获得openid，并设置到cookie中，响应
          //处理授权的操作

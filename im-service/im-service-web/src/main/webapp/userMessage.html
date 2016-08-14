@@ -53,7 +53,7 @@
 
 <script type = "text/javascript">
     $("#signupBtn").click(function() {
-        var openid=getCookie('openid').substring(6);
+        var openid=getCookie('openid').substring(7);
         alert(openid);
         var myName= $("#Name").val();
         var age= $("#Age").val();
@@ -75,7 +75,6 @@
                 myClass:myClass,
                 organization:organization,
                 evaluationPerson:evaluationPerson,
-                evaluationTime:evaluationTime
 //                hc: now_score,
 //                xf1: 0
             },

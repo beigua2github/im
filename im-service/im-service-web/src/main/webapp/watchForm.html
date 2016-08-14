@@ -234,9 +234,11 @@
         return currentdate;
     }
     function set_pre_value() {
-        var score_join = now_score[qs_id - 1]? now_score[qs_id - 1]+ "分":"0分"; //防止now_score的值为null
-        document.getElementById("selectPointOfInterest").value = score_join;
-        document.getElementById("comment").value = now_comment[qs_id - 1];
+        if(now_score!=null) {
+            var score_join = now_score[qs_id - 1] + "分";
+            document.getElementById("selectPointOfInterest").value = score_join;
+            document.getElementById("comment").value = now_comment[qs_id - 1];
+        }
     }
 
     $(document).ready(function () {
@@ -246,12 +248,13 @@
         });//使提示消失
         var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值  和提交
         judgeCookie(child);
-
+//        alert(child.name);
         //获取历史信息
         $.ajax({
             type: "GET",
             url: "../starsea/watch/getLastWatchForm",
             data: {
+//                name:encodeURI(child.name)
                 name:child.openid
             },
             dataType: "json",
@@ -259,7 +262,7 @@
 //          console.log(data);
                 now_score = data['msg']['msg']['now_score'];
                 now_comment = data['msg']['msg']['now_comment'];
-                                //alert(pre_score);
+                //alert(pre_score);
                 set_pre_value();
                 $(".ts_mask").fadeOut(1000);
             }
