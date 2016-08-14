@@ -234,11 +234,11 @@
         return currentdate;
     }
     function set_pre_value() {
-        if(now_score!=null) {
+
             var score_join = now_score[qs_id - 1] + "分";
             document.getElementById("selectPointOfInterest").value = score_join;
             document.getElementById("comment").value = now_comment[qs_id - 1];
-        }
+
     }
 
     $(document).ready(function () {
@@ -258,12 +258,19 @@
                 name:child.openid
             },
             dataType: "json",
-            success: function(data){ //成功的处理函数
+            success: function(data) { //成功的处理函数
 //          console.log(data);
                 now_score = data['msg']['msg']['now_score'];
                 now_comment = data['msg']['msg']['now_comment'];
                 //alert(pre_score);
+    //database null
+                if (now_score == null) {
+                    now_score = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+//                    now_comment=[""," "];
+                } else {
                 set_pre_value();
+                }
+     //
                 $(".ts_mask").fadeOut(1000);
             }
         });
@@ -271,6 +278,11 @@
         $("#botton_next").click(function () {
                             var tmp_now_score = $("#selectPointOfInterest").find("option:selected").text();
                             now_score[qs_id - 1] = tmp_now_score.split("分")[0];//保存本次选中的成绩。去掉‘分’这个汉字
+        //database null
+                            if(now_comment==null){
+                                now_comment=[""];
+                            }
+         //
                             now_comment[qs_id - 1] = eval(document.getElementById('comment')).value;//保存本次填写的备注，不填就是空字符串
                             if (qs_id <= 57) {
                                 qs_id++;

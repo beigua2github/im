@@ -7,7 +7,7 @@ function getCookie(cookie_name){
     //    return false;
 //        return '123';
 //    alert(document.cookie);
-//    return 'oF3PcsnsrMiJzEwalZZbAfWQpxCI';
+//    return 'openid=o45t9wZx7eQo5VIB4nTY_76TCW4w';
 //    alert(document.cookie);
     var alllCookie=document.cookie;
     var cookie_pos=alllCookie.indexOf(cookie_name);
@@ -24,8 +24,11 @@ function getCookie(cookie_name){
 }
 //判断用户有没有openid和数据库中有没有记录
 function judgeCookie(child) {
-    var cookie_id = getCookie("openid").substring(7);
-    //alert(cookie_id);
+    var cookie_id = getCookie("openid");
+    if(cookie_id){
+        cookie_id=cookie_id.substring(7);
+    }
+    //alert(cookie_id+"!");
     if (!cookie_id) {  //没有cookie，第一次访问，跳转值注册页面
         //这个URL 是向open.weixin.qq.com发送授权请求，映射到后端的接口，获得openid，并设置到cookie中，响应
          //处理授权的操作

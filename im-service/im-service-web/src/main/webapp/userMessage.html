@@ -54,7 +54,7 @@
 <script type = "text/javascript">
     $("#signupBtn").click(function() {
         var openid=getCookie('openid').substring(7);
-        alert(openid);
+//        alert(openid);
         var myName= $("#Name").val();
         var age= $("#Age").val();
         var sex= $("#Sex").val();
@@ -85,7 +85,7 @@
                 if (data.code == 200) {
                     alert("注册完成");
 //                    window.location.href="userMessageFinish.html";
-                    window.close();
+                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
                 }
                 else {
                     alert("查询失败: " + data.msg);
