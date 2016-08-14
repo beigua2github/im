@@ -74,7 +74,7 @@
                 school:school,
                 myClass:myClass,
                 organization:organization,
-                evaluationPerson:evaluationPerson,
+                evaluationPerson:evaluationPerson
 //                hc: now_score,
 //                xf1: 0
             },
@@ -83,8 +83,9 @@
             dataType: 'json',
             success: function (data) {
                 if (data.code == 200) {
-//                    alert("success");
-                    window.location.href="userMessageFinish.html";
+                    alert("注册完成");
+//                    window.location.href="userMessageFinish.html";
+                    window.close();
                 }
                 else {
                     alert("查询失败: " + data.msg);

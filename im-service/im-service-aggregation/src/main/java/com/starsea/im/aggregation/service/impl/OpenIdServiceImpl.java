@@ -14,12 +14,12 @@ public class OpenIdServiceImpl implements OpenIdService{
         String secret = "615cbcd9c3b4d7ec4d510fd82b172842";
         String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code=" + code + "&grant_type=authorization_code";
         String  json="";
-//        try {
-//            json = new HttpRequestor().doGet(requestUrl);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        json="{'dsad':'dasdsa','dsfsa':'cdsvs','openid':'3543csdcuuwd89','cds':'cdcs'}";
+        try {
+            json = new HttpRequestor().doGet(requestUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        json="{'dsad':'dasdsa','dsfsa':'cdsvs','openid':'3543csdcuuwd89','cds':'cdcs'}";
         int start=json.indexOf("openid")+9;
         int end=json.indexOf(",",start)-1;
         String openid=json.substring(start,end);//提取openid
