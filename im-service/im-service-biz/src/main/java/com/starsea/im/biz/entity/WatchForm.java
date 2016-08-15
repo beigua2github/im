@@ -10,6 +10,7 @@ public class WatchForm {
     private String name;
     private String evaluationPerson;
     private Date evaluationTime;
+    private String OpenId;
     private Integer Question1;
     private String Comment1;
     private Integer Question2;
@@ -121,6 +122,14 @@ public class WatchForm {
     private Integer Question55;
     private String Comment55;
     private Integer Question56;
+
+    public String getOpenId() {
+        return OpenId;
+    }
+
+    public void setOpenId(String openId) {
+        OpenId = openId;
+    }
 
     public String getComment52() {
         return Comment52;

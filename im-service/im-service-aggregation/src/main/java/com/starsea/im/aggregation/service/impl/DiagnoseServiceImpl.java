@@ -34,9 +34,23 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public StudyFormDto queryLastStudyFormByName(String name) {
+      public StudyFormDto queryLastStudyFormByName(String name) {
 
         StudyForm studyForm = diagnoseDao.queryLastStudyFormByName(name);
+        StudyFormDto studyFormDto = new StudyFormDto();
+        if (studyForm != null) {
+            studyFormDto = Transformer.convertStudyFormDtoFromStudyForm(studyForm);
+        }
+
+        return studyFormDto;
+
+    }
+
+
+    @Override
+    public StudyFormDto queryStudyFormByOpenId(String openId) {
+
+        StudyForm studyForm = diagnoseDao.queryStudyFormByOpenId(openId);
         StudyFormDto studyFormDto = new StudyFormDto();
         if (studyForm != null) {
             studyFormDto = Transformer.convertStudyFormDtoFromStudyForm(studyForm);

@@ -23,5 +23,8 @@ public interface AdvantageDao {
     @DataSource("read")
     public AdvantageForm queryAdvantageFormByName(String name);
 
+    @DataSource("read")
+    public AdvantageForm queryAdvantageFormByOpenId(String openId);
+
 
 }

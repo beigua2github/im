@@ -40,6 +40,16 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
     }
 
     @Override
+    public WatchFormDto queryWatchFormByOpenId(String openId) {
+        WatchForm watchForm = watchDao.queryWatchFormByOpenId(openId);
+        WatchFormDto watchFormDto = new WatchFormDto();
+        if(watchForm!=null){
+            watchFormDto =  Transformer.convertWatchFormDtoFromWatchForm(watchForm);
+        }
+        return watchFormDto;
+    }
+
+    @Override
     public List<WatchFormDto> queryLastWatchFormByNameWeek(String name) {
         Date fDateEnd = new Date();
         Calendar cal = Calendar.getInstance();

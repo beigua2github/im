@@ -33,7 +33,7 @@ public class Transformer {
         return sdf.format(new Date(Long.valueOf(timestamp)));
     }
 
-    public static StudyForm enrichStudyForm(String name, String sex, String myClass, String school, String organization, String evaluationPerson, String evaluationTime, int[] hc) throws ParseException {
+    public static StudyForm enrichStudyForm(String name, String sex, String myClass, String school, String organization, String evaluationPerson, String evaluationTime, String openId, int[] hc) throws ParseException {
 
         StudyForm studyForm = new StudyForm();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,6 +45,7 @@ public class Transformer {
         studyForm.setOrganization(organization);
         studyForm.setEvaluationPerson(evaluationPerson);
         studyForm.setEvaluationTime(date);
+        studyForm.setOpenId(openId);
         studyForm.setQuestion1(hc[0]);
         studyForm.setQuestion2(hc[1]);
         studyForm.setQuestion3(hc[2]);
@@ -67,7 +68,7 @@ public class Transformer {
 
     }
 
-    public static AdvantageForm enrichAdvantage(String school,String myClass,String name, String sex, int age,int[] now_score) throws ParseException {
+    public static AdvantageForm enrichAdvantage(String school,String myClass,String name, String sex, int age, String openId,int[] now_score) throws ParseException {
 
         AdvantageForm advantageForm = new AdvantageForm();
         advantageForm.setSchool(school);
@@ -75,6 +76,7 @@ public class Transformer {
         advantageForm.setName(name);
         advantageForm.setSex(sex);
         advantageForm.setAge(age);
+        advantageForm.setOpenId(openId);
         advantageForm.setQuestion1(now_score[0]);
         advantageForm.setQuestion2(now_score[1]);
         advantageForm.setQuestion3(now_score[2]);
@@ -99,11 +101,12 @@ public class Transformer {
         advantageForm.setQuestion22(now_score[21]);
         advantageForm.setQuestion23(now_score[22]);
         advantageForm.setQuestion24(now_score[23]);
+        advantageForm.setQuestion25(now_score[24]);
         return advantageForm;
 
     }
 
-    public static WatchForm enrichWatchForm(String name, String evaluationPerson, String evaluationTime, int[] now_score,String[] now_comment) throws ParseException {
+    public static WatchForm enrichWatchForm(String name, String evaluationPerson, String evaluationTime,String openId, int[] now_score,String[] now_comment) throws ParseException {
 
         WatchForm watchForm = new WatchForm();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -111,6 +114,7 @@ public class Transformer {
         watchForm.setName(name);
         watchForm.setEvaluationPerson(evaluationPerson);
         watchForm.setEvaluationTime(date);
+        watchForm.setOpenId(openId);
         watchForm.setQuestion1(now_score[0]);
         watchForm.setQuestion2(now_score[1]);
         watchForm.setQuestion3(now_score[2]);

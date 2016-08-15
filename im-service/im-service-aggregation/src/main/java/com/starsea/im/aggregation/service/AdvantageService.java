@@ -22,6 +22,9 @@ public interface AdvantageService {
     @DataSource(DataSourceType.READ)
     public AdvantageFormDto queryAdvantageFormByName(String name);
 
+    @DataSource(DataSourceType.READ)
+    public AdvantageFormDto queryAdvantageFormByOpenId(String openId);
+
 
 
 }

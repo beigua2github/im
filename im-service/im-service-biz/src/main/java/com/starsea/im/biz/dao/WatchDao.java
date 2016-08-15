@@ -24,5 +24,8 @@ public interface WatchDao {
     public WatchForm queryLastWatchFormByName(String name);
 
     @DataSource("read")
+    public WatchForm queryWatchFormByOpenId(String openId);
+
+    @DataSource("read")
     public List<WatchForm> queryLastWatchFormByNameWeek(@Param("name") String name, @Param("dateStart") Date dateStart,@Param("dateEnd") Date dateEnd);
 }

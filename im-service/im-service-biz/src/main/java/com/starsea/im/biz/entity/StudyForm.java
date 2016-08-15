@@ -15,6 +15,7 @@ public class StudyForm {
     private String organization;
     private String evaluationPerson;
     private Date evaluationTime;
+    private String openId;
     private Integer Question1;
     private Integer Question2;
     private Integer Question3;
@@ -250,5 +251,13 @@ public class StudyForm {
 
     public void setQuestion18(Integer question18) {
         Question18 = question18;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

@@ -7,7 +7,7 @@
 <mapper namespace="com.starsea.im.biz.dao.WatchDao">
 
     <sql id = "keys">
-        Name,  EvaluationPerson,  EvaluationTime,  Question1,  Comment1,  Question2,  Comment2,
+        OpenId ,Name,  EvaluationPerson,  EvaluationTime,  Question1,  Comment1,  Question2,  Comment2,
         Question3,  Comment3,  Question4,  Comment4,  Question5,  Comment5 ,  Question6,
         Comment6 ,  Question7,  Comment7 ,  Question8,  Comment8 ,  Question9,  Comment9 ,
         Question10,  Comment10 ,  Question11,  Comment11 ,  Question12,  Comment12 ,
@@ -31,7 +31,7 @@
     <insert id="addWatchForm" parameterType="WatchForm">
         INSERT INTO test.watchform
         (<include refid="keys"/>)
-        VALUES (#{name},#{evaluationPerson},#{evaluationTime},#{question1},#{comment1},#{question2},#{comment2},#{question3},#{comment3},#{question4},#{comment4},
+        VALUES (#{openId},#{name},#{evaluationPerson},#{evaluationTime},#{question1},#{comment1},#{question2},#{comment2},#{question3},#{comment3},#{question4},#{comment4},
         #{question5},#{comment5},#{question6},#{comment6},#{question7},#{comment7},#{question8},#{comment8 },#{question9},#{comment9 },#{question10},#{comment10 },
         #{question11},#{comment11},#{question12},#{comment12 },#{question13},#{comment13 },#{question14},#{comment14},#{question15},#{comment15 },#{question16},#{comment16},#{question17},#{comment17},
         #{question18},#{comment18},#{question19},#{comment19 },#{question20},#{comment20},#{question21},#{comment21},#{question22},#{comment22},#{question23},#{comment23},#{question24},#{comment24 },#{question25},
@@ -45,6 +45,10 @@
 
     <select id="queryLastWatchFormByName" resultType="WatchForm">
         SELECT * FROM test.watchform where Name = #{name} order by id desc limit 1
+    </select>
+
+    <select id="queryWatchFormByOpenId" resultType="WatchForm">
+        SELECT * FROM test.watchform where OpenId = #{openId}
     </select>
 
     <select id="queryLastWatchFormByNameWeek" resultType="WatchForm" parameterType="map">
