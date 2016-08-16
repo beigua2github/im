@@ -32,6 +32,7 @@ public class WatchController extends AjaxBase {
     @RequestMapping(value = "/addWatch", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addWatch(HttpServletRequest req,
+                                     @RequestParam(value = "openId") String openId,
                                      @RequestParam(value = "name") String name,
                                      @RequestParam(value = "evaluationPerson") String evaluationPerson,
                                      @RequestParam(value = "evaluationTime") String evaluationTime,
@@ -40,7 +41,7 @@ public class WatchController extends AjaxBase {
     ) throws ParseException {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
-        WatchForm watchForm = Transformer.enrichWatchForm(name, evaluationPerson, evaluationTime, now_score, now_comment);
+        WatchForm watchForm = Transformer.enrichWatchForm(name, evaluationPerson, evaluationTime,openId, now_score, now_comment);
         serviceResult.setMsg(watchService.addWatchForm(watchForm));
         return setResponseData(serviceResult);
     }
@@ -55,6 +56,15 @@ public class WatchController extends AjaxBase {
         return setResponseData(serviceResult);
     }
 
+
+    @RequestMapping(value = "/getWatchFormByOpenId", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult getWatchFormByOpenId(@RequestParam(value = "openId") String openId) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryWatchFormByOpenId(openId));
+        return setResponseData(serviceResult);
+    }
 
     @RequestMapping(value = "/getLastWatchFormByNameWeek", method = RequestMethod.GET)
     @ResponseBody

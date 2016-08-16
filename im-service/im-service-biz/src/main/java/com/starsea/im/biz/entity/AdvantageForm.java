@@ -12,6 +12,7 @@ public class AdvantageForm {
     private String sex;
     private String banji;
     private String school;
+    private String openId;
     private Integer Question1;
     private Integer Question2;
     private Integer Question3;
@@ -284,5 +285,12 @@ public class AdvantageForm {
 
     public void setQuestion25(Integer question25) {
         Question25 = question25;
+    }
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

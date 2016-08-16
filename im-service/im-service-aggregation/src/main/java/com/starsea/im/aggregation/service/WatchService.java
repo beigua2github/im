@@ -18,6 +18,8 @@ public interface WatchService {
     @DataSource(DataSourceType.READ)
     public WatchFormDto queryLastWatchFormByName(String name);
 
+    @DataSource(DataSourceType.READ)
+    public WatchFormDto queryWatchFormByOpenId(String openId);
 
     @DataSource(DataSourceType.READ)
     public List<WatchFormDto> queryLastWatchFormByNameWeek(String name);
@@ -28,8 +30,6 @@ public interface WatchService {
 
     @DataSource(DataSourceType.READ)
     public Long queryAvgWatchFormByNameDay(String name,int day);
-
-
 
 
     }

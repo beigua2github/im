@@ -55,5 +55,16 @@ public class AdvantageServiceIml implements AdvantageService {
         return advantageFormDto;
     }
 
+    @Override
+    public AdvantageFormDto queryAdvantageFormByOpenId(String openId) {
+
+        AdvantageForm advantageForm = advantageDao.queryAdvantageFormByOpenId(openId);
+        AdvantageFormDto advantageFormDto = new AdvantageFormDto();
+        if (advantageForm != null) {
+            advantageFormDto = Transformer.converAdvantageFormDtoFromAdvantageForm(advantageForm);
+        }
+        return advantageFormDto;
+    }
+
 
 }

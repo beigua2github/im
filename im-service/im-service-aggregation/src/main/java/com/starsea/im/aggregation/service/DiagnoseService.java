@@ -22,6 +22,10 @@ public interface DiagnoseService {
     @DataSource(DataSourceType.READ)
     public StudyFormDto queryLastStudyFormByName(String name);
 
+    @DataSource(DataSourceType.READ)
+    public StudyFormDto queryStudyFormByOpenId(String openId);
+
+
     //均分  分别传入4个纬度需要计算的分数 studyForms.size()we为学生人数
     public List<Long> getAvgWithStudents();
 

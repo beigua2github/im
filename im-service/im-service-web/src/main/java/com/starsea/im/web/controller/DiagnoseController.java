@@ -30,22 +30,22 @@ public class DiagnoseController extends AjaxBase{
     @RequestMapping(value = "/addStudyForm", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addStudyForm(HttpServletRequest req,
-                                 @RequestParam(value = "myName") String name,
-                                 @RequestParam(value = "age") int age,
-                                 @RequestParam(value = "sex") String sex,
-                                 @RequestParam(value = "myClass") String myClass,
-                                 @RequestParam(value = "school") String school,
-                                 @RequestParam(value = "organization") String organization,
-                                 @RequestParam(value = "evaluationPerson") String evaluationPerson,
-                                 @RequestParam(value = "evaluationTime") String evaluationTime,
-                                 @RequestParam(value = "hc[]") int[] hc,
-                                 @RequestParam(value = "xf1") int xf1) throws ParseException {
-
+                                         @RequestParam(value = "openId") String openId,
+                                         @RequestParam(value = "myName") String name,
+                                         @RequestParam(value = "age") int age,
+                                         @RequestParam(value = "sex") String sex,
+                                         @RequestParam(value = "myClass") String myClass,
+                                         @RequestParam(value = "school") String school,
+                                         @RequestParam(value = "organization") String organization,
+                                         @RequestParam(value = "evaluationPerson") String evaluationPerson,
+                                         @RequestParam(value = "evaluationTime") String evaluationTime,
+                                         @RequestParam(value = "hc[]") int[] hc,
+                                         @RequestParam(value = "xf1") int xf1) throws ParseException {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg("ok");
 
-        StudyForm studyForm = Transformer.enrichStudyForm(name,age, sex, myClass, school, organization, evaluationPerson, evaluationTime, hc);
+        StudyForm studyForm = Transformer.enrichStudyForm(name,age, sex, myClass, school, organization, evaluationPerson, evaluationTime,openId ,hc);
         serviceResult.setMsg(diagnoseService.addStudyForm(studyForm));
         return setResponseData(serviceResult);
     }
@@ -66,6 +66,16 @@ public class DiagnoseController extends AjaxBase{
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(diagnoseService.queryLastStudyFormByName(name));
+        return setResponseData(serviceResult);
+    }
+
+
+    @RequestMapping(value = "/getStudyFormByOpenId", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult getStudyFormByOpenId(@RequestParam(value = "openId") String openId) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(diagnoseService.queryStudyFormByOpenId(openId));
         return setResponseData(serviceResult);
     }
 

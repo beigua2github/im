@@ -22,4 +22,8 @@ public interface DiagnoseDao {
 
     @DataSource("read")
     public StudyForm queryLastStudyFormByName(String name);
+
+    @DataSource("read")
+    public StudyForm queryStudyFormByOpenId(String openId);
+
 }
