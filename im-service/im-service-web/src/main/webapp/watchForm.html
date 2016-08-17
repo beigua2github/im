@@ -808,7 +808,9 @@
     var new_comment =new Array();
     var now_score = new Array();//用于记录学生的成绩
     //    now_score=[1,1,2,3,4,5,1,1,2,3,4,5,6,1,1,2,3,4,5,6,1,1,2,3,4,5,1,1,2,3,4,5,1,1,2,3,4,5,6,7,1,1,2,3,4,5];
+//    now_score=[5];
     var now_comment = new Array();//用于记录学生特别情况
+//    now_comment=[''];
     //    now_comment=['情绪力','人际力','自主力','专注力','意志力','学习认知','学习策略'];
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
@@ -842,13 +844,15 @@
             dataType: "json",
             success:function(data){ //成功的处理函数
                 console.log(data);
-                now_score = data['msg']['msg']['now_score'];
-                now_comment = data['msg']['msg']['now_comment'];
+                if(data['msg']['msg']['now_score']!=null) {
+                    now_score = data['msg']['msg']['now_score'];
+                    now_comment = data['msg']['msg']['now_comment'];
+                }else{
+                    now_score=[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5];
+                    now_comment=["","","","","","",""];
+                }
                 //alert(pre_score);
 //                set_pre_value();
-                if (now_score == null) {
-                    now_srcoe=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                }
                 $(".ts_mask").fadeOut(1000);
             }
         });

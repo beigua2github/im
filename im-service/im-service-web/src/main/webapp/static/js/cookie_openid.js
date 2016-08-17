@@ -3,6 +3,8 @@
  */
 //用户获取cookie中的微信ID
 function getCookie(cookie_name){
+    return "openid=o45t9wZx7";
+
     var alllCookie=document.cookie;
     var cookie_pos=alllCookie.indexOf(cookie_name);
     if(cookie_pos!=-1){
@@ -39,7 +41,7 @@ function judgeCookie(child) {
             async:false,
             success: function (data) {
                 //如果有记录，ServiceResult的code为200，反之为500 返回的json为{code,{code,msg}}
-                if (data['msg']['msg']['openId']==null) { //没有记录，跳转至注册界面
+                if (data['msg']['msg']['name']==null) { //没有记录，跳转至注册界面
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
                     child.name= data['msg']['msg']['name'];
