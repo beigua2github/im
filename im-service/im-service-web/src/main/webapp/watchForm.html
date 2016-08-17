@@ -832,7 +832,6 @@
         });//使提示消失
         var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值  和提交
         judgeCookie(child);
-//        alert(child.evaluationPerson);
         $.ajax({
             type: "GET",
             url: "../starsea/watch/getWatchFormByOpenId",
