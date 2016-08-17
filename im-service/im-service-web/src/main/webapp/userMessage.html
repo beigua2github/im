@@ -41,7 +41,7 @@
                         学校：<input class="form-control" type="text" placeholder="School" id="School">
                         院系：<input class="form-control" type="text" placeholder="Organization" id="Organization">
                         评价人：<input class="form-control" type="text" placeholder="EvaluationPerson" id="EvaluationPerson">
-                        <!--邮箱:<input class="form-control" type="text" placeholder="EvaluationPerson" id="email">-->
+                        邮箱:<input class="form-control" type="text" placeholder="EvaluationPerson" id="email">
                         <div class="action">
                             <a class="btn btn-primary signup" id="signupBtn">提 交</a>
                         </div>
@@ -64,7 +64,7 @@
         var myClass= $("#Class").val();
         var organization= $("#Organization").val();
         var evaluationPerson= $("#EvaluationPerson").val();
-//        var email= $("#email").val();
+        var email= $("#email").val();
 
 
         $.ajax({
@@ -77,8 +77,8 @@
                 school:school,
                 myClass:myClass,
                 organization:organization,
-                evaluationPerson:evaluationPerson
-//                email:email
+                evaluationPerson:evaluationPerson,
+                email:email
             },
             type: 'post',
             cache: false,
