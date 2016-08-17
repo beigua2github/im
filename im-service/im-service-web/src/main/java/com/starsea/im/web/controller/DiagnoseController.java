@@ -1,7 +1,7 @@
 package com.starsea.im.web.controller;
 
 import com.starsea.im.aggregation.service.DiagnoseService;
-import com.starsea.im.aggregation.service.UtilService;
+import com.starsea.im.aggregation.service.decodeService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
 import com.starsea.im.biz.entity.StudyForm;
@@ -25,7 +25,7 @@ public class DiagnoseController extends AjaxBase{
     @Autowired
     DiagnoseService diagnoseService;
     @Autowired
-    UtilService utilService;
+    decodeService utilService;
 
     @RequestMapping(value = "/addStudyForm", method = RequestMethod.POST)
     @ResponseBody
@@ -34,7 +34,7 @@ public class DiagnoseController extends AjaxBase{
                                          @RequestParam(value = "myName") String name,
                                          @RequestParam(value = "age") int age,
                                          @RequestParam(value = "sex") String sex,
-                                         @RequestParam(value = "myClass") String myClass,
+                                         @RequestParam(value = "myClass" ) String myClass,
                                          @RequestParam(value = "school") String school,
                                          @RequestParam(value = "organization") String organization,
                                          @RequestParam(value = "evaluationPerson") String evaluationPerson,

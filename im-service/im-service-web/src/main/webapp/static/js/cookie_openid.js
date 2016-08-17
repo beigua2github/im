@@ -7,7 +7,7 @@ function getCookie(cookie_name){
     //    return false;
 //        return '123';
 //    alert(document.cookie);
-//    return 'openid=o45t9wZx7eQo5VIB4nTY_76TCW4w';
+//    return 'openid=o45t95VIB4nTY_76TCW4w';
 //    alert(document.cookie);
     var alllCookie=document.cookie;
     var cookie_pos=alllCookie.indexOf(cookie_name);
@@ -50,11 +50,11 @@ function judgeCookie(child) {
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
                     child.name= data['msg']['msg']['name'];
-                    child.evaluationPerson=data['msg']['msg']['evaluationPersion'];
+                    child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
                     child.age=data['msg']['msg']['age'];
                     child.sex=data['msg']['msg']['sex'];
                     child.school=data['msg']['msg']['school'];
-                    child.myCladd=data['msg']['msg']['myClass'];
+                    child.myClass=data['msg']['msg']['myClass'];
                     child.organization=data['msg']['msg']['organization'];
 
                 }

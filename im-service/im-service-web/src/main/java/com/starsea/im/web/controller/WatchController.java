@@ -1,6 +1,6 @@
 package com.starsea.im.web.controller;
 
-import com.starsea.im.aggregation.service.UtilService;
+import com.starsea.im.aggregation.service.decodeService;
 import com.starsea.im.aggregation.service.impl.WatchService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.ParseException;
 
 /**
@@ -27,7 +25,7 @@ public class WatchController extends AjaxBase {
     @Autowired
     WatchService watchService;
     @Autowired
-    UtilService utilService;
+    decodeService utilService;
 
     @RequestMapping(value = "/addWatch", method = RequestMethod.POST)
     @ResponseBody

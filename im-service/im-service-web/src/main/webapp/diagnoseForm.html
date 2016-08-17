@@ -209,10 +209,10 @@
         judgeCookie(child);
         $.ajax({
             type: "GET",
-            url: "../starsea/diagnose/getLastStudyForm",
+            url: "../starsea/diagnose/getStudyFormByOpenId",
             data: {
-//                name:child.openid
-                name:encodeURI(child.name)
+                openId:child.openid
+//                name:encodeURI(child.name)
             },
             dataType: "json",
             success:function(data){ //成功的处理函数
@@ -289,6 +289,7 @@
                     $.ajax({
                         url: '../starsea/diagnose/addStudyForm',
                         data: {
+                            openId:child.openid,
                             myName:child.name,
                             age:child.age,
                             sex:child.sex,
