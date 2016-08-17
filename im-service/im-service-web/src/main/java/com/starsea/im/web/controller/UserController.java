@@ -48,7 +48,8 @@ public class UserController extends AjaxBase{
                                 @RequestParam("myClass") String myClass,
                                 @RequestParam("school") String school,
                                 @RequestParam("organization") String organization,
-                                @RequestParam("evaluationPerson") String evaluationPerson
+                                @RequestParam("evaluationPerson") String evaluationPerson,
+                                @RequestParam("email") String email
                                 ){
         ServiceResult serviceResult = new ServiceResult();
         UserEntity userEntity = new UserEntity();
@@ -61,6 +62,7 @@ public class UserController extends AjaxBase{
         userEntity.setOrganization(organization);
         userEntity.setEvaluationPerson(evaluationPerson);
         userEntity.setCreateTime(new Date());
+        userEntity.setEmail(email);
         serviceResult.setMsg(userService.addUser(userEntity));
         serviceResult.setCode(200);
         return setResponseData(serviceResult);
