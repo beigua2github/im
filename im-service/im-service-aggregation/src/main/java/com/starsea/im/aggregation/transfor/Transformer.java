@@ -1,9 +1,11 @@
 package com.starsea.im.aggregation.transfor;
 
 import com.starsea.im.aggregation.dto.AdvantageFormDto;
+import com.starsea.im.aggregation.dto.LabelDto;
 import com.starsea.im.aggregation.dto.StudyFormDto;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.entity.AdvantageForm;
+import com.starsea.im.biz.entity.LabelEntity;
 import com.starsea.im.biz.entity.StudyForm;
 import com.starsea.im.biz.entity.WatchForm;
 
@@ -353,6 +355,15 @@ public class Transformer {
 
     }
 
+
+    public static LabelDto convertLabelDtoFromLabelEntity(LabelEntity labelEntity) {
+        LabelDto labelDto = new LabelDto();
+        labelDto.setLabelOne(labelEntity.getLabelOne());
+        labelDto.setLabelTwo(labelEntity.getLabelTwo());
+        labelDto.setContent(labelEntity.getContent());
+
+        return labelDto;
+    }
 
     public static List<List<Integer>> convertListFromStudyFormsOfFenxin(List<StudyForm> allStudyForm){
 
