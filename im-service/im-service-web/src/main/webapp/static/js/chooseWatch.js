@@ -19,11 +19,32 @@ function self_commit(){
     if(count!=5){
         alert("请选择5个");
     }else{
-        var chooseClass=new Array();
+        var chooseClass=new Array();//用于记录选择的类型 1-7编号
         $("input:checked").each(function(){
             chooseClass.push($(this).val());
         });
         alert(chooseClass);
+        $.ajax({
+            type: "POST",
+            url: "../starsea/",
+            data: {
+                data:chooseClass
+            },
+            dataType: "json",
+            success:function(data){ //成功的处理函数
+                console.log(data);
+                if(data['msg']['msg']['now_score']!=null) {
+                    now_score = data['msg']['msg']['now_score'];
+                    now_comment = data['msg']['msg']['now_comment'];
+                }else{
+                    now_score=[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5];
+                    now_comment=["","","","","","",""];
+                }
+                //alert(pre_score);
+//                set_pre_value();
+                $(".ts_mask").fadeOut(1000);
+            }
+        });
     }
 }
 function self_back(){
