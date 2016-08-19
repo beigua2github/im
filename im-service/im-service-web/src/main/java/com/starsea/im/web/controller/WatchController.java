@@ -95,9 +95,42 @@ public class WatchController extends AjaxBase {
         name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
-        serviceResult.setMsg(watchService.queryAvgWatchFormByNameDay(name,day));
+        serviceResult.setMsg(watchService.queryAvgWatchFormByNameDay(name, day));
         return setResponseData(serviceResult);
     }
 
+    @RequestMapping(value = "/queryLastWatchFormByOpenIdWeek", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryLastWatchFormByOpenIdWeek(@RequestParam(value = "openId") String openId) {
+        openId=utilService.decode(openId);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdWeek(openId));
+        return setResponseData(serviceResult);
+    }
+
+
+
+    @RequestMapping(value = "/queryLastWatchFormByOpenIdMonth", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryLastWatchFormByOpenIdMonth(@RequestParam(value = "openId") String name) {
+        name=utilService.decode(name);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdMonth(name));
+        return setResponseData(serviceResult);
+    }
+
+    @RequestMapping(value = "/queryAvgWatchFormByOpenIdDay", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryAvgWatchFormByOpenIdDay(@RequestParam(value = "openId") String name,
+                                                    @RequestParam(value = "day",defaultValue = "7") int day
+    ) {
+        name=utilService.decode(name);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryAvgWatchFormByOpenIdDay(name, day));
+        return setResponseData(serviceResult);
+    }
 
 }

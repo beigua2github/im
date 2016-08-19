@@ -50,4 +50,8 @@
         SELECT * FROM test.watchform where Name = #{name}  AND  EvaluationTime BETWEEN #{dateStart} and #{dateEnd}
     </select>
 
+    <select id="queryLastWatchFormByOpenIdWeek" resultType="WatchForm" parameterType="map">
+        SELECT * FROM test.watchform where OpenId = #{openId}  AND  EvaluationTime BETWEEN #{dateStart} and #{dateEnd}
+    </select>
+
 </mapper>
