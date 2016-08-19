@@ -3,7 +3,7 @@
  */
 //用户获取cookie中的微信ID
 function getCookie(cookie_name){
-    return "openid=o45t9wZx7eQo5VIB4nTY_76TCW4w";
+    //return "openid=o45t9wZx7eQo5VIB4nTY_76TCW4w";
     var alllCookie=document.cookie;
     var cookie_pos=alllCookie.indexOf(cookie_name);
     if(cookie_pos!=-1){

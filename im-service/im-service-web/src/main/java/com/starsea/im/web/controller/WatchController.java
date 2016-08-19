@@ -1,6 +1,7 @@
 package com.starsea.im.web.controller;
 
 import com.starsea.im.aggregation.service.decodeService;
+import com.starsea.im.aggregation.service.impl.DecodeService;
 import com.starsea.im.aggregation.service.impl.WatchService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
@@ -25,17 +26,17 @@ public class WatchController extends AjaxBase {
     @Autowired
     WatchService watchService;
     @Autowired
-    decodeService utilService;
+    DecodeService utilService;
 
     @RequestMapping(value = "/addWatch", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addWatch(HttpServletRequest req,
-                                     @RequestParam(value = "openId") String openId,
-                                     @RequestParam(value = "name") String name,
-                                     @RequestParam(value = "evaluationPerson") String evaluationPerson,
-                                     @RequestParam(value = "evaluationTime") String evaluationTime,
-                                     @RequestParam(value = "now_score[]") int[] now_score,
-                                     @RequestParam(value = "now_comment[]") String[] now_comment
+                                  @RequestParam(value = "openId") String openId,
+                                  @RequestParam(value = "name") String name,
+                                  @RequestParam(value = "evaluationPerson") String evaluationPerson,
+                                  @RequestParam(value = "evaluationTime") String evaluationTime,
+                                  @RequestParam(value = "now_score[]") int[] now_score,
+                                  @RequestParam(value = "now_comment[]") String[] now_comment
     ) throws ParseException {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
@@ -89,13 +90,46 @@ public class WatchController extends AjaxBase {
     @ResponseBody
     public ServiceResult queryAvgWatchFormByNameDay(@RequestParam(value = "name",defaultValue = "黑仔一号") String name,
                                                     @RequestParam(value = "day",defaultValue = "7") int day
-                                                    ) {
+    ) {
         name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
-        serviceResult.setMsg(watchService.queryAvgWatchFormByNameDay(name,day));
+        serviceResult.setMsg(watchService.queryAvgWatchFormByNameDay(name, day));
         return setResponseData(serviceResult);
     }
 
+    @RequestMapping(value = "/queryLastWatchFormByOpenIdWeek", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryLastWatchFormByOpenIdWeek(@RequestParam(value = "openId") String openId) {
+        openId=utilService.decode(openId);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdWeek(openId));
+        return setResponseData(serviceResult);
+    }
+
+
+
+    @RequestMapping(value = "/queryLastWatchFormByOpenIdMonth", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryLastWatchFormByOpenIdMonth(@RequestParam(value = "openId") String name) {
+        name=utilService.decode(name);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdMonth(name));
+        return setResponseData(serviceResult);
+    }
+
+    @RequestMapping(value = "/queryAvgWatchFormByOpenIdDay", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryAvgWatchFormByOpenIdDay(@RequestParam(value = "openId") String name,
+                                                      @RequestParam(value = "day",defaultValue = "7") int day
+    ) {
+        name=utilService.decode(name);
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryAvgWatchFormByOpenIdDay(name, day));
+        return setResponseData(serviceResult);
+    }
 
 }

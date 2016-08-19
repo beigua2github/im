@@ -219,8 +219,8 @@ public class Transformer {
 
     public static WatchFormDto convertWatchFormDtoFromWatchForm(WatchForm watchForm){
 
-        int[] now_score = new int[57];
-        String[] now_comment = new String[57];
+        int[] now_score = new int[46];
+        String[] now_comment = new String[7];
         WatchFormDto watchFormDto = new WatchFormDto();
         watchFormDto.setName(watchForm.getName());
         watchFormDto.setEvaluationPerson(watchForm.getEvaluationPerson());
@@ -250,7 +250,6 @@ public class Transformer {
         now_score[22]= watchForm.getQuestion23();
         now_score[23]= watchForm.getQuestion24();
         now_score[24]= watchForm.getQuestion25();
-
         now_score[25]= watchForm.getQuestion26();
         now_score[26]= watchForm.getQuestion27();
         now_score[27]= watchForm.getQuestion28();
