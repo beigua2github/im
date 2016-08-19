@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Choice</title>
+    <link href="static/css/chooseWatch.css" rel="stylesheet">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/chooseWatch.js"></script>
+    <script src="static/js/jquery-labelauty.js"></script>
+    <link href="static/css/jquery-labelauty.css" rel="stylesheet">
+</head>
+<body>
+<div class="ts_mask">
+    <div class="tishi">
+        <input class="button_cp" type="button" value="测评">
+        <br>
+        <input class="button_self" type="button" value="自主">
+    </div>
+</div>
+<div class="self">
+    <h3>您擅长的技能（复选框）</h3>
+    <ul class="dowebok">
+        <li><input type="checkbox" name="checkbox" data-labelauty="HTML" value="1"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="CSS" value="2"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="JavaScript" value="3"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="SEO" value="4"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="PHP" value="5"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="JAVA" value="6"></li>
+        <li><input type="checkbox" name="checkbox" data-labelauty=".NET" value="7"></li>
+    </ul>
+    <script>
+        $(function(){
+            $(':input').labelauty();
+        });
+    </script>
+</div>
+
+<div class="cp">
+</div>
+
+</body>
+</html>
