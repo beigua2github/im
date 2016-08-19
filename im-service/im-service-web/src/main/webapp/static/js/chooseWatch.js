@@ -19,13 +19,11 @@ function self_commit(){
     if(count!=5){
         alert("请选择5个");
     }else{
-        var check_json={};
-        var n=1;
+        var chooseClass=new Array();
         $("input:checked").each(function(){
-            check_json['choice'+n]=$(this).val();
-            n+=1;
+            chooseClass.push($(this).val());
         });
-        alert(JSON.stringify(check_json));
+        alert(chooseClass);
     }
 }
 function self_back(){
