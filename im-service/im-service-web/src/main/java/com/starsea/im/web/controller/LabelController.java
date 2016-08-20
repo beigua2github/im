@@ -29,8 +29,7 @@ public class LabelController extends AjaxBase{
                                   @RequestParam("openId") String openId,
                                   @RequestParam("labelone") String labelOne,
                                   @RequestParam("labelTwo") String labelTwo,
-                                  @RequestParam("content") String content
-                                  ) {
+                                  @RequestParam("content") String content) {
         ServiceResult serviceResult = new ServiceResult();
         LabelEntity labelEntity = new LabelEntity();
         labelEntity.setLabelOne(labelOne);

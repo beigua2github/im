@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 @Single
 public interface UserDao {
-    @DataSource("write")
+    @DataSource("red")
     public UserEntity queryUser(int id);
 
     @DataSource("read")
@@ -23,8 +23,6 @@ public interface UserDao {
     @DataSource("read")
     public List<UserEntity> queryUsers();
 
-    //使用@Insert注解指明add方法要执行的SQL
-//    @Insert("insert into users(email, password) values(#{email}, #{password})")
     @DataSource("write")
     public int addUser(UserEntity user);
 

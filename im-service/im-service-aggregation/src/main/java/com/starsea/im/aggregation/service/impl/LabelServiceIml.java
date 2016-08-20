@@ -41,4 +41,17 @@ public class LabelServiceIml implements LabelService{
         return labelDtos;
     }
 
+    @Override
+    public LabelDto queryLabelById(int id){
+
+        LabelEntity labelEntity = labelDao.queryLabelById(id);
+        LabelDto labelDto = new LabelDto();
+        if(labelEntity != null ){
+            labelDto = Transformer.convertLabelDtoFromLabelEntity(labelEntity);
+
+        }
+
+        return labelDto;
+    }
+
 }

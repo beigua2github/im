@@ -2,27 +2,23 @@ package com.starsea.im.aggregation.service;
 
 import com.starsea.im.aggregation.constant.DataSourceType;
 import com.starsea.im.aggregation.dto.LabelDto;
-import com.starsea.im.aggregation.dto.SearchDto;
 import com.starsea.im.aggregation.dto.UserDto;
 import com.starsea.im.biz.annotation.DataSource;
 import com.starsea.im.biz.entity.LabelEntity;
-import com.starsea.im.biz.entity.PageModel;
+import com.starsea.im.biz.entity.UserLabelEntity;
 
 import java.util.List;
 
 /**
- * Created by beigua on 2015/8/12.
+ * Created by danny on 16/8/20.
  */
-public interface LabelService {
-
+public interface UserLabelService {
     @DataSource(DataSourceType.WRITE)
-    public int addLabel(LabelEntity labelEntity);
+    public int addUserLabel(UserLabelEntity userLabelEntity);
 
 
     @DataSource(DataSourceType.READ)
-    public List<LabelDto> queryLabel();
+    public List<LabelDto> queryLabelByOpenId(String openId);
 
-    @DataSource(DataSourceType.READ)
-    public LabelDto queryLabelById(int id);
 
 }

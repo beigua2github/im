@@ -20,5 +20,8 @@
         SELECT * FROM test.label
     </select>
 
+    <select id="queryLabelById" resultType="LabelEntity">
+        SELECT ID,LabelOne,LabelTwo,Content FROM test.label WHERE ID = #{id}
+    </select>
 
 </mapper>

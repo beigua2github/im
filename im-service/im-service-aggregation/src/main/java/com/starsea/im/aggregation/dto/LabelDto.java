@@ -13,6 +13,7 @@ import lombok.experimental.Builder;
 @Builder
 @ToString
 public class LabelDto {
+    private Integer id;
     private String labelOne;
     private String labelTwo;
     private String content;

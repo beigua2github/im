@@ -20,5 +20,8 @@ public interface LabelDao {
     @DataSource("read")
     public List<LabelEntity> queryLabel();
 
+    @DataSource("read")
+    public LabelEntity queryLabelById(int id);
+
 
 }

@@ -358,6 +358,7 @@ public class Transformer {
 
     public static LabelDto convertLabelDtoFromLabelEntity(LabelEntity labelEntity) {
         LabelDto labelDto = new LabelDto();
+        labelDto.setId(labelEntity.getId());
         labelDto.setLabelOne(labelEntity.getLabelOne());
         labelDto.setLabelTwo(labelEntity.getLabelTwo());
         labelDto.setContent(labelEntity.getContent());

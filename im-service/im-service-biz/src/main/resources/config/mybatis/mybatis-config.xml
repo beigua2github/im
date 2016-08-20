@@ -9,5 +9,6 @@
         <mapper resource="config/mybatis/WatchDao.xml"/>
         <mapper resource="config/mybatis/AdvantageDao.xml"/>
         <mapper resource="config/mybatis/LabelDao.xml"/>
+        <mapper resource="config/mybatis/UserLabelDao.xml"/>
     </mappers>
 </configuration>
