@@ -41,7 +41,7 @@
     </select>
 
     <select id="queryAdvantageFormByOpenId" resultType="AdvantageForm" >
-        SELECT * FROM test.advantage where OpenId = #{openId}
+        SELECT * FROM test.advantage where OpenId = #{openId} order by id desc limit 1
     </select>
 
 </mapper>

@@ -30,7 +30,7 @@
 
 
     <select id="queryStudyFormByOpenId" resultType="StudyForm">
-        SELECT * FROM test.studyform_teacher where OpenId = #{openId}
+        SELECT * FROM test.studyform_teacher where OpenId = #{openId} order by id desc limit 1
     </select>
 
 </mapper>

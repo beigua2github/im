@@ -188,10 +188,10 @@
 
         $.ajax({
             type: "GET",
-            url: "../starsea/advantage/getAdvantageFormByName",
+            url: "../starsea/advantage/getAdvantageFormByOpenId",
             data: {
-//                name:child.openid
-                name:encodeURI(child.name)
+                openId:child.openid
+//                name:encodeURI(child.name)
             },
             dataType: "json",
             success:function(data){ //成功的处理函数
@@ -254,6 +254,7 @@
                     $.ajax({
                         url: '../starsea/advantage/addAdvantageForm',
                         data: {
+                            openId:child.openid,
                             school:child.school,
                             myClass:child.myClass,
                             name:child.name,

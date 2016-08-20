@@ -38,7 +38,8 @@ public class UserEntity {
     private String evaluationPerson;
 
     private Date createTime;
-
     private String email;
+
+
 
 }
