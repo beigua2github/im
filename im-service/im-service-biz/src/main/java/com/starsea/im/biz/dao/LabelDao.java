@@ -2,28 +2,26 @@ package com.starsea.im.biz.dao;
 
 import com.starsea.im.biz.annotation.DataSource;
 import com.starsea.im.biz.annotation.Single;
+import com.starsea.im.biz.entity.LabelEntity;
 import com.starsea.im.biz.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by beigua on 2015/8/5.
+ * Created by danny on 16/8/19.
  */
 @Repository
 @Single
-public interface UserDao {
-    @DataSource("red")
-    public UserEntity queryUser(int id);
-
-    @DataSource("read")
-    public UserEntity queryUserByOpenId(String openId);
-
-
-    @DataSource("read")
-    public List<UserEntity> queryUsers();
-
+public interface LabelDao {
     @DataSource("write")
-    public int addUser(UserEntity user);
+    public int addLabel(LabelEntity labelEntity);
+
+    @DataSource("read")
+    public List<LabelEntity> queryLabel();
+
+    @DataSource("read")
+    public LabelEntity queryLabelById(int id);
+
 
 }

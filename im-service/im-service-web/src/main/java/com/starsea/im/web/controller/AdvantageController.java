@@ -22,9 +22,9 @@ import java.text.ParseException;
 public class AdvantageController extends AjaxBase {
 
     @Autowired
-    AdvantageService advantageService;
+    private AdvantageService advantageService;
     @Autowired
-    decodeService utilService;
+    private decodeService utilService;
 
     @RequestMapping(value = "/addAdvantageForm", method = RequestMethod.POST)
     @ResponseBody

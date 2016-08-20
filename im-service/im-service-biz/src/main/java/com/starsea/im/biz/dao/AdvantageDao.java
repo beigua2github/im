@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by danny on 16/5/8.
  */
+
 @Repository
 @Single
 public interface AdvantageDao {

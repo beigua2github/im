@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.UserLabelDao">
+
+
+    <select id="queryLabelByOpenId"  resultType="int">
+        select LabelId from test.UserLabel WHERE OpenId = #{openId}
+    </select>
+
+
+    <insert id="addUserLabel" parameterType="UserLabelEntity">
+        insert into test.UserLabel(OpenId,LabelId)
+                    values(#{openId},#{labelId})
+    </insert>
+
+</mapper>
