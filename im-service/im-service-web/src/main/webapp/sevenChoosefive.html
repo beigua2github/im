@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>
+
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/move.js"></script>
+    <script type="text/javascript" src="static/js/modernizr.min.js"></script>
+    <script type='text/javascript' src="static/js/jquery.min.js"></script>
+    <!-- <script type='text/javascript' src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script> -->
+    <script type='text/javascript' src="static/js/bootstrap-slider.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <link href="static/css/sevenChoosefive.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/default.css">
+    <!-- <link href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link href="static/css/bootstrap-slider.min.css" rel="stylesheet">
+
+    <style type="text/css">
+
+    </style>
+
+</head>
+
+
+<body>
+<div class="whole">
+    <!--首页头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/head.jpg"/>
+        </div>
+        <div class="t_tit">
+            <p>请选择方法以确定五大重点</p>
+        </div>
+    </div>
+
+    <!--首页方法选择-->
+    <div class="method">
+        <button id="button_method1">A.后台分析得出五大重点</button>
+        <button id="button_method2">B.直接选择五大重点</button>
+    </div>
+
+
+    <!--提示遮罩层,正在提交数据-->
+    <div class="ts_mask2">
+        <div class="tishi2">
+            <div class="qd2"></div>
+        </div>
+    </div>
+
+    <!--方法A的遮罩层-->
+    <div class="method1_mask">
+        <div class="method1">
+
+
+            <div class="method_head">
+                <img src="static/image/category1.jpg"/>
+                <p>方法A:请选择一下任意标签</p>
+            </div>
+
+
+
+            <div class="method_tail">
+                <button class="button_back" id="button_back1">返回</button>
+                <button class="button_save" id="button_save1">确定</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--方法B的遮罩层-->
+    <div class="method2_mask">
+        <div class="method2">
+
+            <div class="method_head">
+                <img src="static/image/category1.jpg"/>
+                <p>方法B:请选择5个维度</p>
+            </div>
+
+            <div class="method2_con">
+                <button class="button_c1">
+                    <img src="static/image/category1.jpg"><p>情绪力</p>
+                </button>
+                <button class="button_c2">
+                    <img src="static/image/category2.jpg"><p>人际力</p>
+                </button>
+                <button class="button_c3">
+                    <img src="static/image/category3.jpg"><p>自主力</p>
+                </button>
+                <button class="button_c4">
+                    <img src="static/image/category4.jpg"><p>专注力</p>
+                </button>
+                <button class="button_c5">
+                    <img src="static/image/category5.jpg"><p>意志力</p>
+                </button>
+                <button class="button_c6">
+                    <img src="static/image/category6.jpg"><p>学习认知</p>
+                </button>
+                <button class="button_c7">
+                    <img src="static/image/category7.jpg"><p>学习策略</p>
+                </button>
+            </div>
+
+            <div class="method_tail">
+                <button class="button_back" id="button_back2">返回</button>
+                <button class="button_save" id="button_save2">确定</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>
+
+
+<script>
+    //定义全局变量
+    var flag_array=new Array();//存放七个维度是否选中的标记
+    var flag1=0, flag2=0, flag3=0, flag4=0, flag5=0, flag6=0, flag7=0;//七个维度是否选择的标记
+    var clicksum=0;//控制七个维度只能选择5个
+    var save2_click=0, save1_click=0;//控制方法A和B的提交次数
+
+
+    $(document).ready(function () {
+
+        //选择方法A
+        $("#button_method1").click(function () {
+            $(".method1_mask").fadeIn();
+
+
+        });
+        //方法A的返回按钮
+        $("#button_back1").click(function () {
+            $(".method1_mask").fadeOut();
+        });
+        //方法B的确认按钮
+        $("#button_save1").click(function () {
+            if(save1_click==0){
+                $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+
+                $.ajax({
+                    url: '',
+                    data: {
+                        openId:child.openid,
+                        name: child.name,
+                        evaluationPerson:child.evaluationPerson,
+                        evaluationTime: getNowFormatDate(),
+                        now_score: now_score,
+                        now_comment: now_comment
+                    },
+                    type: 'post',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code == 200) {
+                            $(".ts_mask2").fadeOut(1000);
+                            //alert("success");
+                            window.location.href = 'watchForm.html';
+                        }
+                        else {
+                            alert("查询失败: " + data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert("服务器处理异常");
+                    }
+                });
+            }
+
+        });
+
+
+
+        //选择方法B
+        $("#button_method2").click(function () {
+            $(".method2_mask").fadeIn();
+
+            //7个维度选择5个
+            $(".button_c1").click(function () {
+                if(flag1==0 && 5>clicksum){
+                    flag1 = 1; clicksum++;console.log(clicksum,flag1);
+                    $(".button_c1").css('opacity', '1');
+                }
+            });
+            $(".button_c2").click(function () {
+                if(flag2==0 && 5>clicksum){
+                    flag2 = 1; clicksum++;console.log(clicksum,flag2);
+                    $(".button_c2").css('opacity', '1');
+                }
+            });
+            $(".button_c3").click(function () {
+                if(flag3==0 && 5>clicksum){
+                    flag3 = 1; clicksum++;console.log(clicksum,flag3);
+                    $(".button_c3").css('opacity', '1');
+                }
+            });
+            $(".button_c4").click(function () {
+                if(flag4==0 && 5>clicksum){
+                    flag4 = 1; clicksum++;console.log(clicksum,flag4);
+                    $(".button_c4").css('opacity', '1');
+                }
+            });
+            $(".button_c5").click(function () {
+                if(flag5==0 && 5>clicksum){
+                    flag5 = 1; clicksum++;console.log(clicksum,flag5);
+                    $(".button_c5").css('opacity', '1');
+                }
+            });
+            $(".button_c6").click(function () {
+                if(flag6==0 && 5>clicksum){
+                    flag6 = 1; clicksum++;console.log(clicksum,flag6);
+                    $(".button_c6").css('opacity', '1');
+                }
+            });
+            $(".button_c7").click(function () {
+                if(flag7==0 && 5>clicksum){
+                    flag7 = 1; clicksum++;console.log(clicksum,flag7);
+                    $(".button_c7").css('opacity', '1');
+                }
+            });
+
+
+        });
+
+        //方法2的返回按钮
+        $("#button_back2").click(function () {
+            $(".method2_mask").fadeOut();
+            //所有选择全部重置
+            flag1=0;flag2=0;flag3=0;flag4=0;flag5=0;flag6=0;flag7=0;
+            clicksum=0;
+            $(".button_c1").css('opacity', '0.5');
+            $(".button_c2").css('opacity', '0.5');
+            $(".button_c3").css('opacity', '0.5');
+            $(".button_c4").css('opacity', '0.5');
+            $(".button_c5").css('opacity', '0.5');
+            $(".button_c6").css('opacity', '0.5');
+            $(".button_c7").css('opacity', '0.5');
+        });
+        //方法2的确认按钮
+        $("#button_save2").click(function () {
+            if(save2_click==0){//确保只提交一次
+                save2_click++;
+                $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+
+                //调用ajax传数据给后台
+                $.ajax({
+                    url: '',
+                    data: {
+                        name: "黑仔一号",
+                        evaluationPerson: "黑仔一号的爸爸",
+                        evaluationTime: getNowFormatDate(),
+                        flag_array: flag_array,
+                    },
+                    type: 'post',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code == 200) {
+                            $(".ts_mask2").fadeOut(1000);
+                            //alert("success");
+                            window.location.href = '../watchForm.html';
+                        }
+                    },
+                    error: function () {
+                        alert("服务器处理异常");
+                    }
+                });
+            }
+        });
+
+
+
+
+
+    })
+</script>
