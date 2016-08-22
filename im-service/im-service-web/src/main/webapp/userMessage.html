@@ -35,11 +35,13 @@
                         <h6>Ejia</h6>
                         姓名：<input class="form-control" type="text" placeholder="Name" id="Name" >
                         年龄：<input class="form-control" type="text" placeholder="Age" id="Age">
-                        性别：<input class="form-control" type="text" placeholder="Sex" id="Sex">
+                        性别：&nbsp;&nbsp;&nbsp;男：<input type="radio" checked="checked" name="Sex" value="男" />&nbsp;
+                        女：<input type="radio" name="Sex" value="女" /><br/>
                         年级：<input class="form-control" type="text" placeholder="Class" id="Class">
                         学校：<input class="form-control" type="text" placeholder="School" id="School">
                         院系：<input class="form-control" type="text" placeholder="Organization" id="Organization">
                         评价人：<input class="form-control" type="text" placeholder="EvaluationPerson" id="EvaluationPerson">
+                        邮箱:<input class="form-control" type="text" placeholder="EvaluationPerson" id="email">
                         <div class="action">
                             <a class="btn btn-primary signup" id="signupBtn">提 交</a>
                         </div>
@@ -57,13 +59,14 @@
 //        alert(openid);
         var myName= $("#Name").val();
         var age= $("#Age").val();
-        var sex= $("#Sex").val();
+        var sex= $('input:radio:checked').val();
         var school= $("#School").val();
         var myClass= $("#Class").val();
         var organization= $("#Organization").val();
         var evaluationPerson= $("#EvaluationPerson").val();
-//        var now_score=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-//        alert(evaluationTime);
+        var email= $("#email").val();
+
+
         $.ajax({
             url: '../starsea/user/signup',//插入数据的接口
             data: {
@@ -74,9 +77,8 @@
                 school:school,
                 myClass:myClass,
                 organization:organization,
-                evaluationPerson:evaluationPerson
-//                hc: now_score,
-//                xf1: 0
+                evaluationPerson:evaluationPerson,
+                email:email
             },
             type: 'post',
             cache: false,
@@ -84,7 +86,6 @@
             success: function (data) {
                 if (data.code == 200) {
                     alert("注册完成");
-//                    window.location.href="userMessageFinish.html";
                     WeixinJSBridge.invoke('closeWindow',{},function(res){});
                 }
                 else {

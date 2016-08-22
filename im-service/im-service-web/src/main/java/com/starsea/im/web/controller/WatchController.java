@@ -1,6 +1,7 @@
 package com.starsea.im.web.controller;
 
-import com.starsea.im.aggregation.service.UtilService;
+import com.starsea.im.aggregation.service.decodeService;
+import com.starsea.im.aggregation.service.impl.DecodeService;
 import com.starsea.im.aggregation.service.impl.WatchService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.ServiceResult;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.ParseException;
 
 /**
@@ -27,17 +26,17 @@ public class WatchController extends AjaxBase {
     @Autowired
     WatchService watchService;
     @Autowired
-    UtilService utilService;
+    DecodeService utilService;
 
     @RequestMapping(value = "/addWatch", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addWatch(HttpServletRequest req,
-                                     @RequestParam(value = "openId") String openId,
-                                     @RequestParam(value = "name") String name,
-                                     @RequestParam(value = "evaluationPerson") String evaluationPerson,
-                                     @RequestParam(value = "evaluationTime") String evaluationTime,
-                                     @RequestParam(value = "now_score[]") int[] now_score,
-                                     @RequestParam(value = "now_comment[]") String[] now_comment
+                                  @RequestParam(value = "openId") String openId,
+                                  @RequestParam(value = "name") String name,
+                                  @RequestParam(value = "evaluationPerson") String evaluationPerson,
+                                  @RequestParam(value = "evaluationTime") String evaluationTime,
+                                  @RequestParam(value = "now_score[]") int[] now_score,
+                                  @RequestParam(value = "now_comment[]") String[] now_comment
     ) throws ParseException {
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
@@ -91,7 +90,7 @@ public class WatchController extends AjaxBase {
     @ResponseBody
     public ServiceResult queryAvgWatchFormByNameDay(@RequestParam(value = "name",defaultValue = "黑仔一号") String name,
                                                     @RequestParam(value = "day",defaultValue = "7") int day
-                                                    ) {
+    ) {
         name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
