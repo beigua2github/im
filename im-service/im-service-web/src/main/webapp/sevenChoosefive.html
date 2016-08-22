@@ -77,6 +77,145 @@
                 <p>方法A:请选择一下任意标签</p>
             </div>
 
+            <div class="method1_con">
+                <div id="point1">
+                    <h1>1.沟通</h1>
+                    <div class="focus">
+                        <h2>关注焦点:</h2>
+                        <button>如何引导</button>
+                        <button>任性</button>
+                        <button>不听话</button>
+                    </div>
+                    <div class="reason">
+                        <h2>原因:</h2>
+                        <button>不自信</button>
+                        <button>不被尊重</button>
+                        <button>不能倾听</button>
+                        <button>话语理解</button>
+                        <button>情绪调控</button>
+                        <button>被忽视</button>
+                        <button>遇到</button>
+                        <button>没有支持</button>
+                    </div>
+                </div>
+
+                <div id="point2">
+                    <h1>2.人际能力</h1>
+                    <div class="focus">
+                        <h2>关注焦点:</h2>
+                        <button>环境适应</button>
+                        <button>被认可</button>
+                        <button>不愿意打招呼</button>
+                        <button>生存能力</button>
+                        <button>竞争能力</button>
+                        <button>自我保护力</button>
+                        <button>不能守规矩</button>
+                    </div>
+                    <div class="reason">
+                        <h2>原因:</h2>
+                        <button>不自信</button>
+                        <button>自尊心</button>
+                        <button>沟通方式</button>
+                        <button>自我中心</button>
+                        <button>互动体验</button>
+                        <button>感同身受</button>
+                        <button>情绪调控</button>
+                        <button>利他</button>
+                        <button>关注与支持</button>
+                        <button>守规矩</button>
+                        <button>尊重</button>
+                        <button>适宜</button>
+                        <button>共识</button>
+                        <button>执行</button>
+                        <button>调整</button>
+                        <button>守规矩</button>
+                    </div>
+                </div>
+
+                <div id="point3">
+                    <h1>3.人格</h1>
+                    <div class="focus">
+                        <h2>关注焦点</h2>
+						<button>孤僻</button>
+						<button>自闭</button>
+						<button>忧郁</button>
+						<button>敏感</button>
+						<button>安全感</button>
+						<button>自觉性</button>
+						<button>小气</button>
+						<button>自尊心</button>
+						<button>责任心</button>
+						<button>同情心</button>
+						<button>忌妒</button>
+						<button>粘人</button>
+						<button>自卑</button>
+						<button>虚荣心</button>
+						<button>自私</button>
+						<button>胆小</button>
+						<button>脾气大</button>
+
+                    </div>
+                    <div class="reason">
+                        <h2>原因:</h2>
+						<button>自尊</button>
+						<button>责任</button>
+						<button>独立性</button>
+						<button>自我意识</button>
+						<button>勇气</button>
+						<button>韧性</button>
+						<button>安全感</button>
+						<button>爱</button>
+                    </div>
+                </div>
+
+                <div id="point4">
+                    <h1>4.学习力</h1>
+                    <div class="focus">
+                        <h2>关注焦点</h2>
+						<button>学得浅</button>
+						<button>兴趣或没动力</button>
+						<button>激励或压力</button>
+						<button>不去补习班</button>
+						<button>拖沓</button>
+                    </div>
+                    <div class="reason">
+                        <h2>原因:</h2>
+                        <button>速度慢</button>
+                        <button>做不来</button>
+                        <button>求关注</button>
+                        <button>不喜欢这门课</button>
+                        <button>身体不舒服</button>
+                    </div>
+                </div>
+
+                <div id="point5">
+                    <h1>5.情绪</h1>
+                    <div class="focus">
+                        <h2>关注焦点</h2>
+						<button>易被消极情绪控制</button>
+                    </div>
+                    <div class="reason">
+                        <h2>原因:</h2>
+                        <button>消极情绪</button>
+                        <button>情绪表达方式</button>
+                        <button>理解</button>
+                        <button>沟通</button>
+                        <button>发现</button>
+                        <button>改进</button>
+                    </div>
+                </div>
+
+                <div class="page">
+                    <a href="#" id="page_before">上一页</a>
+                    <a href="#point1" id="page1">[1]</a>
+                    <a href="#point2" id="page2">[2]</a>
+                    <a href="#point3" id="page3">[3]</a>
+                    <a href="#point4" id="page4">[4]</a>
+                    <a href="#point5" id="page5">[5]</a>
+                    <a href="#" id="page_later">下一页</a>
+                </div>
+            </div>
+
 
 
             <div class="method_tail">
@@ -142,51 +281,129 @@
     var save2_click=0, save1_click=0;//控制方法A和B的提交次数
 
 
+
+
     $(document).ready(function () {
 
         //选择方法A
         $("#button_method1").click(function () {
             $(".method1_mask").fadeIn();
+            var page=1;
+
+            //选择第一页
+            $("#page1").click(function () {
+                $("#point1").css('display','block');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+//                page=1;
+            });
+            //选择第二页
+            $("#page2").click(function () {
+
+                $("#point1").css('display','none');
+                $("#point2").css('display','block');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+//                page=2;
+            });
+            //选择第三页
+            $("#page3").click(function () {
+
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','block');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+//                page=3;
+            });
+            //选择第四页
+            $("#page4").click(function () {
+
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','block');
+                $("#point5").css('display','none');
+//                page=4;
+            });
+            //选择第五页
+            $("#page5").click(function () {
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','block');
+//                page=5;
+            });
+
+            //点击上一页
+            $("#page_before").click(function () {
+                if(0<page){page--;}
+                if(page==1){$("#page1").click();}
+                if(page==2){$("#page2").click();}
+                if(page==3){$("#page3").click();}
+                if(page==4){$("#page4").click();}
+                if(page==5){$("#page5").click();}
+            });
+
+            //点击下一页
+            $("#page_later").click(function () {
+                if(5>page){page++;}
+                if(page==5){$("#page5").click();}
+                if(page==4){$("#page4").click();}
+                if(page==3){$("#page3").click();}
+                if(page==2){$("#page2").click();}
+                if(page==1){$("#page1").click();}
+            });
 
 
         });
         //方法A的返回按钮
         $("#button_back1").click(function () {
             $(".method1_mask").fadeOut();
+            $("#point1").css('display','block');
+            $("#point2").css('display','none');
+            $("#point3").css('display','none');
+            $("#point4").css('display','none');
+            $("#point5").css('display','none');
+
         });
         //方法B的确认按钮
         $("#button_save1").click(function () {
             if(save1_click==0){
                 $(".ts_mask2").fadeIn(1000);//提示正在提交数据
 
-                $.ajax({
-                    url: '',
-                    data: {
-                        openId:child.openid,
-                        name: child.name,
-                        evaluationPerson:child.evaluationPerson,
-                        evaluationTime: getNowFormatDate(),
-                        now_score: now_score,
-                        now_comment: now_comment
-                    },
-                    type: 'post',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        if (data.code == 200) {
-                            $(".ts_mask2").fadeOut(1000);
-                            //alert("success");
-                            window.location.href = 'watchForm.html';
-                        }
-                        else {
-                            alert("查询失败: " + data.msg);
-                        }
-                    },
-                    error: function () {
-                        alert("服务器处理异常");
-                    }
-                });
+//                $.ajax({
+//                    url: '',
+//                    data: {
+//                        openId:child.openid,
+//                        name: child.name,
+//                        evaluationPerson:child.evaluationPerson,
+//                        evaluationTime: getNowFormatDate(),
+//                        now_score: now_score,
+//                        now_comment: now_comment
+//                    },
+//                    type: 'post',
+//                    cache: false,
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        console.log(data);
+//                        if (data.code == 200) {
+//                            $(".ts_mask2").fadeOut(1000);
+//                            //alert("success");
+//                            window.location.href = 'watchForm.html';
+//                        }
+//                        else {
+//                            alert("查询失败: " + data.msg);
+//                        }
+//                    },
+//                    error: function () {
+//                        alert("服务器处理异常");
+//                    }
+//                });
             }
 
         });
