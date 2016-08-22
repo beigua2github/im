@@ -78,141 +78,63 @@
             </div>
 
             <div class="method1_con">
+
                 <div id="point1">
                     <h1>1.沟通</h1>
-                    <div class="focus">
+                    <div class="focus" id="focus1">
                         <h2>关注焦点:</h2>
-                        <button>如何引导</button>
-                        <button>任性</button>
-                        <button>不听话</button>
                     </div>
-                    <div class="reason">
+                    <div class="reason" id="reason1">
                         <h2>原因:</h2>
-                        <button>不自信</button>
-                        <button>不被尊重</button>
-                        <button>不能倾听</button>
-                        <button>话语理解</button>
-                        <button>情绪调控</button>
-                        <button>被忽视</button>
-                        <button>遇到</button>
-                        <button>没有支持</button>
                     </div>
                 </div>
 
                 <div id="point2">
                     <h1>2.人际能力</h1>
-                    <div class="focus">
+                    <div class="focus" id="focus2">
                         <h2>关注焦点:</h2>
-                        <button>环境适应</button>
-                        <button>被认可</button>
-                        <button>不愿意打招呼</button>
-                        <button>生存能力</button>
-                        <button>竞争能力</button>
-                        <button>自我保护力</button>
-                        <button>不能守规矩</button>
                     </div>
-                    <div class="reason">
+                    <div class="reason" id="reason2">
                         <h2>原因:</h2>
-                        <button>不自信</button>
-                        <button>自尊心</button>
-                        <button>沟通方式</button>
-                        <button>自我中心</button>
-                        <button>互动体验</button>
-                        <button>感同身受</button>
-                        <button>情绪调控</button>
-                        <button>利他</button>
-                        <button>关注与支持</button>
-                        <button>守规矩</button>
-                        <button>尊重</button>
-                        <button>适宜</button>
-                        <button>共识</button>
-                        <button>执行</button>
-                        <button>调整</button>
-                        <button>守规矩</button>
                     </div>
                 </div>
 
                 <div id="point3">
                     <h1>3.人格</h1>
-                    <div class="focus">
+                    <div class="focus" id="focus3">
                         <h2>关注焦点</h2>
-						<button>孤僻</button>
-						<button>自闭</button>
-						<button>忧郁</button>
-						<button>敏感</button>
-						<button>安全感</button>
-						<button>自觉性</button>
-						<button>小气</button>
-						<button>自尊心</button>
-						<button>责任心</button>
-						<button>同情心</button>
-						<button>忌妒</button>
-						<button>粘人</button>
-						<button>自卑</button>
-						<button>虚荣心</button>
-						<button>自私</button>
-						<button>胆小</button>
-						<button>脾气大</button>
-
                     </div>
-                    <div class="reason">
+                    <div class="reason" id="reason3">
                         <h2>原因:</h2>
-						<button>自尊</button>
-						<button>责任</button>
-						<button>独立性</button>
-						<button>自我意识</button>
-						<button>勇气</button>
-						<button>韧性</button>
-						<button>安全感</button>
-						<button>爱</button>
                     </div>
                 </div>
 
                 <div id="point4">
                     <h1>4.学习力</h1>
-                    <div class="focus">
+                    <div class="focus" id="focus4">
                         <h2>关注焦点</h2>
-						<button>学得浅</button>
-						<button>兴趣或没动力</button>
-						<button>激励或压力</button>
-						<button>不去补习班</button>
-						<button>拖沓</button>
                     </div>
-                    <div class="reason">
+                    <div class="reason" id="reason4">
                         <h2>原因:</h2>
-                        <button>速度慢</button>
-                        <button>做不来</button>
-                        <button>求关注</button>
-                        <button>不喜欢这门课</button>
-                        <button>身体不舒服</button>
                     </div>
                 </div>
 
                 <div id="point5">
                     <h1>5.情绪</h1>
-                    <div class="focus">
+                    <div class="focus" id="focus5">
                         <h2>关注焦点</h2>
-						<button>易被消极情绪控制</button>
                     </div>
-                    <div class="reason">
+                    <div class="reason" id="reason5">
                         <h2>原因:</h2>
-                        <button>消极情绪</button>
-                        <button>情绪表达方式</button>
-                        <button>理解</button>
-                        <button>沟通</button>
-                        <button>发现</button>
-                        <button>改进</button>
                     </div>
                 </div>
 
                 <div class="page">
-                    <a href="#" id="page_before">上一页</a>
                     <a href="#point1" id="page1">[1]</a>
                     <a href="#point2" id="page2">[2]</a>
                     <a href="#point3" id="page3">[3]</a>
                     <a href="#point4" id="page4">[4]</a>
                     <a href="#point5" id="page5">[5]</a>
-                    <a href="#" id="page_later">下一页</a>
                 </div>
             </div>
 
@@ -275,7 +197,22 @@
 
 <script>
     //定义全局变量
-    var flag_array=new Array();//存放七个维度是否选中的标记
+    //方法A的变量
+    //方法A存放成长重点的焦点
+    var category1_focus=['如何引导','任性','不听话'];
+    var category2_focus=['环境适应','被认可','不愿意打招呼','生存能力','竞争能力','自我保护力','不能守规矩'];
+    var category3_focus=['孤僻','自闭','忧郁','敏感','安全感','自觉性','小气','自尊心','责任心','同情心','忌妒','粘人','自卑','虚荣心','自私','胆小','脾气大'];
+    var category4_focus=['学得浅','兴趣或没动力','激励或压力','不去补习班','拖沓'];
+    var category5_focus=['易被消极情绪控制'];
+    //方法A存放成长重点的原因
+    var category1_reason=['不自信','不被尊重','不能倾听','话语理解','情绪调控（害怕、恐惧）','被忽视','遇到困境','没有支持'];
+    var category2_reason=['不自信','自尊心','沟通方式','自我中心','互动体验','感同身受','情绪调控','利他','关注与支持','守规矩','尊重','适宜','共识','执行','调整'];
+    var category3_reason=['自尊','责任','独立性','自我意识','勇气','韧性','安全感','爱'];
+    var category4_reason=['学习策略','学习探索动力','学习认知','专注力','意志力','速度慢','做不来','求关注','不喜欢这门课','身体不舒服'];
+    var category5_reason=['消极情绪','情绪表达方式','理解','沟通','发现','改进'];
+
+    //方法B的变量
+    var flag_array=new Array();//方法B存放七个维度是否选中的标记
     var flag1=0, flag2=0, flag3=0, flag4=0, flag5=0, flag6=0, flag7=0;//七个维度是否选择的标记
     var clicksum=0;//控制七个维度只能选择5个
     var save2_click=0, save1_click=0;//控制方法A和B的提交次数
@@ -285,11 +222,45 @@
 
     $(document).ready(function () {
 
+        //从数组中动态导入标签
+        function addlabel () {
+            //第一个成长重点
+            for (var i=0;i<category1_focus.length;i++){
+                var tmp = '<button>'+category1_focus[i]+'</button>';$('#focus1').append(tmp);}
+            for (var i=0;i<category1_reason.length;i++){
+                var tmp = '<button>'+category1_reason[i]+'</button>';$('#reason1').append(tmp);}
+            //第二个成长重点
+            for (var i=0;i<category2_focus.length;i++){
+                var tmp = '<button>'+category2_focus[i]+'</button>';$('#focus2').append(tmp);}
+            for (var i=0;i<category2_reason.length;i++){
+                var tmp = '<button>'+category2_reason[i]+'</button>';$('#reason2').append(tmp);}
+            //第三个成长重点
+            for (var i=0;i<category3_focus.length;i++){
+                var tmp = '<button>'+category3_focus[i]+'</button>';$('#focus3').append(tmp);}
+            for (var i=0;i<category3_reason.length;i++){
+                var tmp = '<button>'+category3_reason[i]+'</button>';$('#reason3').append(tmp);}
+            //第四个成长重点
+            for (var i=0;i<category4_focus.length;i++){
+                var tmp = '<button>'+category4_focus[i]+'</button>';$('#focus4').append(tmp);}
+            for (var i=0;i<category4_reason.length;i++){
+                var tmp = '<button>'+category4_reason[i]+'</button>';$('#reason4').append(tmp);}
+            //第五个成长重点
+            for (var i=0;i<category5_focus.length;i++){
+                var tmp = '<button>'+category5_focus[i]+'</button>';$('#focus5').append(tmp);}
+            for (var i=0;i<category5_reason.length;i++){
+                var tmp = '<button>'+category5_reason[i]+'</button>';$('#reason5').append(tmp);}
+        }
+
+        addlabel();
+
+
+
+
         //选择方法A
         $("#button_method1").click(function () {
             $(".method1_mask").fadeIn();
             var page=1;
-
+            $("#page1").css('color','#000');
             //选择第一页
             $("#page1").click(function () {
                 $("#point1").css('display','block');
@@ -297,37 +268,54 @@
                 $("#point3").css('display','none');
                 $("#point4").css('display','none');
                 $("#point5").css('display','none');
-//                page=1;
+                $("#page1").css('color','#000');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=1;
             });
             //选择第二页
             $("#page2").click(function () {
-
                 $("#point1").css('display','none');
                 $("#point2").css('display','block');
                 $("#point3").css('display','none');
                 $("#point4").css('display','none');
                 $("#point5").css('display','none');
-//                page=2;
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#000');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=2;
             });
             //选择第三页
             $("#page3").click(function () {
-
                 $("#point1").css('display','none');
                 $("#point2").css('display','none');
                 $("#point3").css('display','block');
                 $("#point4").css('display','none');
                 $("#point5").css('display','none');
-//                page=3;
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#000');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=3;
             });
             //选择第四页
             $("#page4").click(function () {
-
                 $("#point1").css('display','none');
                 $("#point2").css('display','none');
                 $("#point3").css('display','none');
                 $("#point4").css('display','block');
                 $("#point5").css('display','none');
-//                page=4;
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#000');
+                $("#page5").css('color','#fff');
+                page=4;
             });
             //选择第五页
             $("#page5").click(function () {
@@ -336,30 +324,13 @@
                 $("#point3").css('display','none');
                 $("#point4").css('display','none');
                 $("#point5").css('display','block');
-//                page=5;
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#000');
+                page=5;
             });
-
-            //点击上一页
-            $("#page_before").click(function () {
-                if(0<page){page--;}
-                if(page==1){$("#page1").click();}
-                if(page==2){$("#page2").click();}
-                if(page==3){$("#page3").click();}
-                if(page==4){$("#page4").click();}
-                if(page==5){$("#page5").click();}
-            });
-
-            //点击下一页
-            $("#page_later").click(function () {
-                if(5>page){page++;}
-                if(page==5){$("#page5").click();}
-                if(page==4){$("#page4").click();}
-                if(page==3){$("#page3").click();}
-                if(page==2){$("#page2").click();}
-                if(page==1){$("#page1").click();}
-            });
-
-
         });
         //方法A的返回按钮
         $("#button_back1").click(function () {
@@ -369,9 +340,13 @@
             $("#point3").css('display','none');
             $("#point4").css('display','none');
             $("#point5").css('display','none');
-
+            $("#page1").css('color','#000');
+            $("#page2").css('color','#fff');
+            $("#page3").css('color','#fff');
+            $("#page4").css('color','#fff');
+            $("#page5").css('color','#fff');
         });
-        //方法B的确认按钮
+        //方法A的确认按钮
         $("#button_save1").click(function () {
             if(save1_click==0){
                 $(".ts_mask2").fadeIn(1000);//提示正在提交数据
@@ -460,7 +435,6 @@
 
 
         });
-
         //方法2的返回按钮
         $("#button_back2").click(function () {
             $(".method2_mask").fadeOut();

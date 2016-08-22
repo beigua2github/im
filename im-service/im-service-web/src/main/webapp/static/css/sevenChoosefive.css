@@ -70,7 +70,7 @@ body{width: 100vw; height: 100vh; font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-ser
 
 /*方法1内容的页码*/
 .method1_con .page{width: 100vw;height: 10vw;text-align: center;margin-top: 5vw;}
-.method1_con .page a{height: 10vw;width: auto;color: #fff;line-height: 10vw; font-size: 4vw;margin-left: 2vw;}
+.method1_con .page a{height: 10vw;width: auto;color: #fff;line-height: 10vw; font-size: 4vw;margin-left: 2vw;margin-right: 2vw;}
 
 
 
