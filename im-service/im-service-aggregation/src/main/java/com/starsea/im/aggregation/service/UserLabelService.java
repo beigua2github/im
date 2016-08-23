@@ -20,5 +20,8 @@ public interface UserLabelService {
     @DataSource(DataSourceType.READ)
     public List<LabelDto> queryLabelByOpenId(String openId);
 
+    @DataSource(DataSourceType.READ)
+    public List<Integer> queryEnergyByOpenId(String openId);
+
 
 }
