@@ -26,6 +26,7 @@ body{width: 100vw; height: 100vh; font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-ser
 
 /*首页七个维度*/
 .category{width: 100vw;height: auto;text-align: center;overflow: hidden;margin-top: 10vw;margin-bottom: 10vw}
+.category img{ width: 17vw; height: auto; margin:0 2.5vw 0vw 2.5vw; border-radius:10px;}
 .category button{ display: inline-block; text-align: center; background: #f05150; font-size: 4vw;
     line-height: 5vw; color: #fff; margin-bottom: 5vw;opacity: 0.5; }
 .category img{ width: 17vw; height: auto; margin:0 2.5vw 0vw 2.5vw; border-radius:10px; }

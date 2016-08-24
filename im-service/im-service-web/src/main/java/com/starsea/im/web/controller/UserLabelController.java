@@ -48,4 +48,19 @@ public class UserLabelController extends AjaxBase{
         serviceResult.setCode(200);
         return setResponseData(serviceResult);
     }
+
+
+    @RequestMapping(value = "/queryEnergyByOpenId",method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryEnergyByOpenId(HttpServletRequest req,
+                                          @RequestParam("openId") String openId){
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setMsg(userLabelService.queryEnergyByOpenId(openId));
+        serviceResult.setCode(200);
+        return setResponseData(serviceResult);
+    }
+
+
+
+
 }
