@@ -52,7 +52,20 @@ function judgeCookie(child) {
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
                     //判断有没有需要不需要7选5
-
+                    if(getCookie("label")){
+                        $.ajax({
+                            type: "GET",
+                                url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
+                                dataType: "json",
+                                data: {
+                                openId: cookie_id
+                            },
+                            success:function(data){
+                                child.enerySelect=data['msg']['msg'];
+                            }
+                        }),
+                    }
+                    //child.enerySelect="12345";
                     child.name= data['msg']['msg']['name'];
                     child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
                     child.age=data['msg']['msg']['age'];
