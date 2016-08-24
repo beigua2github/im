@@ -1,9 +1,11 @@
 package com.starsea.im.aggregation.service.impl;
 
 import com.starsea.im.aggregation.dto.StudyFormDto;
+import com.starsea.im.aggregation.dto.StudyResultDto;
 import com.starsea.im.aggregation.service.DiagnoseService;
 import com.starsea.im.aggregation.transfor.Transformer;
 import com.starsea.im.aggregation.util.MathToolsUtil;
+import com.starsea.im.aggregation.util.StudyResultUtil;
 import com.starsea.im.biz.dao.DiagnoseDao;
 import com.starsea.im.biz.entity.StudyForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,22 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
         return studyFormDto;
 
+    }
+
+    @Override
+    public List<Long> getAvgWithStudent(String openId) {
+
+        StudyForm studyForm = diagnoseDao.queryStudyFormByOpenId(openId);
+        List<Long> Avg = new ArrayList<Long>();
+        Long fenxinAvg = MathToolsUtil.getSum(Transformer.convertListFromStudyFormsOfFenxin(studyForm));
+        Long yaodianAvg = MathToolsUtil.getSum(Transformer.convertListFromStudyFormsOfYaodian(studyForm));
+        Long xinxiAvg = MathToolsUtil.getSum(Transformer.convertListFromStudyFormsOfXinxi(studyForm));
+        Long jiaolvAvg = MathToolsUtil.getSum(Transformer.convertListFromStudyFormsOfJiaolv(studyForm));
+        Avg.add(fenxinAvg);
+        Avg.add(yaodianAvg);
+        Avg.add(xinxiAvg);
+        Avg.add(jiaolvAvg);
+        return Avg;
     }
 
     //均分  分别传入4个纬度需要计算的分数
@@ -171,6 +189,40 @@ public class DiagnoseServiceImpl implements DiagnoseService {
 
         return totalRegularScore;
     }
+
+
+    public List<StudyResultDto> getFinalCommentByOpenId(String openId){
+
+        List<Long> goal = getAvgWithStudent(openId);
+        List<StudyResultDto> studyResultDtos = new ArrayList<StudyResultDto>();
+        for(int i=0;i<4;i++) {
+            StudyResultDto studyResultDto = new StudyResultDto();
+            studyResultDto.setOpenId(openId);
+            studyResultDto.setScore(goal.get(i));
+            switch (i){
+                case 0:
+                    studyResultDto.setContent(StudyResultUtil.getFenXin(goal.get(i)));
+                    break;
+                case 1:
+                    studyResultDto.setContent(StudyResultUtil.getYaoDian(goal.get(i)));
+                    break;
+                case 2:
+                    studyResultDto.setContent(StudyResultUtil.getXingxi(goal.get(i)));
+                    break;
+                case 3:
+                    studyResultDto.setContent(StudyResultUtil.getJiaoLv(goal.get(i)));
+                    break;
+                default:
+                    break;
+            }
+            studyResultDtos.add(studyResultDto);
+        }
+
+      return studyResultDtos;
+
+    }
+
+
 }
 
 

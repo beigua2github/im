@@ -14,7 +14,20 @@ import java.util.List;
 public class MathToolsUtil {
 
     //总分
-    public static long getSum(List<Integer> hcs){
+    public static long getSum(List<Integer> score){
+
+        long sunTemp = 0;
+        for(long hc:score){
+
+            sunTemp+=hc;
+        }
+
+        return sunTemp;
+
+    }
+
+    //总分
+    public static long getSumWithLong(List<Long> hcs){
 
         long sunTemp = 0;
         for(long hc:hcs){
@@ -26,9 +39,18 @@ public class MathToolsUtil {
 
     }
     //平均分
-    public static long getAvg(List<Integer> hcs){
+    public static long getAvg(List<Integer> score){
 
-        long avg = getSum(hcs)/hcs.size();
+        long avg = getSum(score)/score.size();
+
+        return avg;
+
+    }
+
+    //平均分
+    public static long getAvgWithLong(List<Long> hcs){
+
+        long avg = getSumWithLong(hcs)/hcs.size();
 
         return avg;
 

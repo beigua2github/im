@@ -2,6 +2,7 @@ package com.starsea.im.aggregation.service;
 
 import com.starsea.im.aggregation.constant.DataSourceType;
 import com.starsea.im.aggregation.dto.StudyFormDto;
+import com.starsea.im.aggregation.dto.StudyResultDto;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.annotation.DataSource;
 import com.starsea.im.biz.entity.StudyForm;
@@ -26,6 +27,9 @@ public interface DiagnoseService {
     public StudyFormDto queryStudyFormByOpenId(String openId);
 
 
+    //均分  分别传入4个纬度需要计算的分数 单个学生的分数,方便返回结果
+    public List<Long> getAvgWithStudent(String openId);
+
     //均分  分别传入4个纬度需要计算的分数 studyForms.size()we为学生人数
     public List<Long> getAvgWithStudents();
 
@@ -40,6 +44,6 @@ public interface DiagnoseService {
 
     public  List<Long> getFinalStdScore();
 
-
+   public List<StudyResultDto> getFinalCommentByOpenId(String openId);
 
     }

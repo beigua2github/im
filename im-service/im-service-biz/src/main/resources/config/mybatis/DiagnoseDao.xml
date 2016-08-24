@@ -33,4 +33,10 @@
         SELECT * FROM test.studyform_teacher where OpenId = #{openId} order by id desc limit 1
     </select>
 
+    <select id="queryStudyFormAllOpenId" resultType="int">
+        SELECT OpenId FROM test.studyform_teacher
+    </select>
+
+
+
 </mapper>
