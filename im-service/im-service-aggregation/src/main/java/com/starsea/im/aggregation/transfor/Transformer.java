@@ -386,7 +386,7 @@ public class Transformer {
         List<List<Integer>> resultStudyForms = new ArrayList<List<Integer>>();
         for (StudyForm studyForm:allStudyForm){
             List<Integer> everyStudy = new ArrayList<Integer>();
-            //分心抑制
+            //要点
             everyStudy.add(studyForm.getQuestion6());
             everyStudy.add(studyForm.getQuestion10());
             everyStudy.add(studyForm.getQuestion2());
@@ -402,7 +402,7 @@ public class Transformer {
         List<List<Integer>> resultStudyForms = new ArrayList<List<Integer>>();
         for (StudyForm studyForm:allStudyForm){
             List<Integer> everyStudy = new ArrayList<Integer>();
-            //分心抑制
+            //信心
             everyStudy.add(studyForm.getQuestion5());
             everyStudy.add(studyForm.getQuestion1());
             everyStudy.add(studyForm.getQuestion17());
@@ -419,7 +419,7 @@ public class Transformer {
         List<List<Integer>> resultStudyForms = new ArrayList<List<Integer>>();
         for (StudyForm studyForm:allStudyForm){
             List<Integer> everyStudy = new ArrayList<Integer>();
-            //分心抑制
+            //焦虑
             everyStudy.add(studyForm.getQuestion11());
             everyStudy.add(studyForm.getQuestion13());
             everyStudy.add(studyForm.getQuestion7());
@@ -427,6 +427,54 @@ public class Transformer {
             resultStudyForms.add(everyStudy);
         }
         return resultStudyForms;
+
+    }
+
+    public static List<Integer> convertListFromStudyFormsOfFenxin(StudyForm studyForm){
+
+            List<Integer> everyStudy = new ArrayList<Integer>();
+            //分心抑制
+            everyStudy.add(studyForm.getQuestion12());
+            everyStudy.add(studyForm.getQuestion8());
+            everyStudy.add(studyForm.getQuestion4());
+            everyStudy.add(studyForm.getQuestion6());
+        return everyStudy;
+
+    }
+    public static List<Integer> convertListFromStudyFormsOfYaodian(StudyForm studyForm){
+
+            List<Integer> everyStudy = new ArrayList<Integer>();
+            //要点
+            everyStudy.add(studyForm.getQuestion6());
+            everyStudy.add(studyForm.getQuestion10());
+            everyStudy.add(studyForm.getQuestion2());
+            everyStudy.add(studyForm.getQuestion18());
+            everyStudy.add(studyForm.getQuestion14());
+        return everyStudy;
+
+    }
+    public static List<Integer> convertListFromStudyFormsOfXinxi(StudyForm studyForm){
+
+            List<Integer> everyStudy = new ArrayList<Integer>();
+            //信心
+            everyStudy.add(studyForm.getQuestion5());
+            everyStudy.add(studyForm.getQuestion1());
+            everyStudy.add(studyForm.getQuestion17());
+            everyStudy.add(studyForm.getQuestion9());
+            everyStudy.add(studyForm.getQuestion13());
+        return everyStudy;
+
+    }
+
+    public static List<Integer> convertListFromStudyFormsOfJiaolv(StudyForm studyForm){
+
+            List<Integer> everyStudy = new ArrayList<Integer>();
+            //焦虑
+            everyStudy.add(studyForm.getQuestion11());
+            everyStudy.add(studyForm.getQuestion13());
+            everyStudy.add(studyForm.getQuestion7());
+            everyStudy.add(studyForm.getQuestion15());
+        return everyStudy;
 
     }
 }
