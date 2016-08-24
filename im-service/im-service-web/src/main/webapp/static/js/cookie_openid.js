@@ -55,27 +55,30 @@ function judgeCookie(child) {
                     if(getCookie("label")){
                         $.ajax({
                             type: "GET",
-                                url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
-                                dataType: "json",
-                                data: {
+                            url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
+                            dataType: "json",
+                            data: {
                                 openId: cookie_id
                             },
+                            async:false,
                             success:function(data){
-                                child.enerySelect=data['msg']['msg'];
+                                child.enerySelect=data['msg']['msg']['enerySelect'];
+                                //alert(child.enerySelect);
                             }
-                        }),
+                        });
+                    }else{
+                        window.location.href="'../../sevenChoosefive.html";
                     }
-                    //child.enerySelect="12345";
-                    child.name= data['msg']['msg']['name'];
-                    child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
-                    child.age=data['msg']['msg']['age'];
-                    child.sex=data['msg']['msg']['sex'];
-                    child.school=data['msg']['msg']['school'];
-                    child.myClass=data['msg']['msg']['myClass'];
-                    child.organization=data['msg']['msg']['organization'];
-
                 }
+                child.name= data['msg']['msg']['name'];
+                child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
+                child.age=data['msg']['msg']['age'];
+                child.sex=data['msg']['msg']['sex'];
+                child.school=data['msg']['msg']['school'];
+                child.myClass=data['msg']['msg']['myClass'];
+                child.organization=data['msg']['msg']['organization'];
             }
         });
+
     }
 }

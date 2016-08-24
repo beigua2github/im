@@ -17,6 +17,6 @@ public interface UserEneryDao {
     public int addUserEnery(UserEneryEntity userEneryEntity);
 
     @DataSource("read")
-    public String queryEneryByOpenId(String openId);
+    public UserEneryEntity queryEneryByOpenId(String openId);
 
 }

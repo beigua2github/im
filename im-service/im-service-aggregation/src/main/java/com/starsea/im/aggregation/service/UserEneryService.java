@@ -17,5 +17,5 @@ public interface UserEneryService{
 
 
     @DataSource(DataSourceType.READ)
-    public String queryEneryByOpenId(String openId);
+    public UserEneryEntity queryEneryByOpenId(String openId);
 }

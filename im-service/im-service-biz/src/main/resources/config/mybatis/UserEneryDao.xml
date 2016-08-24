@@ -7,8 +7,8 @@
 <mapper namespace="com.starsea.im.biz.dao.UserEneryDao">
 
 
-       <select id="queryEneryByOpenId"  resultType="String">
-              select EnerySelect from test.UserEnery WHERE OpenId = #{openId}
+       <select id="queryEneryByOpenId" resultType="UserEneryEntity">
+              select * from test.UserEnery WHERE OpenId = #{openId}
        </select>
 
 

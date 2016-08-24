@@ -41,8 +41,8 @@ public class UserEneryController extends AjaxBase {
     public ServiceResult queryEnergyByOpenId(HttpServletRequest req,
                                              @RequestParam("openId") String openId){
         ServiceResult serviceResult = new ServiceResult();
-        serviceResult.setMsg(userEneryService.queryEneryByOpenId(openId));
         serviceResult.setCode(200);
+        serviceResult.setMsg(userEneryService.queryEneryByOpenId(openId));
         return setResponseData(serviceResult);
     }
 
