@@ -3,26 +3,34 @@
  */
 //用户获取cookie中的微信ID
 function getCookie(cookie_name){
-    return "openid=o45t9wZx7eQo5VIB4nTY_76TCW4w";
-    var alllCookie=document.cookie;
-    var cookie_pos=alllCookie.indexOf(cookie_name);
+    //return "o45t9wZx7eQo5VIB4nTY_76TCW4w";
+    var allCookie=document.cookie;
+    var cookie_pos=allCookie.indexOf(cookie_name);
     if(cookie_pos!=-1){
-        cookie_pos+=cookie_name+1;
-        var cookie_end=alllCookie.indexOf(";",cookie_pos);
+        cookie_pos+=cookie_name.length+1;
+        var cookie_end=allCookie.indexOf(";",cookie_pos);
         if(cookie_end==-1){
-            cookie_end=alllCookie.length;
+            cookie_end=allCookie.length;
         }
-        var value=alllCookie.substring(cookie_pos,cookie_end);
+        var value=allCookie.substring(cookie_pos,cookie_end);
+        //alert(value);
         return value;
     }
     return false;
 }
+function setCookie(name,val,time){//time 以 天 为单位
+    var theCookie = name + "=" + val;
+    var date = new Date();
+    date.setTime(date.getTime()+1000*60*60*24*time);
+    var cookieDate = date.toGMTString();
+    theCookie += ";expires=" + cookieDate+";path=/";
+    document.cookie = theCookie;
+}
+
 //判断用户有没有openid和数据库中有没有记录
 function judgeCookie(child) {
     var cookie_id = getCookie("openid");
-    if(cookie_id){
-        cookie_id=cookie_id.substring(7);
-    }
+    //alert(cookie_id);
     if (!cookie_id) {  //没有cookie，第一次访问，跳转值注册页面
         //这个URL 是向open.weixin.qq.com发送授权请求，映射到后端的接口，获得openid，并设置到cookie中，响应
          //处理授权的操作
@@ -43,6 +51,8 @@ function judgeCookie(child) {
                 if (data['msg']['msg']['name']==null) { //没有记录，跳转至注册界面
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
+                    //判断有没有需要不需要7选5
+
                     child.name= data['msg']['msg']['name'];
                     child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
                     child.age=data['msg']['msg']['age'];
