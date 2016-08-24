@@ -137,4 +137,15 @@ public class DiagnoseController extends AjaxBase{
         return setResponseData(serviceResult);
     }
 
+    @RequestMapping(value = "/getFinalCommentByOpenId", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult getFinalCommentByOpenId(@RequestParam(value = "openId") String openId) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(diagnoseService.getFinalCommentByOpenId(openId));
+        return setResponseData(serviceResult);
+    }
+
+
+
 }
