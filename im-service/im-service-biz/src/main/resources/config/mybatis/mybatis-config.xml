@@ -12,5 +12,6 @@
         <mapper resource="config/mybatis/UserLabelDao.xml"/>
         <mapper resource="config/mybatis/EnergyAreaDao.xml"/>
         <mapper resource="config/mybatis/LabelToEnergyDao.xml"/>
+        <mapper resource="config/mybatis/UserEneryDao.xml"/>
     </mappers>
 </configuration>
