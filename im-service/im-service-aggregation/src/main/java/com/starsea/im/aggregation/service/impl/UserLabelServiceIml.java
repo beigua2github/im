@@ -6,7 +6,7 @@ import com.starsea.im.aggregation.service.LabelToEnergyService;
 import com.starsea.im.aggregation.service.UserLabelService;
 import com.starsea.im.biz.dao.UserLabelDao;
 import com.starsea.im.biz.entity.UserLabelEntity;
-import com.sun.tools.classfile.Opcode;
+//import com.sun.tools.classfile.Opcode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
