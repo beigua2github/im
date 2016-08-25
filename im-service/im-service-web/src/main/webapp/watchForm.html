@@ -777,7 +777,7 @@
 
     var now_score = new Array();//用于记录学生的成绩
     var now_comment = new Array();//用于记录学生特别情况
-
+    var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:"",enerySelect:""};//用于获取历史信息要查询的值  和提交
 
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
@@ -794,13 +794,33 @@
         var currentdate = year + seperator1 + month + seperator1 + strDate;
         return currentdate;
     }
+    function sevenChosefive(){
+        if(getCookie("label_ejia")=="select"){
+            $.ajax({
+                type: "GET",
+                url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
+                dataType: "json",
+                data: {
+                    openId: child.openid
+                },
+                async:false,
+                success:function(data){
+                    child.enerySelect=data['msg']['msg']['enerySelect'];
+                    //alert(child.enerySelect);
+                }
+            });
+        }else{
+            window.location.href="'../../sevenChoosefive.html";
+        }
+    }
+
     $(document).ready(function () {
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
         $(".qd").click(function () {
             $(".ts_mask").fadeOut(1000);
         });//使提示消失
-        var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:"",enerySelect:""};//用于获取历史信息要查询的值  和提交
         judgeCookie(child);
+        sevenChosefive();
 //        alert(child.enerySelect);
         $.ajax({
             type: "GET",

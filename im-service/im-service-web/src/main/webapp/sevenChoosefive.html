@@ -306,28 +306,28 @@
         function addlabel () {
             //第一个成长重点
             for (var i=1;i<=category1_focus.length;i++){
-                var tmp = '<button class="label1_focus" click="0" name="A'+i+'">'+category1_focus[i-1]+'</button>';$('#focus1').append(tmp);}
+                var tmp = '<button class="label1_focus" click="0" a="1" name="A'+i+'">'+category1_focus[i-1]+'</button>';$('#focus1').append(tmp);}
             for (var i=4;i<category1_reason.length+4;i++){
                 var tmp = '<button class="label1_reason" click="0"  name="A'+i+'">'+category1_reason[i-4]+'</button>';$('#reason1').append(tmp);}
 
             //第二个成长重点
             for (var i=1;i<=category2_focus.length;i++){
-                var tmp = '<button class="label2_focus" click="0" name="B'+i+'">'+category2_focus[i-1]+'</button>';$('#focus2').append(tmp);}
+                var tmp = '<button class="label2_focus" click="0" a="2" name="B'+i+'">'+category2_focus[i-1]+'</button>';$('#focus2').append(tmp);}
             for (var i=8;i<category2_reason.length+8;i++){
                 var tmp = '<button class="label2_reason" click="0" name="B'+i+'">'+category2_reason[i-8]+'</button>';$('#reason2').append(tmp);}
             //第三个成长重点
             for (var i=1;i<=category3_focus.length;i++){
-                var tmp =  '<button class="label3_focus" click="0" name="C'+i+'">'+category3_focus[i-1]+'</button>';$('#focus3').append(tmp);}
+                var tmp =  '<button class="label3_focus" click="0" a="3" name="C'+i+'">'+category3_focus[i-1]+'</button>';$('#focus3').append(tmp);}
             for (var i=18;i<category3_reason.length+18;i++){
                 var tmp = '<button class="label3_reason" click="0" name="C'+i+'">'+category3_reason[i-18]+'</button>';$('#reason3').append(tmp);}
             //第四个成长重点
             for (var i=1;i<=category4_focus.length;i++){
-                var tmp = '<button class="label4_focus" click="0" name="D'+i+'">'+category4_focus[i-1]+'</button>';$('#focus4').append(tmp);}
+                var tmp = '<button class="label4_focus" click="0" a="4" name="D'+i+'">'+category4_focus[i-1]+'</button>';$('#focus4').append(tmp);}
             for (var i=6;i<category4_reason.length+6;i++){
                 var tmp = '<button class="label4_reason" click="0" name="D'+i+'">'+category4_reason[i-6]+'</button>';$('#reason4').append(tmp);}
             //第五个成长重点
             for (var i=1;i<=category5_focus.length;i++){
-                var tmp = '<button class="label5_focus" click="0" name="E'+i+'">'+category5_focus[i-1]+'</button>';$('#focus5').append(tmp);}
+                var tmp = '<button class="label5_focus" click="0" a="5" name="E'+i+'">'+category5_focus[i-1]+'</button>';$('#focus5').append(tmp);}
             for (var i=2;i<category5_reason.length+2;i++){
                 var tmp = '<button class="label5_reason"click="0"  name="E'+i+'">'+category5_reason[i-2]+'</button>';$('#reason5').append(tmp);}
         }
@@ -406,6 +406,7 @@
         }
         function buttonLbale_focus() {
             var name = $(this).attr('name');
+            var a=$(this).attr('a');
             if($(this).attr('click')==0) {
                 $(this).addClass('click');
                 if (isinArray(name,eneryArea_1)) {eneryArea[0][1] += 1;}
@@ -416,7 +417,7 @@
                 if (isinArray(name,eneryArea_6)) {eneryArea[5][1] += 1;}
                 if (isinArray(name,eneryArea_7)) {eneryArea[6][1] += 1;}
                 $(this).attr('click','1');
-                $(".reason1_mask").fadeIn();
+                $(".reason"+a+"_mask").fadeIn();
             }else{
                 $(this).removeClass('click');
                 if (isinArray(name,eneryArea_1)) {eneryArea[0][1] -= 1;}
@@ -429,6 +430,7 @@
                 $(this).attr('click','0');
             }
         }
+
 
 
         addlabel();

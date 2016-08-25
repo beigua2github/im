@@ -27,7 +27,7 @@ function setCookie(name,val,time){//time 以 天 为单位
     document.cookie = theCookie;
 }
 
-//判断用户有没有openid和数据库中有没有记录 还有7选5
+//判断用户有没有openid和数据库中有没有记录
 function judgeCookie(child) {
     var cookie_id = getCookie("openid");
     //alert(cookie_id);
@@ -51,32 +51,14 @@ function judgeCookie(child) {
                 if (data['msg']['msg']['name']==null) { //没有记录，跳转至注册界面
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
-                    //判断有没有需要不需要7选5
-                    if(getCookie("label_ejia")=="select"){
-                        $.ajax({
-                            type: "GET",
-                            url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
-                            dataType: "json",
-                            data: {
-                                openId: cookie_id
-                            },
-                            async:false,
-                            success:function(data){
-                                child.enerySelect=data['msg']['msg']['enerySelect'];
-                                //alert(child.enerySelect);
-                            }
-                        });
-                    }else{
-                        window.location.href="'../../sevenChoosefive.html";
-                    }
+                    child.name= data['msg']['msg']['name'];
+                    child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
+                    child.age=data['msg']['msg']['age'];
+                    child.sex=data['msg']['msg']['sex'];
+                    child.school=data['msg']['msg']['school'];
+                    child.myClass=data['msg']['msg']['myClass'];
+                    child.organization=data['msg']['msg']['organization'];
                 }
-                child.name= data['msg']['msg']['name'];
-                child.evaluationPerson=data['msg']['msg']['evaluationPerson'];
-                child.age=data['msg']['msg']['age'];
-                child.sex=data['msg']['msg']['sex'];
-                child.school=data['msg']['msg']['school'];
-                child.myClass=data['msg']['msg']['myClass'];
-                child.organization=data['msg']['msg']['organization'];
             }
         });
 

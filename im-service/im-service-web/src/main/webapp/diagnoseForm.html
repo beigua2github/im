@@ -128,6 +128,7 @@
     var pre_score = new Array(1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3);
 
     var now_score = new Array();//用于记录学生的成绩
+    var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值
 
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
@@ -205,7 +206,7 @@
 
     $(document).ready(function () {
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
-        var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值
+
         judgeCookie(child);
         $.ajax({
             type: "GET",
