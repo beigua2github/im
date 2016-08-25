@@ -8,13 +8,13 @@
 
 
        <select id="queryEneryByOpenId" resultType="UserEneryEntity">
-              select * from test.UserEnery WHERE OpenId = #{openId}
+              select * from test.UserEnery WHERE OpenId = #{openId} order by id desc limit 1
        </select>
 
 
        <insert id="addUserEnery" parameterType="UserEneryEntity">
-              insert into test.UserEnery(OpenId,EnerySelect)
-              values(#{openId},#{enerySelect})
+              insert into test.UserEnery(OpenId,EnerySelect,EvaluationTime)
+              values(#{openId},#{enerySelect},#{evaluationTime})
        </insert>
 
 </mapper>

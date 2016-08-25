@@ -25,11 +25,13 @@ public class UserEneryController extends AjaxBase {
     @ResponseBody
     public ServiceResult addEnery(HttpServletRequest request,
                                   @RequestParam("openId") String openId,
-                                  @RequestParam("enerySelect") String enerySelect) {
+                                  @RequestParam("enerySelect") String enerySelect,
+                                  @RequestParam(value = "evaluationTime") String evaluationTime) {
         ServiceResult serviceResult = new ServiceResult();
         UserEneryEntity userEneryEntity = new UserEneryEntity();
         userEneryEntity.setOpenId(openId);
         userEneryEntity.setEnerySelect(enerySelect);
+        userEneryEntity.setEvaluationTime(evaluationTime);
         serviceResult.setMsg(userEneryService.addUserEnery(userEneryEntity));
         serviceResult.setCode(200);
         return setResponseData(serviceResult);

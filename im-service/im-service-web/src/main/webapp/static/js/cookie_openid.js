@@ -27,7 +27,7 @@ function setCookie(name,val,time){//time 以 天 为单位
     document.cookie = theCookie;
 }
 
-//判断用户有没有openid和数据库中有没有记录
+//判断用户有没有openid和数据库中有没有记录 还有7选5
 function judgeCookie(child) {
     var cookie_id = getCookie("openid");
     //alert(cookie_id);
@@ -52,7 +52,7 @@ function judgeCookie(child) {
                     window.location.href = '../../userMessage.html';
                 } else {//有记录的话  传回孩子姓名，父母姓名，opednid等信息供 获取历史信息（通过openid查询） 提交（孩子姓名，父母姓名） 进行后面的操作
                     //判断有没有需要不需要7选5
-                    if(getCookie("label")){
+                    if(getCookie("label_ejia")=="select"){
                         $.ajax({
                             type: "GET",
                             url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口

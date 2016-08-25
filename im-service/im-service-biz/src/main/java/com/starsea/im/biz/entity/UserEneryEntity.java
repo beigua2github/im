@@ -7,6 +7,15 @@ public class UserEneryEntity {
     private Integer id;
     private String openId;
     private String enerySelect;
+    private String evaluationTime;
+
+    public String getEvaluationTime() {
+        return evaluationTime;
+    }
+
+    public void setEvaluationTime(String evaluationTime) {
+        this.evaluationTime = evaluationTime;
+    }
 
     public Integer getId() {
         return id;
