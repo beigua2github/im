@@ -805,7 +805,12 @@
                 },
                 async:false,
                 success:function(data){
-                    child.enerySelect=data['msg']['msg']['enerySelect'];
+                    if(data['msg']['msg']!=null){
+                        child.enerySelect=data['msg']['msg']['enerySelect'];
+                    }
+                    else{
+                        window.location.href="'../../sevenChoosefive.html";
+                    }
                     //alert(child.enerySelect);
                 }
             });

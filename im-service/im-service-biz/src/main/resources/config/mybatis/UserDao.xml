@@ -15,7 +15,7 @@
 
     <select id="queryUserByOpenId"  resultType="userEntity">
         <![CDATA[
-        select * from test.user WHERE OpenId = #{openId}
+        select * from test.user WHERE OpenId = #{openId} order by id desc limit 1
     ]]>
     </select>
 
@@ -26,7 +26,7 @@
     </select>
 
     <insert id="addUser" parameterType="userEntity">
-        insert into test.user(OpenId,Name,Age,Sex,Class,School,Organization,EvaluationPerson,CreateTime,Email)
+        insert into test.user(OpenId,Name,Age,Sex,MyClass,School,Organization,EvaluationPerson,CreateTime,Email)
                     values(#{openId},#{name},#{age},#{sex},#{myClass},#{school},#{organization},#{evaluationPerson},#{createTime},#{email})
     </insert>
 
