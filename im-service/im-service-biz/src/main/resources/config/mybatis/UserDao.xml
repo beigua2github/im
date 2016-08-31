@@ -5,15 +5,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.starsea.im.biz.dao.UserDao">
+
+
     <select id="queryUser"  resultType="userEntity">
         <![CDATA[
-        select * from student WHERE id = #{id}
+        select * from test.user WHERE OpenId = #{openId}
+    ]]>
+    </select>
+
+    <select id="queryUserByOpenId"  resultType="userEntity">
+        <![CDATA[
+        select * from test.user WHERE OpenId = #{openId}
     ]]>
     </select>
 
     <select id="queryUsers"  resultType="userEntity">
         <![CDATA[
-        select * from student
+        select * from test.user
     ]]>
     </select>
+
+    <insert id="addUser" parameterType="userEntity">
+        insert into test.user(OpenId,Name,Age,Sex,Class,School,Organization,EvaluationPerson,CreateTime,Email)
+                    values(#{openId},#{name},#{age},#{sex},#{myClass},#{school},#{organization},#{evaluationPerson},#{createTime},#{email})
+    </insert>
+
 </mapper>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head><meta charset="utf-8">
-    <title>星辰大海</title>
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="/static/open/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
 	           <div class="col-md-12">
 	              <!-- Logo -->
 	              <div class="logo">
-					  <h1><a href="index.html">星辰大海水果交易平台</a></h1>
+					  <h1><a href="index.html">Ejia</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -28,12 +28,12 @@
 				<div class="login-wrapper">
 			        <div class="box">
 			            <div class="content-wrap">
-			                <h6>加入星辰大海</h6>
-			                <input class="form-control" type="text" placeholder="E-mail address">
-			                <input class="form-control" type="password" placeholder="Password">
+			                <h6>Ejia</h6>
+			                <input class="form-control" type="text" placeholder="E-mail address" id="text">
+			                <input class="form-control" type="password" placeholder="Password" id="password">
 			                <input class="form-control" type="password" placeholder="Confirm Password">
 			                <div class="action">
-			                    <a class="btn btn-primary signup" href="login.html">注册</a>
+			                    <a class="btn btn-primary signup" id="signupBtn">注 册</a>
 			                </div>                
 			            </div>
 			        </div>
@@ -47,11 +47,41 @@
 		</div>
 	</div>
 
-
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="/static/js/jquery-1.11.0.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/static/open/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/static/open/js/custom.js"></script>
   </body>
 </html>
+
+<script type = "text/javascript">
+	$("#signupBtn").click(function() {
+
+		var text = $("#text").val();
+		var password = $("#password").val();
+		$.ajax({
+			url: '../starsea/user/signup',
+			data: {
+				email: text,
+				password: password
+			},
+			type: 'post',
+			cache: false,
+			dataType: 'json',
+			success: function (data) {
+				if (data.code == 200) {
+
+					alert("success");
+				}
+				else {
+					alert("查询失败: " + data.msg);
+				}
+			},
+			error: function () {
+				alert("服务器处理异常");
+			}
+		});
+	});
+
+
+</script>

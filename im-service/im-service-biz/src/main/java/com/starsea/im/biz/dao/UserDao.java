@@ -13,9 +13,17 @@ import java.util.List;
 @Repository
 @Single
 public interface UserDao {
-    @DataSource("write")
+    @DataSource("red")
     public UserEntity queryUser(int id);
 
     @DataSource("read")
+    public UserEntity queryUserByOpenId(String openId);
+
+
+    @DataSource("read")
     public List<UserEntity> queryUsers();
+
+    @DataSource("write")
+    public int addUser(UserEntity user);
+
 }

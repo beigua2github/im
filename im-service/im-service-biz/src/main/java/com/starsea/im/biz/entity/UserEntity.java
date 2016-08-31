@@ -5,6 +5,7 @@ import lombok.experimental.Builder;
 import org.apache.ibatis.type.Alias;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -20,15 +21,25 @@ import java.sql.Timestamp;
 public class UserEntity {
     private int id;
 
+    private String openId;
+
     private String name;
 
     private int age;
 
-    private String account;
+    private String sex;
 
-    private String password;
+    private String myClass;
 
+    private String school;
+
+    private String organization;
+
+    private String evaluationPerson;
+
+    private Date createTime;
     private String email;
 
-    private Timestamp createTime;
+
+
 }

@@ -1,0 +1,122 @@
+body {
+    background-image: url("../image/black.png");
+
+}
+div{
+    float:left;
+}
+#div_one{
+    width: 330px;
+
+}
+
+#div_one TABLE{
+    position: fixed;
+    top:40%;
+}
+.font{
+    color:navajowhite;
+    font-size:20px;
+    font-weight: bolder;
+}
+.input{
+    width: 150px;
+    height: 26px;
+    padding: 0px 5px;
+    margin: 0px;
+    border: 0;
+    background-color: #6b6b6b;
+    background-image: url("../image/input.png");
+    color: white;
+}
+.select{
+    background-color: #6b6b6b;
+    background-image: url("../image/input.png");
+    color: white;
+}
+.select option{
+    color:white;
+}
+#div_two_1{
+    overflow-y:auto;
+    overflow-x:hidden;
+    position: fixed;
+    top: 0px;
+    right:0%;
+    height:500px;
+    width:1000px;
+    background-image: url("../image/white.png");
+
+}
+.question{
+    background-color: blanchedalmond;
+    font-weight: bolder;
+    font-size:20px;
+}
+.question span{
+    font-size: xx-large;
+}
+.radio{
+   line-height: 30px;
+    font-style: inherit;
+}
+#div_two_2{
+    position: fixed;
+    bottom: 0px;
+    right:0%;
+    width:1000px;
+    height:150px;
+    background-image: url("../image/white.png");
+}
+#span{
+    position: absolute;
+    right:350px;
+}
+button.blue-pill {
+    background-color: #a5b8da;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a5b8da), color-stop(100%, #7089b3));
+    background-image: -webkit-linear-gradient(top, #a5b8da, #7089b3);
+    background-image: -moz-linear-gradient(top, #a5b8da, #7089b3);
+    background-image: -ms-linear-gradient(top, #a5b8da, #7089b3);
+    background-image: -o-linear-gradient(top, #a5b8da, #7089b3);
+    background-image: linear-gradient(top, #a5b8da, #7089b3);
+    border-top: 1px solid #758fba;
+    border-right: 1px solid #6c84ab;
+    border-bottom: 1px solid #5c6f91;
+    border-left: 1px solid #6c84ab;
+    border-radius: 18px;
+    -webkit-box-shadow: inset 0 1px 0 0 #aec3e5;
+    box-shadow: inset 0 1px 0 0 #aec3e5;
+    color: #fff;
+    font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    padding: 8px 0;
+    text-align: center;
+    text-shadow: 0 -1px 1px #64799e;
+    text-transform: uppercase;
+    width: 150px; }
+button.blue-pill:hover {
+    background-color: #9badcc;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9badcc), color-stop(100%, #687fa6));
+    background-image: -webkit-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -moz-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -ms-linear-gradient(top, #9badcc, #687fa6);
+    background-image: -o-linear-gradient(top, #9badcc, #687fa6);
+    background-image: linear-gradient(top, #9badcc, #687fa6);
+    border-top: 1px solid #6d86ad;
+    border-right: 1px solid #647a9e;
+    border-bottom: 1px solid #546685;
+    border-left: 1px solid #647a9e;
+    -webkit-box-shadow: inset 0 1px 0 0 #a5b9d9;
+    box-shadow: inset 0 1px 0 0 #a5b9d9;
+    cursor: pointer; }
+button.blue-pill:active {
+    border: 1px solid #546685;
+    -webkit-box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 2px #7e8da6, 0 1px 0 0 #eeeeee; }
+#span input{
+    background-image: url("../image/input.png");
+}
+#p{
+    padding: 15px 10px 50px 10px;
+    font-size:small;
+}
