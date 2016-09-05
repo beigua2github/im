@@ -850,6 +850,8 @@
                 success:function(data){
                     if(data['msg']['msg']!=null){
                         child.enerySelect=data['msg']['msg']['enerySelect'];
+                        bigtitle=data['msg']['msg']['title'];
+                        label=data['msg']['msg']['customResult'];
                     }
                     else{
                         window.location.href="'../../sevenChoosefive.html";

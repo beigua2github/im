@@ -295,7 +295,7 @@
     //方法B的变量
 //    var flag_array=new Array();//方法B存放七个维度是否选中的标记
     var flag1=0, flag2=0, flag3=0, flag4=0, flag5=0, flag6=0, flag7=0;//七个维度是否选择的标记
-    var clicksum=0;//控制七个维度只能选择5个
+    var clicksum=0;//控制七个维度只能选择4个
     var save2_click=0, save1_click=0;//控制方法A和B的提交次数
     var result="";//方法B的选择结果
 
@@ -357,7 +357,7 @@
                     }
                 }
             }
-            for(var i=0;i<5;i++){
+            for(var i=0;i<4;i++){
                 result+=array[i][0];
             }
             return result;
@@ -563,35 +563,39 @@
                 $(".ts_mask2").fadeIn(1000);//提示正在提交数据
                 //eneryArea进行排序 获得分数最高的前5个
                 var result=sort(eneryArea);
+
+                setCookie('enerySelect',result,0.1);
+                window.location.href = 'custom.html';
+
 //                alert(result);
-                var openid=getCookie("openid");
-                $.ajax({
-                    url: '../starsea/userenery/addUserEnery',
-                    data: {
-                        openId:openid,
-                        enerySelect:result,
-                        evaluationTime: getNowFormatDate()
-                    },
-                    type: 'post',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        if (data.code == 200) {
-                            $(".ts_mask2").fadeOut(1000);
-                            //alert("success");
-                            setCookie('label_ejia','select',30);
-                            window.location.href = 'watchForm.html';
-                        }
-                        else {
-                            alert("查询失败: " + data.msg);
-                        }
-                    },
-                    error: function () {
-                        alert("服务器处理异常");
-                        $(".ts_mask2").fadeOut(1000);
-                    }
-                });
+//                var openid=getCookie("openid");
+//                $.ajax({
+//                    url: '../starsea/userenery/addUserEnery',
+//                    data: {
+//                        openId:openid,
+//                        enerySelect:result,
+//                        evaluationTime: getNowFormatDate()
+//                    },
+//                    type: 'post',
+//                    cache: false,
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        console.log(data);
+//                        if (data.code == 200) {
+//                            $(".ts_mask2").fadeOut(1000);
+//                            //alert("success");
+//                            setCookie('enerySelect',result,0.1);
+//                            window.location.href = 'custom.html';
+//                        }
+//                        else {
+//                            alert("查询失败: " + data.msg);
+//                        }
+//                    },
+//                    error: function () {
+//                        alert("服务器处理异常");
+//                        $(".ts_mask2").fadeOut(1000);
+//                    }
+//                });
             }
 
         });
@@ -604,7 +608,7 @@
 
         //7个维度选择5个
         $(".button_c1").click(function () {
-                if(flag1==0 && 5>clicksum){
+                if(flag1==0 && 4>clicksum){
                     flag1 = 1; clicksum++;console.log(clicksum,flag1);
                     $(".button_c1").css('opacity', '1');
                     $(this).attr('click','1');
@@ -616,7 +620,7 @@
                 }
             });
         $(".button_c2").click(function () {
-                if(flag2==0 && 5>clicksum){
+                if(flag2==0 && 4>clicksum){
                     flag2 = 1; clicksum++;console.log(clicksum,flag2);
                     $(".button_c2").css('opacity', '1');
                     $(this).attr('click','1');
@@ -628,7 +632,7 @@
                 }
             });
         $(".button_c3").click(function () {
-                if(flag3==0 && 5>clicksum){
+                if(flag3==0 && 4>clicksum){
                     flag3 = 1; clicksum++;console.log(clicksum,flag3);
                     $(".button_c3").css('opacity', '1');
                     $(this).attr('click','1');
@@ -639,7 +643,7 @@
                 }
             });
         $(".button_c4").click(function () {
-                if(flag4==0 && 5>clicksum){
+                if(flag4==0 && 4>clicksum){
                     flag4 = 1; clicksum++;console.log(clicksum,flag4);
                     $(".button_c4").css('opacity', '1');
                     $(this).attr('click','1');
@@ -651,7 +655,7 @@
                 }
             });
         $(".button_c5").click(function () {
-                if(flag5==0 && 5>clicksum){
+                if(flag5==0 && 4>clicksum){
                     flag5 = 1; clicksum++;console.log(clicksum,flag5);
                     $(".button_c5").css('opacity', '1');
                     $(this).attr('click','1');
@@ -663,7 +667,7 @@
                 }
             });
         $(".button_c6").click(function () {
-                if(flag6==0 && 5>clicksum){
+                if(flag6==0 && 4>clicksum){
                     flag6 = 1; clicksum++;console.log(clicksum,flag6);
                     $(".button_c6").css('opacity', '1');
                     $(this).attr('click','1');
@@ -675,7 +679,7 @@
                 }
             });
         $(".button_c7").click(function () {
-                if(flag7==0 && 5>clicksum){
+                if(flag7==0 && 4>clicksum){
                     flag7 = 1; clicksum++;console.log(clicksum,flag7);
                     $(".button_c7").css('opacity', '1');
                     $(this).attr('click','1');
@@ -717,8 +721,8 @@
             $(".button_b[click='1']").each(function(){
                 num++;
             });
-            if(num!=5){
-                alert("请选择5个");
+            if(num!=4){
+                alert("请选择4个");
             }else {
                 if (save2_click == 0) {//确保只提交一次
                     save2_click++;
@@ -726,43 +730,43 @@
                     $(".button_b[click='1']").each(function () {
                         result += $(this).attr('val');
                     });
-                    var openid=getCookie("openid");
-//                    alert(result);
-                    //调用ajax传数据给后台
-                    $.ajax({
-                        url: '../starsea/userenery/addUserEnery',
-                        data: {
-                            openId:openid,
-                            enerySelect:result,
-                            evaluationTime: getNowFormatDate()
-                        },
-                        type: 'post',
-                        cache: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
-                            if (data.code == 200) {
-                                $(".ts_mask2").fadeOut(1000);
-                                //alert("success");
-                                setCookie('label_ejia','select',30);
-                                window.location.href = 'watchForm.html';
-                            }
-                            else {
-                                alert("查询失败: " + data.msg);
-                            }
-                        },
-                        error: function () {
-                            alert("服务器处理异常");
-                            $(".ts_mask2").fadeOut(1000);
-                        }
-                    });
+
+                    setCookie('enerySelect',result,0.1);
+                    window.location.href = 'custom.html';
+
+//                    var openid=getCookie("openid");
+////                    alert(result);
+//                    //调用ajax传数据给后台
+//                    $.ajax({
+//                        url: '../starsea/userenery/addUserEnery',
+//                        data: {
+//                            openId:openid,
+//                            enerySelect:result,
+//                            evaluationTime: getNowFormatDate()
+//                        },
+//                        type: 'post',
+//                        cache: false,
+//                        dataType: 'json',
+//                        success: function (data) {
+//                            console.log(data);
+//                            if (data.code == 200) {
+//                                $(".ts_mask2").fadeOut(1000);
+//                                //alert("success");
+////                                setCookie('label_ejia','select',30);
+//                                setCookie('enerySelect',result,0.1);
+//                                window.location.href = 'custom.html';
+//                            }
+//                            else {
+//                                alert("查询失败: " + data.msg);
+//                            }
+//                        },
+//                        error: function () {
+//                            alert("服务器处理异常");
+//                            $(".ts_mask2").fadeOut(1000);
+//                        }
+//                    });
                 }
             }
         });
-
-
-
-
-
     })
 </script>
