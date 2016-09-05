@@ -1,0 +1,42 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,form,input,legend,button,textarea{margin:0;padding:0; vertical-align: baseline; background: transparent; border: 0; outline: 0; }
+ul,li{ float:left; font-family:"Î¢ÈíÑÅºÚ"; color:#6e5b2e;}
+/*body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif; background:#f05150; font-family:"Î¢ÈíÑÅºÚ";}*/
+body{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif; background:#f05150; font-family:"Î¢ÈíÑÅºÚ";}
+
+
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+.head{ width:95%; height:20vw; margin:8vw auto 8vw 5%;}
+.t_pic{ width:20vw; height:20vw; float:left; border-radius:10px; overflow:hidden;}
+.t_pic img{ width:100%; height:auto;}
+.t_tit{ width:70vw; height:10vw; margin-top:5vw; float:right; border-top:1px solid #fff; font-size:4vw; color:#fff; letter-spacing:0.5vw; overflow:hidden;}
+.t_tit p{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+/*µÃ·Ö½á¹ûÑùÊ½*/
+h2{
+    text-align:center;
+    color: white;
+    margin-top:-15px;
+    font-size: 200%;
+}
+
+.point{
+    width: 70%;
+    height:10vw;
+    background-color:navajowhite;
+    display: block;
+    margin: 5vw auto;
+    margin-top: 15vw;
+    color: black;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}

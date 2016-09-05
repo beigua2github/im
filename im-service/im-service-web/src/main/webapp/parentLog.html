@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="static/css/time-style.css" />
+    <style type="text/css">
+        h2.top_title{border-bottom:none;background:none;text-align:center;line-height:32px; font-size:20px}
+        h2.top_title span{font-size:12px; color:#666;font-weight:500}
+        /*body{*/
+            /*background:#f05150;*/
+        /*}*/
+        #new_title{
+            width: 80%;
+            margin-bottom: 3vw;
+        }
+        textarea{
+            width: 100%;
+            height:60vw;
+        }
+    </style>
+    <script src="static/js/jquery-1.11.0.min.js"></script>
+    <script src="static/js/cookie_openid.js"></script>
+    <script src="static/js/parent_log.js"></script>
+</head>
+
+<body>
+<h2 class="top_title">今日发现<br/><span>记录日常感受</span></h2>
+<div class="div_1">
+    <input type="button" value="新发现" class="new"/>
+    <section id="cd-timeline" class="cd-container"></section>
+</div>
+<div class="div_2" style="display: none;">
+    <input type="text" id="new_title" placeholder="请输入标题"/>
+    <textarea id="new_content" value="记录每天新的发现" style="color:#999 ;" onfocus="if(value=='记录每天新的发现'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';  value='记录每天新的发现'}"></textarea>
+    <input type="button" class="submit" value="提交"/><br/>
+    <input type="button" class="back" value="返回"/>
+</div>
+</div>
+</body>
+</html>

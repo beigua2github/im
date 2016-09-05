@@ -22,7 +22,7 @@
   }
   var id=document.getElementById("id").innerHTML;
   setCookie("openid",id);
-  window.window.location.href="../../userMessage.html";
+  window.window.location.href="../../common_fourPoint.html";
 </script>
 </body>
 </html>

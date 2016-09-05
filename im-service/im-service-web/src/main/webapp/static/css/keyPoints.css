@@ -1,0 +1,32 @@
+body{margin:0;padding:0; vertical-align: baseline; background: transparent; border: 0; outline: 0; }
+body{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif; background:#f05150; font-family:"微软雅黑";}
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input{color:#000;}
+.head{ width:95%; height:20vw; margin:8vw auto 8vw 5%;}
+.t_pic{ width:20vw; height:20vw; float:left; border-radius:10px; overflow:hidden;}
+.t_pic img{ width:100%; height:auto;}
+.t_tit{ width:70vw; height:10vw; margin-top:5vw; float:right; border-top:1px solid #fff; font-size:4vw; color:#fff; letter-spacing:0.5vw; overflow:hidden;}
+.t_tit p{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+.span{
+    color: grey;
+    cursor: hand;
+}
+.select{
+    color: black;
+}
+
+a{
+    cursor:pointer;
+}
+.labelButton{
+    opacity: 0.5;
+}
+.selectButton{
+    opacity: 1;
+}
+.reasonPlay p{
+    color: yellow;
+}
