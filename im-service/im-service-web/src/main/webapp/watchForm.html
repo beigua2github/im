@@ -817,7 +817,7 @@
     var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:"",enerySelect:""};//用于获取历史信息要查询的值  和提交
 
 
-    var bigtitle='学习动力';//存放自定义的大标题
+    var bigtitle='no';//存放自定义的大标题
     var label=['动力1','动力2','动力3','动力4','动力5','动力6','动力7'];//存放自定义的小标题
 
 
@@ -850,17 +850,17 @@
                 success:function(data){
                     if(data['msg']['msg']!=null){
                         child.enerySelect=data['msg']['msg']['enerySelect'];
-                        bigtitle=data['msg']['msg']['title'];
-                        label=data['msg']['msg']['customResult'];
+//                        bigtitle=data['msg']['msg']['title'];
+//                        label=data['msg']['msg']['customResult'];
                     }
                     else{
-                        window.location.href="'../../sevenChoosefive.html";
+                        window.location.href="sevenChoosefive.html";
                     }
                     //alert(child.enerySelect);
                 }
             });
         }else{
-            window.location.href="'../../sevenChoosefive.html";
+            window.location.href="sevenChoosefive.html";
         }
     }
 
@@ -899,7 +899,7 @@
 
         //以下是初始化用户的自定义维度
         //大标题为空的时候,不显示自定义维度
-        if(bigtitle==null){
+        if(bigtitle=='no'){
             $(".button_custom").css("display","none");
         }
         //自定义维度的大标题

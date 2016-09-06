@@ -1,0 +1,31 @@
+{
+  "nodes": [
+    {"id": "root", "group": 1},
+    {"id": "son1", "group": 2},
+    {"id": "son2", "group": 2},
+    {"id": "son3", "group": 2},
+    {"id": "grandson1", "group": 3},
+    {"id": "grandson2", "group": 3},
+    {"id": "grandson3", "group": 3},
+    {"id": "grandson4", "group": 3},
+    {"id": "grandson5", "group": 3},
+    {"id": "grandson6", "group": 3},
+    {"id": "grandson7", "group": 3},
+    {"id": "grandson8", "group": 3},
+    {"id": "grandson9", "group": 3}
+  ],
+  "links": [
+    {"source": "son1", "target": "root", "value": 8},
+    {"source": "son2", "target": "root", "value": 8},
+    {"source": "son3", "target": "root", "value": 8},
+    {"source": "grandson1", "target": "son1", "value": 4},
+    {"source": "grandson2", "target": "son1", "value": 4},
+    {"source": "grandson3", "target": "son1", "value": 4},
+    {"source": "grandson4", "target": "son2", "value": 4},
+    {"source": "grandson5", "target": "son2", "value": 4},
+    {"source": "grandson6", "target": "son2", "value": 4},
+    {"source": "grandson7", "target": "son3", "value": 4},
+    {"source": "grandson8", "target": "son3", "value": 4},
+    {"source": "grandson9", "target": "son3", "value": 4}
+  ]
+}
