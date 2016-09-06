@@ -182,7 +182,8 @@ Main components
 }
 .cd-timeline-content .cd-read-more {
   float: right;
-  padding: .8em 1em;
+  /*padding: .8em 1em;*/
+  padding: 0.5em;
   background: #acb7c0;
   color: white;
   border-radius: 0.25em;
