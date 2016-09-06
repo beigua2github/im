@@ -50,8 +50,10 @@ $(document).ready(function () {
             button.addEventListener("click", function(){ //设置事件
                 var num=$(this).attr('name');
                 $('.reasonPlay p').html(explain[n][num]);
-                $('.labelButton').removeClass('selectButton');
-                $(this).addClass('selectButton');
+                $('.labelButton').css('opacity','0.5');
+                $(this).css('opacity','1');
+                // $('.labelButton').removeClass('selectButton');
+                // $(this).addClass('selectButton');
             }, false);
             div2.appendChild(button);
         }
@@ -75,7 +77,9 @@ $(document).ready(function () {
         var num=$(this).attr('name');
         n=num-1;
         jiaodian();
-        $('a').removeClass('select');
-        $(this).addClass('select');
+        // $('a').removeClass('select');
+        // $(this).addClass('select');
+        $('a').css('color','#fff');
+        $(this).css('color','#000');
     });
 });

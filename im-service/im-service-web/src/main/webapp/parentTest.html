@@ -29,30 +29,38 @@
             <p>家长教育效能评估</p>
         </div>
     </div>
-<div class="div1">
-    <!--选择单选题目-->
-    <div class="t_con">
-        <div class="con_tit">
-            <p id="title_txt" name="1">(1/10)&nbsp;单选题</p>
-            <p id="content_txt"></p>
+
+
+    <!--首页答题部分-->
+    <div class="div1">
+        <!--选择单选题目-->
+        <div class="t_con">
+            <div class="con_tit">
+                <p id="title_txt" name="1">(1/10)&nbsp;单选题</p>
+                <p id="content_txt"></p>
+            </div>
+            <div class="con_con">
+                <input type="radio" name="q"  id="q1" value="1" /><label class="s1" for="q1"></label><br/>
+                <input type="radio" name="q"  id="q2" value="2"/><label class="s2" for="q2"></label><br/>
+                <input type="radio" name="q"  id="q3" value="3"/><label class="s3" for="q3"></label>
+            </div>
         </div>
-        <input type="radio" name="q"  id="q1" value="1" /><label class="s1" for="q1"></label><br/>
-        <input type="radio" name="q"  id="q2" value="2"/><label class="s2" for="q2"></label><br/>
-        <input type="radio" name="q"  id="q3" value="3"/><label class="s3" for="q3"></label>
+
+        <!--上提下题按钮-->
+        <div class="t_btn">
+            <button id="botton_pre" type="button">上一题</button>
+            <button id="botton_next" type="button">下一题</button>
+        </div>
     </div>
 
-    <!--上提下题按钮-->
-    <div class="t_btn">
-        <button id="botton_pre" type="button">上一题</button>
-        <button id="botton_next" type="button">下一题</button>
-    </div>
-</div>
+    <!--得分结果-->
     <div class="detail" style="display: none;">
         <p class="p1"><span class="score_label">得分：</span><span class="score"></span></p>
         <p class="comment_label">描述：</p>
         <p class="comment_detal"></p>
-        <input type="button" class="back" value="返回"/>
+        <button class="back">返回</button>
     </div>
+
 </div>
 <script>
     //点击下一题没选择时执行的动作

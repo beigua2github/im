@@ -17,28 +17,37 @@
     <script src="static/js/keyPoints.js"></script>
 </head>
 <body>
-<!--头部信息-->
-<div class="head">
-    <div class="t_pic">
-        <img src="static/image/head.jpg" />
+<div class="whole">
+    <!--头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/head.jpg" />
+        </div>
+        <div class="t_tit">
+            <p>成长诊断</p>
+        </div>
     </div>
-    <div class="t_tit">
-        <p>成长诊断</p>
+    <!--中间内容-->
+    <div class="content">
+        <h2>关注焦点</h2>
+        <div class="label"></div>
+
+        <button class="reason">原因诊断</button>
+        <div class="page">
+            <a  name="1">[1]</a>
+            <a  name="2">[2]</a>
+            <a  name="3">[3]</a>
+            <a  name="4">[4]</a>
+            <a  name="5">[5]</a>
+            <a  name="6">[6]</a>
+        </div>
     </div>
-</div>
-<div class="content">
-    <h2></h2>
-    <h3>关注焦点</h3>
-    <div class="label"></div>
-    <div>
-    <input type="button" class="reason" value="原因诊断"/>
-    <a class="span select" name="1">[1]&nbsp;&nbsp;</a><a class="span" name="2">[2]&nbsp;&nbsp;</a><a class="span" name="3">[3]&nbsp;&nbsp;</a>
-    <a class="span" name="4">[4]&nbsp;&nbsp;</a><a class="span" name="5">[5]&nbsp;&nbsp;</a><a class="span" name="6">[6]&nbsp;&nbsp;</a></div>
-</div>
-<div class="reasonPlay" style="display: none">
-    <p></p>
-    <div class="label2"></div>
-    <input type="button" value="返回" class="back"/>
+    <!--原因诊断部分-->
+    <div class="reasonPlay" style="display: none">
+        <p></p>
+        <div class="label2"></div>
+        <button class="back">返回</button>
+    </div>
 </div>
 </body>
 </html>
