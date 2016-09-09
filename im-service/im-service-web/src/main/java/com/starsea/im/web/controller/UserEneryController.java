@@ -3,6 +3,7 @@ package com.starsea.im.web.controller;
 import com.starsea.im.aggregation.service.UserEneryService;
 import com.starsea.im.aggregation.util.ServiceResult;
 import com.starsea.im.biz.entity.UserEneryEntity;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +24,19 @@ public class UserEneryController extends AjaxBase {
 
     @RequestMapping(value = "/addUserEnery", method = RequestMethod.POST)
     @ResponseBody
-    public ServiceResult addEnery(HttpServletRequest request,
+    public ServiceResult addUserEnery(HttpServletRequest request,
                                   @RequestParam("openId") String openId,
                                   @RequestParam("enerySelect") String enerySelect,
+                                  @RequestParam("title") String title,
+                                  @RequestParam("customResult") String customResult,
                                   @RequestParam(value = "evaluationTime") String evaluationTime) {
         ServiceResult serviceResult = new ServiceResult();
         UserEneryEntity userEneryEntity = new UserEneryEntity();
         userEneryEntity.setOpenId(openId);
         userEneryEntity.setEnerySelect(enerySelect);
         userEneryEntity.setEvaluationTime(evaluationTime);
+        userEneryEntity.setTitle(title);
+        userEneryEntity.setCustomResult(customResult);
         serviceResult.setMsg(userEneryService.addUserEnery(userEneryEntity));
         serviceResult.setCode(200);
         return setResponseData(serviceResult);
@@ -48,5 +53,19 @@ public class UserEneryController extends AjaxBase {
         return setResponseData(serviceResult);
     }
 
-
+    @RequestMapping(value = "/addScore", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult addScore(HttpServletRequest request,
+                                  @RequestParam("openId") String openId,
+                                  @RequestParam("score") String score,
+                                  @RequestParam("commont") String commont) {
+        ServiceResult serviceResult = new ServiceResult();
+        UserEneryEntity userEneryEntity = new UserEneryEntity();
+        userEneryEntity.setOpenId(openId);
+        userEneryEntity.setScore(score);
+        userEneryEntity.setCommont(commont);
+        serviceResult.setMsg(userEneryService.addScore(userEneryEntity));
+        serviceResult.setCode(200);
+        return setResponseData(serviceResult);
+    }
 }

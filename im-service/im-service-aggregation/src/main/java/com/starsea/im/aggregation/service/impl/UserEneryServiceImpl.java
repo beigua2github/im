@@ -23,4 +23,8 @@ public class UserEneryServiceImpl implements UserEneryService{
         UserEneryEntity userEneryEntity=userEneryDao.queryEneryByOpenId(openId);
         return userEneryEntity;
     }
+
+    public int addScore(UserEneryEntity userEneryEntity) {
+        return userEneryDao.addScore(userEneryEntity);
+    }
 }

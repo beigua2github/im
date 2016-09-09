@@ -4,10 +4,9 @@
 $(document).ready(function () {
     var log=[];
     var openid=getCookie('openid');
-    $('#new').click(function(){
-
-    });
-    $.ajax({
+    var childOpenid=getCookie('childOpenid');
+    if(childOpenid==false){
+        $.ajax({
         type: "GET",
         url: "../starsea/user/getUserByOpenId",
         dataType: "json",
@@ -100,6 +99,26 @@ $(document).ready(function () {
             }
         }
     });
+        $('.submit').click(function(){
+            var title=$('#new_title').val();
+            var content=$('#new_content').val();
+            $.ajax({
+                type: "POST",
+                url: "../starsea/",
+                dataType: "json",
+                data: {
+                    title:title,
+                    content:content,
+                    time:getNowFormatDate()
+                },
+                success: function (data) {
+                    window.location.reload();//刷新当前页面
+                }
+            });
+        });
+    }else{
+
+    }
 
 
     $('.new').click(function(){
@@ -115,23 +134,6 @@ $(document).ready(function () {
         $('#new_content').css('color','#999');
         $('.div_1').css('display','block');
         $('.div_2').css('display','none');
-    });
-    $('.submit').click(function(){
-        var title=$('#new_title').val();
-        var content=$('#new_content').val();
-        $.ajax({
-            type: "POST",
-            url: "../starsea/",
-            dataType: "json",
-            data: {
-                title:title,
-                content:content,
-                time:getNowFormatDate()
-            },
-            success: function (data) {
-                window.location.reload();//刷新当前页面
-            }
-        });
     });
 
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd

@@ -13,7 +13,16 @@ $(document).ready(function () {
         $('.p3').click(function(){
             window.location.href="../../keyPoints.html";
         });
-    }else{//老师
-
+    }else if(flag=='t'){//老师
+        $('.p1').click(function(){
+            window.location.href="../../diagnoseForm.html";
+        });
+        $('.p2').val('老师教育效能评估');
+        $('.p2').click(function(){
+            window.location.href="../../teacherTest.html";
+        });
+        $('.p3').click(function(){
+            window.location.href="../../keyPoints.html";
+        });
     }
 });

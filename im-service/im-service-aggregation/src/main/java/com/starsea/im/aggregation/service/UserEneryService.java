@@ -18,4 +18,9 @@ public interface UserEneryService{
 
     @DataSource(DataSourceType.READ)
     public UserEneryEntity queryEneryByOpenId(String openId);
+
+    @DataSource(DataSourceType.WRITE)
+    public int addScore(UserEneryEntity userEneryEntity);
+
+
 }

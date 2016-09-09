@@ -19,4 +19,5 @@ public interface UserEneryDao {
     @DataSource("read")
     public UserEneryEntity queryEneryByOpenId(String openId);
 
+    public int addScore(UserEneryEntity userEneryEntity);
 }

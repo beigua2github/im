@@ -34,4 +34,7 @@ public class UserDto {
     private String evaluationPerson;
 
     private Date createTime;
+    private String email;
+    private String teacher;
+    private String role;
 }

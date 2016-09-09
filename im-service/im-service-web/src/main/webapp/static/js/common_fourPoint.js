@@ -11,9 +11,14 @@ function getOpenid(){
 }
 
 $(document).ready(function () {
+    //删除cookie的方法， 第三个参数设置为负的
+    //setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",3000);
+    //setCookie("role",'1',-1);
     var openid=getOpenid();
-    var flag = getCookie("p_t");//flag标志角色  p家长 t老师
-    if(!flag) {//第一次
+    var role = getCookie("role");//p为家长 t为老师
+    //alert(role);
+    //setCookie("role","p",3000);
+    if(!role) {//第一次
         //获取角色信息
         $.ajax({
             type: "GET",
@@ -24,21 +29,26 @@ $(document).ready(function () {
             },
             async: false,
             success: function (data) {
-                //var flag=data['msg']['msg']['power'];
-                var f="p";
-                if(f) {
+                var f=data['msg']['msg']['role'];
+                //var f="t";
+                if(f=="老师") {
                     //将角色设置到cookie
-                    setCookie("p_t",f,3000);
+                    setCookie("role","t",3000);
+                    role="t";
+                }else if(f=="家长"){
+                    setCookie("role","p",3000);
+                    role="p";
                 }else{
-                    //alert("没有权限");
+                    alert("没有权限");
                     //WeixinJSBridge.invoke('closeWindow',{},function(res){});
-                    window.location.href='../../userMessage.html';
+                    //window.location.href='../../userMessage.html';
+
                 }
             }
         });
     }
-    flag = getCookie("p_t");
-    if (flag =="a") {//家长
+    //alert(role);
+    if (role =="p") {//家长
         $('.fourPoint').css('display','block');
         $('.children').css('display','none');
 
@@ -52,108 +62,114 @@ $(document).ready(function () {
             window.location.href="../../zhexiantu.html";
         });
         $('.p4').click(function(){
-            window.location.href="../../parentLog.html";
+            window.location.href="../../newFind.html";
         });
     }
     //老师
-    else{
+    else if(role=='t'){
         var children=[];
         $('.fourPoint').css('display','none');
         $('.children').css('display','block');
 
-        children=[{openid:"o45t9wZx7eQo5VIB4nTY_76TCW4w",name:"小明",school:"华师",class:"一年级"},{openid:"cdscvdsvsdd",name:"小红",school:"华师",class:"二年级"}];
+        //children=[{openid:"o45t9wZx7eQo5VIB4nTY_76TCW4w",name:"小明",school:"华师",class:"一年级"},
+        //    {openid:"cdscvdsvsdd",name:"小红",school:"华师aaaaaaa",class:"二年级aaaaa"},
+        //    {openid:"cevrvrvr",name:"小白",school:"华师",class:"三年级"},
+        //    {openid:"cdscvvfdsdd",name:"小蓝",school:"华师",class:"四年级"},
+        //    {openid:"cdsacsdsdd",name:"小绿",school:"华师",class:"五年级"},
+        //    {openid:"vregthvsdd",name:"小黑",school:"华师",class:"六年级"},
+        //    {openid:"pioiysvsdd",name:"小紫",school:"华师",class:"七年级"}];
+
         //获取老师管理的孩子openid
         $.ajax({
             type: "GET",
-            url: "../starsea/",
+            url: "../starsea/user/getChildrenUserByOpenId",
             dataType: "json",
             data: {
                 openId: openid
             },
+            async:false,
             success: function (data) {
-                var content=data['msg']['msg'];//获取孩子信息  生成一个数组 split content=['dcdscuid','小红','华师','一年级','dcwcww','小明','华师','二年级']；
-                var children_num=0;
-                for(var i=0;i<content.length;i+=4) {
-                    children[children_num]={openid:"",name:""};
-                    children[children_num].openid=content[i];
-                    children[children_num].name=content[i+1];
-                    children[children_num].school=content[i+2];
-                    children[children_num].class=content[i+3];
-                    children_num+=1;
+                var content=data['msg']['msg'];//获取孩子信息
+                for(var i=0;i<content.length;i++) {
+                    children[i]={openid:"",name:"",school:"",class:""};
+                    children[i].openid=content[i].openId;
+                    children[i].name=content[i].name;
+                    children[i].school=content[i].school;
+                    children[i].class=content[i].myClass;
                 }
-                //children=[{openid:"cdscsdcsd",name:"小明",school:"华师",class:"一年级"},{openid:"cdscvdsvsdd",name:"小红",school:"华师",class:"二年级"}];
             }
         });
-        var a=0;//为circle设置编号
 
-        var svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
-        var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function(d) { return d.id; }))
-            .force("charge", d3.forceManyBody())
-            .force("center", d3.forceCenter(width / 2, height / 2));
-        d3.json("static/json/data.json", function(error, graph) {
-            if (error) throw error;
-
-            var link = svg.append("g")
-                .attr("class", "links")
-                .selectAll("line")
-                .data(graph.links)
-                .enter().append("line")
-            // .attr("stroke-width", function(d) { return (d.value); });
-
-            var node = svg.append("g")
-                .attr("class", "nodes")
-                .selectAll("circle")
-                .data(graph.nodes)
-                .enter().append("circle")
-                .attr("r", 10)
-                .attr("fill", function(d) { return color(d.group); })
-                .call(d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended));
-
-            node.append("title")
-                .text(function(d) { return d.id; });
-
-            simulation
-                .nodes(graph.nodes)
-                .on("tick", ticked);
-
-            simulation.force("link")
-                .links(graph.links);
-
-            function ticked() {
-                link
-                    .attr("x1", function(d) { return d.source.x; })
-                    .attr("y1", function(d) { return d.source.y; })
-                    .attr("x2", function(d) { return d.target.x; })
-                    .attr("y2", function(d) { return d.target.y; });
-
-                node
-                    .attr("cx", function(d) { return d.x; })
-                    .attr("cy", function(d) { return d.y; });
-            }
+        var num=children.length;
+        var div=document.querySelector('.children');
+        var button = document.createElement('button');
+        button.className='self';
+        button.innerHTML='我的';
+        button.addEventListener("click", function(){
+            window.location.href='..';//显示所有孩子 所有情况的总的
         });
-        function dragstarted(d) {
-            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-        }
-        function dragged(d) {
-            d.fx = d3.event.x;
-            d.fy = d3.event.y;
-        }
-        function dragended(d) {
-            if (!d3.event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
+        div.appendChild(button);
+
+        for(var i=0;i<num;i++) {
+            var div_child = document.createElement('div');
+            div_child.className="divChild";
+            var button_child=document.createElement('button');
+            button_child.innerHTML=children[i].name;
+            //button_child.name=i;
+            button_child.className="child";
+            button_child.value=children[i].openid;
+            var text_child=document.createElement("label");
+            text_child.className="text";
+            text_child.innerHTML="学校："+children[i].school+"<br/>年级："+children[i].class;
+            text_child.style="display:none";
+            button_child.addEventListener("mouseover", function(){
+                $(this).next().css('display','block');
+            });
+            button_child.addEventListener("mouseout", function(){
+                $(this).next().css('display','none');
+            });
+            button_child.addEventListener("click", function(){
+                //alert(1);
+                setCookie('childOpenid',$(this).val(),1);
+                $('.fourPoint').css('display','block');
+                $('.children').css('display','none');
+
+                $('.p1').click(function(){
+                    window.location.href="../../positiveTest.html";
+                });
+                $('.p2').click(function(){
+                    window.location.href="../../watchForm.html";
+                });
+                $('.p3').click(function(){
+                    window.location.href="../../zhexiantu.html";
+                });
+                $('.p4').click(function(){
+                    window.location.href="../../newFind.html";
+                });
+            });
+            div_child.appendChild(button_child);
+            div_child.appendChild(text_child);
+            div.appendChild(div_child);
         }
 
 
 
+        //中心点横坐标
+        var dotLeft = ($(".children").width()-$(".self").width())/2;
+        //中心点纵坐标
+        var dotTop = ($(".children").height()-$(".self").height())/2;
+        //起始角度
+        var stard = 0;
+        //半径
+        var radius = 60;
+        //每一个BOX对应的角度;
+        var avd = 360/$(".divChild").length;
+        //每一个BOX对应的弧度;
+        var ahd = avd*Math.PI/180;
+        //设置圆的中心点的位置
+        $(".self").css({"left":dotLeft,"top":dotTop});
+        $(".divChild").each(function(index, element){
+            $(this).css({"left":Math.sin((ahd*index))*radius+dotLeft,"top":Math.cos((ahd*index))*radius+dotTop});
+        });
     }
 });

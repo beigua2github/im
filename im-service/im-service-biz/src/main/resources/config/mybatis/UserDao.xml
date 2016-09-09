@@ -25,9 +25,15 @@
     ]]>
     </select>
 
+    <select id="queryChildrenUsers"  resultType="userEntity">
+        <![CDATA[
+        select * from test.user where Teacher=#{teacher}
+    ]]>
+    </select>
+
     <insert id="addUser" parameterType="userEntity">
-        insert into test.user(OpenId,Name,Age,Sex,MyClass,School,Organization,EvaluationPerson,CreateTime,Email)
-                    values(#{openId},#{name},#{age},#{sex},#{myClass},#{school},#{organization},#{evaluationPerson},#{createTime},#{email})
+        insert into test.user(OpenId,Name,Age,Sex,MyClass,School,Organization,EvaluationPerson,CreateTime,Email,Role,Teacher)
+                    values(#{openId},#{name},#{age},#{sex},#{myClass},#{school},#{organization},#{evaluationPerson},#{createTime},#{email},#{role},#{teacher})
     </insert>
 
 </mapper>

@@ -49,7 +49,9 @@ public class UserController extends AjaxBase{
                                 @RequestParam("school") String school,
                                 @RequestParam("organization") String organization,
                                 @RequestParam("evaluationPerson") String evaluationPerson,
-                                @RequestParam("email") String email
+                                @RequestParam("email") String email,
+                                @RequestParam("teacher") String teacher,
+                                @RequestParam("role") String role
                                 ){
         ServiceResult serviceResult = new ServiceResult();
         UserEntity userEntity = new UserEntity();
@@ -63,6 +65,8 @@ public class UserController extends AjaxBase{
         userEntity.setEvaluationPerson(evaluationPerson);
         userEntity.setCreateTime(new Date());
         userEntity.setEmail(email);
+        userEntity.setTeacher(teacher);
+        userEntity.setRole(role);
         serviceResult.setMsg(userService.addUser(userEntity));
         serviceResult.setCode(200);
         return setResponseData(serviceResult);
@@ -142,6 +146,18 @@ public class UserController extends AjaxBase{
         return "false";
 
 
+    }
+
+    @RequestMapping(value = "/getChildrenUserByOpenId",method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult getChildrenUserByOpenId(HttpServletRequest req,
+                                         @RequestParam("openId") String openId
+
+    ){
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setMsg(userService.queryChildrenUserByOpenId(openId));
+        serviceResult.setCode(200);
+        return setResponseData(serviceResult);
     }
 
 

@@ -39,6 +39,8 @@ public class UserEntity {
 
     private Date createTime;
     private String email;
+    private String teacher;
+    private String role;
 
     public int getId() {
         return id;
@@ -126,5 +128,21 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

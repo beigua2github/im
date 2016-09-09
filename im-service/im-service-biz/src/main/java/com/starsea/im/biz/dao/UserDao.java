@@ -26,4 +26,7 @@ public interface UserDao {
     @DataSource("write")
     public int addUser(UserEntity user);
 
+    @DataSource("read")
+    public List<UserEntity> queryChildrenUsers(String teacher);
+
 }

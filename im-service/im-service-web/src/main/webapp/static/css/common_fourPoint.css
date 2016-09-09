@@ -40,12 +40,29 @@ h2{
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
-.links line {
-    stroke: #999;
-    stroke-opacity: 0.6;
-}
 
-.nodes circle {
-    stroke: #fff;
-    stroke-width: 1px;
+button{
+    background-color:navajowhite;
+    border-radius:60px;
+}
+.children{
+    position: absolute;
+    top:80vw;
+    width: 95%;
+}
+.self{
+    position: absolute;
+    background-color:white;
+}
+.divChild{
+    position: absolute;
+}
+label{
+    position: absolute;
+    padding:1vw;
+    background-color: white;
+    opacity: 0.8;
+    border-radius:10px;
+    width:35vw;
+    z-index: 99;
 }

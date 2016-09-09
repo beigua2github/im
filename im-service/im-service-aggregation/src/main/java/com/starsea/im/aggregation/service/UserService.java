@@ -38,4 +38,7 @@ public interface UserService{
     @DataSource(DataSourceType.WRITE)
     public int addUser(UserEntity userEntity);
 
+    @DataSource(DataSourceType.READ)
+    public List<UserEntity> queryChildrenUserByOpenId(String OpenId);
+
     }

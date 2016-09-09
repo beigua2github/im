@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="Cache-Control" content="no-cache"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
@@ -93,7 +92,13 @@
     var customResult=[];//自定义最终结果
     var selectResult=getCookie('enerySelect');//7选4的结果
     var flag=0;//用于标志 自定义能量圈不显示时，是因为没有匹配到 还是因为匹配到了 但是在已经在那4个里面包含了
-
+    var f=getCookie('role');
+    var openid;
+    if(f=='p'){
+        openid=getCookie('openid');
+    }else if(f=='t'){
+        openid=getCookie('childOpenid');
+    }
     var custom_f=0;//用来标志  要不要进行小标题的匹配
 //    var custom=[];//存储所有小标题
 //    var customScore=[];//用于存储 小标题 的得分
@@ -312,15 +317,22 @@
                     customResult[i]=customResult[i].c;
                 }
             }
-            alert(customResult);
-
+//            alert(customResult);
+//            alert(openid);
+            //将结果数组转换为字符串 以逗号分隔
+            var result="";
+            for(var i=0;i<customResult.length;i++){
+                result+=customResult[i]+',';
+            }
+            result=result.substring(0,result.length-1);
+//            alert(openid);
             $.ajax({
                 url: '../starsea/userenery/addUserEnery',
                 data: {
-                    openId:getCookie('openid'),
+                    openId:openid,
                     enerySelect:selectResult,
                     title:bigtitle,
-                    customResult:customResult,
+                    customResult:result,
                     evaluationTime: getNowFormatDate()
                 },
                 type: 'post',

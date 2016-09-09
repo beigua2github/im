@@ -78,4 +78,14 @@ public class UserServiceImpl implements UserService{
         return userDao.addUser(userEntity);
     }
 
+    @Override
+    @LogParams
+    public List<UserEntity> queryChildrenUserByOpenId(String OpenId) {
+        UserEntity userEntity = userDao.queryUserByOpenId(OpenId);
+        String name=userEntity.getName();
+
+        List<UserEntity> userEntities=userDao.queryChildrenUsers(name);
+        return userEntities;
+//        return Lists.transform(userDao.queryChildrenUsers(), UserTransfor.INSTANCE);
+    }
 }

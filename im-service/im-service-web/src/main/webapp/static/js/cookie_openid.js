@@ -30,12 +30,14 @@ function setCookie(name,val,time){//time 以 天 为单位
 //判断用户有没有openid和数据库中有没有记录
 function judgeCookie(child) {
     //家长版 要获得openid   老师版 要获得 孩子的信息childOpenid
-    var flag = getCookie("p_t");//flag标志角色  p家长 t老师
+    var flag = getCookie("role");//flag标志角色  p家长 t老师
     var cookie_id;
     if(flag=='p') {
         cookie_id = getCookie("openid");
-    }else{
+    }else if(flag=='t'){
         cookie_id=getCookie("childOpenid");
+        $(".button_submit").css('display','none');
+        $(".button_addcom").css('display','none');
     }
 
     //alert(cookie_id);
