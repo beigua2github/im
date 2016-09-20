@@ -3,9 +3,11 @@ package com.starsea.im.aggregation.service.impl;
 import com.starsea.im.aggregation.constant.DataSourceType;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.annotation.DataSource;
+
+import com.starsea.im.biz.entity.WatchAll_week;
+import com.starsea.im.biz.entity.WatchZheXian;
 import com.starsea.im.biz.entity.WatchForm;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,14 +34,14 @@ public interface WatchService {
     public Long queryAvgWatchFormByNameDay(String name,int day);
 
     @DataSource(DataSourceType.READ)
-    public List<WatchFormDto> queryLastWatchFormByOpenIdWeek(String openId);
+    public WatchZheXian queryLastWatchFormByOpenIdWeek(String openId);
 
     @DataSource(DataSourceType.READ)
-    public List<WatchFormDto> queryLastWatchFormByOpenIdMonth(String openId);
+    public WatchZheXian queryLastWatchFormByOpenIdMonth(String openId);
 
     @DataSource(DataSourceType.READ)
     public Long queryAvgWatchFormByOpenIdDay(String openId,int day);
 
-
-
+    @DataSource(DataSourceType.READ)
+    public WatchAll_week queryOneTeacherAllChildrenByOpenIdWeek(String openId);
 }

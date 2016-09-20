@@ -101,7 +101,7 @@ public class WatchController extends AjaxBase {
     @RequestMapping(value = "/queryLastWatchFormByOpenIdWeek", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult queryLastWatchFormByOpenIdWeek(@RequestParam(value = "openId") String openId) {
-        openId=utilService.decode(openId);
+//        openId=utilService.decode(openId);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
         serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdWeek(openId));
@@ -112,11 +112,11 @@ public class WatchController extends AjaxBase {
 
     @RequestMapping(value = "/queryLastWatchFormByOpenIdMonth", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResult queryLastWatchFormByOpenIdMonth(@RequestParam(value = "openId") String name) {
-        name=utilService.decode(name);
+    public ServiceResult queryLastWatchFormByOpenIdMonth(@RequestParam(value = "openId") String openId) {
+//        name=utilService.decode(name);
         ServiceResult serviceResult = new ServiceResult();
         serviceResult.setCode(200);
-        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdMonth(name));
+        serviceResult.setMsg(watchService.queryLastWatchFormByOpenIdMonth(openId));
         return setResponseData(serviceResult);
     }
 
@@ -132,4 +132,12 @@ public class WatchController extends AjaxBase {
         return setResponseData(serviceResult);
     }
 
+    @RequestMapping(value = "/queryOneTeacherAllChildrenByOpenIdWeek", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryOneTeacherAllChildrenByOpenIdWeek(@RequestParam(value = "openId") String openId) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryOneTeacherAllChildrenByOpenIdWeek(openId));
+        return setResponseData(serviceResult);
+    }
 }

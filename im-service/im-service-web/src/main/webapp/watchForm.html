@@ -822,6 +822,8 @@
     var score=[];//用于存放自定义小标题的分数
     var commont="";//备注
 
+    var play=0;//用于判定 自定义能量圈是否显示  0显示  1不显示
+
     function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
         var date = new Date();
         var seperator1 = "-";
@@ -852,7 +854,11 @@
                         child.enerySelect=data['msg']['msg']['enerySelect'];
                         bigtitle=data['msg']['msg']['title'];
                         commont=data['msg']['msg']['commont'];
-                        label=data['msg']['msg']['customResult'].split(',');
+                        if(data['msg']['msg']['customResult'].length==0){
+                            play=1;
+                        }else{
+                            label=data['msg']['msg']['customResult'].split(',');
+                        }
                         if(data['msg']['msg']['score']!=null) {
                             score=data['msg']['msg']['score'].split(',');
                             for(var i=0;i<score.length;i++){
@@ -910,7 +916,7 @@
 
         //以下是初始化用户的自定义维度
         //大标题为空的时候,不显示自定义维度
-        if(label.length==0){
+        if(play==1){
             $(".button_custom").css("display","none");
         }
         //自定义维度的大标题

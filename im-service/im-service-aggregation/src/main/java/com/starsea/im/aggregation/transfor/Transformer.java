@@ -1,13 +1,7 @@
 package com.starsea.im.aggregation.transfor;
 
-import com.starsea.im.aggregation.dto.AdvantageFormDto;
-import com.starsea.im.aggregation.dto.LabelDto;
-import com.starsea.im.aggregation.dto.StudyFormDto;
-import com.starsea.im.aggregation.dto.WatchFormDto;
-import com.starsea.im.biz.entity.AdvantageForm;
-import com.starsea.im.biz.entity.LabelEntity;
-import com.starsea.im.biz.entity.StudyForm;
-import com.starsea.im.biz.entity.WatchForm;
+import com.starsea.im.aggregation.dto.*;
+import com.starsea.im.biz.entity.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -476,5 +470,14 @@ public class Transformer {
             everyStudy.add(studyForm.getQuestion15());
         return everyStudy;
 
+    }
+
+    public static LogEntity convertLogEntityFromLogDto(LogDto logDto) {
+        LogEntity logEntity=new LogEntity();
+        logEntity.setOpenId(logDto.getOpenId());
+        logEntity.setChildOpenId(logDto.getChildOpenId());
+        String log="{"+logDto.getTitle()+"#"+logDto.getContent()+"#"+logDto.getTime()+"}";
+        logEntity.setLog(log);
+        return logEntity;
     }
 }

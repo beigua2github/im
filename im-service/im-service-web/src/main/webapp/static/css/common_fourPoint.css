@@ -41,28 +41,198 @@ h2{
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
 
-button{
-    background-color:navajowhite;
-    border-radius:60px;
+/*布局介绍*/
+/*先是按照文档流顺序在div中添加button，（老师的button的位置为第四个）然后在手动设置position:relative进行位置根据button的序号设定*/
+
+.child{
+    background:rgba(0,0,0,0.5);
+    border:2px solid white;
+    color: white;
+    padding: 2vw ;
+    font-size: 5vw;
+    width:20vw;
+    height: 20vw;
+    border-radius:600px;/*设置大点 以防止标签随页面变大时 不再是圆*/
+    /*float: left;*/
+    /*margin: 5vw;*/
+}
+.divChild{
+    display: inline-block;
+}
+
+.div0{
+    margin:20vw 8vw 0 10vw;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div1{
+    position: relative;
+    top:-7vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div2{
+    position: relative;
+    right: -10vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div3{
+    vertical-align: middle;
+    margin-left: 2vw;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div4{
+    vertical-align: middle;
+    margin-left: 3vw;
+    position: relative;
+    right: -2vw;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div5{
+    margin:0 8vw 20vw 10vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div6{
+    position: relative;
+    bottom:-7vw;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div7{
+    position: relative;
+    right: -10vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div8{
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div9{
+    position: absolute;
+    bottom: 1vw;
+    left: 1vw;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
 }
 .children{
-    position: absolute;
     top:80vw;
     width: 95%;
 }
 .self{
-    position: absolute;
-    background-color:white;
+    background-image: url("../image/teacher.jpg");
+    background-size:100% 100%;  /*背景图片自适应*/
+    width:50vw;
+    height: 50vw;
+    border-radius:800px;
+    border:5px solid yellow;
+
+    position: relative;
+    /*top: 40%;*/
+    left: 4%;
+    /*height: 40%;*/
+    /*width: 50%;*/
+    /*margin: -15% 0 0 -25%;*/
 }
-.divChild{
-    position: absolute;
+
+/*label{*/
+    /*padding:2vw;*/
+    /*background-color: white;*/
+    /*opacity: 0.8;*/
+    /*border-radius:10px;*/
+    /*width:30vw;*/
+    /*z-index: 99;*/
+    /*font-size: 3vw;*/
+    /*position: absolute;*/
+/*}*/
+
+/*.ok{*/
+    /*z-index: 99;*/
+    /*/!*opacity: 0.8;*!/*/
+    /*background-color: white;*/
+    /*width:12vw;*/
+    /*font-size: 3vw;*/
+    /*height:10vw;*/
+    /*position: absolute;*/
+/*}*/
+.select{
+    border:2px solid yellow;
 }
-label{
+.display{
+    /*background-color: yellowgreen;*/
     position: absolute;
-    padding:1vw;
-    background-color: white;
-    opacity: 0.8;
+    bottom:0;
+    width: 99%;
+    padding-left:1%;
     border-radius:10px;
-    width:35vw;
-    z-index: 99;
+    background:rgba(0,0,0,0.8);
+}
+.display p{
+    display: inline;
+    font-size: 6vw;
+    font-weight: bold;
+    color: white;
+}
+.ok{
+    position: absolute;
+    right:0;
+    bottom:0;
+    background-color: white;
+    width:30%;
+    top:0;
+}
+
+
+
+@-webkit-keyframes bounce-down0 {
+    25% {
+        -webkit-transform: translateY(-3px);
+    }
+    50%, 100% {
+        -webkit-transform: translateY(0);
+    }
+    75% {
+        -webkit-transform: translateY(3px);
+    }
+}
+@keyframes bounce-down0 {
+    25% {
+        transform: translateY(-3px);
+    }
+    50%, 100% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(3px);
+    }
+}
+
+@-webkit-keyframes bounce-down1 {
+    25% {
+        -webkit-transform: translateX(-3px);
+    }
+    50%, 100% {
+        -webkit-transform: translateX(0);
+    }
+    75% {
+        -webkit-transform: translateX(3px);
+    }
+}
+@keyframes bounce-down1 {
+    25% {
+        transform: translateX(-3px);
+    }
+    50%, 100% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(3px);
+    }
 }

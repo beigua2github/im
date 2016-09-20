@@ -8,6 +8,8 @@
 	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
 	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>-->
 	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+	<script type="text/javascript" src="static/js/cookie_openid.js"></script>
+	<script type="text/javascript" src="static/js/watchFormZhexian.js"></script>
 	<link href="static/css/zhexiantu.css" rel="stylesheet" type="text/css"/>
 	<style type="text/css">
 		body{
@@ -99,7 +101,6 @@
 
 
 <script>
-
 	$(function () {
 		var a=[6.7, 5, 7, 9, 3];
 		//折线图
@@ -438,35 +439,6 @@
 
 	$(document).ready(function () {
 
-		$(".ts_mask").fadeIn(1000);//等待获取上次数据
-		$(".qd").click(function () {
-			$(".ts_mask").fadeOut(1000);
-		});//使提示消失
-
-//		$.ajax({
-//			type: "GET",
-//			url: "",
-//			data: {
-////				openId:child.openid
-////                name: encodeURI("黑仔一号")
-//			},
-//			dataType: "json",
-//			success:function(data){ //成功的处理函数
-//				console.log(data);
-//				if(data['msg']['msg']['now_score']!=null) {
-//					now_score = data['msg']['msg']['now_score'];
-//					now_comment = data['msg']['msg']['now_comment'];
-//				}else{
-//					now_score=[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5];
-//					now_comment=["","","","","","",""];
-//				}
-//				//alert(pre_score);
-////                set_pre_value();
-//				$(".ts_mask").fadeOut(1000);
-//			}
-//		});
-
-
 
 		//年度分析
 		$("#button_method1").click(function () {
@@ -477,6 +449,7 @@
 		});
 		//月份分析
 		$("#button_method2").click(function () {
+			month();
 			$(".month_mask").fadeIn();
 		});
 		$("#button_back2").click(function () {
@@ -484,6 +457,7 @@
 		});
 		//一周分析
 		$("#button_method3").click(function () {
+			week();
 			$(".week_mask").fadeIn();
 		});
 		$("#button_back3").click(function () {

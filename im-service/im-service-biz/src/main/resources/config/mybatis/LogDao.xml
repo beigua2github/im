@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.LogDao">
+
+        <select id="queryLog" resultType="LogEntity" parameterType="java.util.Map">
+              select * from test.log WHERE OpenId = #{openId} AND  ChildOpenId=#{childOpenId}
+        </select>
+
+        <insert id="insertLog" parameterType="LogEntity">
+            insert into test.log(OpenId,ChildOpenId,Log)
+              values(#{openId},#{childOpenId},#{log})
+        </insert>
+
+        <update id="updateLog" parameterType="LogEntity">
+            update test.log set Log=concat(#{log},Log) where OpenId=#{openId} AND ChildOpenId=#{childOpenId}
+        </update>
+
+        <update id="deleteLog" parameterType="LogEntity">
+          update test.log set Log=#{log} where OpenId=#{openId} AND ChildOpenId=#{childOpenId}
+        </update>
+</mapper>

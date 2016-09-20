@@ -51,7 +51,7 @@
     </select>
 
     <select id="queryLastWatchFormByOpenIdWeek" resultType="WatchForm" parameterType="map">
-        SELECT * FROM test.watchform where OpenId = #{openId}  AND  EvaluationTime BETWEEN #{dateStart} and #{dateEnd}
+        SELECT * FROM test.watchform where OpenId = #{openId}  AND SUBSTRING(EvaluationTime,1,10) BETWEEN SUBSTRING(#{dateStart},1,10) and SUBSTRING(#{dateEnd},1,10)
     </select>
 
 </mapper>
