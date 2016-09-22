@@ -24,7 +24,7 @@
     <script type='text/javascript' src="static/js/jquery.min.js"></script>
     <!-- <script type='text/javascript' src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script> -->
     <script type='text/javascript' src="static/js/bootstrap-slider.min.js"></script>
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <!--<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
 
     <link href="static/css/mrgc_style.css" rel="stylesheet" type="text/css"/>
     <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>-->
@@ -839,7 +839,7 @@
         var currentdate = year + seperator1 + month + seperator1 + strDate;
         return currentdate;
     }
-    function sevenChosefive(){
+    function sevenChosefive_parent(){
         if(getCookie("label_ejia")=="select"){
             $.ajax({
                 type: "GET",
@@ -880,6 +880,42 @@
         }
     }
 
+    function sevenChosefive_teacher(){
+            $.ajax({
+                type: "GET",
+                url: "../starsea/userenery/queryEnergyByOpenId",  //查询数据库接口
+                dataType: "json",
+                data: {
+                    openId: child.openid
+                },
+                async:false,
+                success:function(data){
+                    if(data['msg']['msg']!=null){
+                        child.enerySelect=data['msg']['msg']['enerySelect'];
+                        bigtitle=data['msg']['msg']['title'];
+                        commont=data['msg']['msg']['commont'];
+                        if(data['msg']['msg']['customResult'].length==0){
+                            play=1;
+                        }else{
+                            label=data['msg']['msg']['customResult'].split(',');
+                        }
+                        if(data['msg']['msg']['score']!=null) {
+                            score=data['msg']['msg']['score'].split(',');
+                            for(var i=0;i<score.length;i++){
+                                score[i]=parseInt(score[i]);
+                            }
+                        }else{
+                            score=[5,5,5,5,5,5,5,5];
+                            commont="";
+                        }
+                    }else{
+                        play=1;
+                    }
+                    //alert(child.enerySelect);
+                }
+            });
+    }
+
     $(document).ready(function () {
         //setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",20);
         $(".ts_mask").fadeIn(1000);//等待获取上次数据
@@ -888,7 +924,11 @@
         });//使提示消失
         judgeCookie(child);
 //        alert(child.openid);
-        sevenChosefive();
+        if(getCookie("role")=="p"){
+            sevenChosefive_parent();
+        }else{
+            sevenChosefive_teacher();
+        }
 //        alert(child.enerySelect);
         $.ajax({
             type: "GET",

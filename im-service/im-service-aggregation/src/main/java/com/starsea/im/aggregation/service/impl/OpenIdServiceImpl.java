@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenIdServiceImpl implements OpenIdService{
     public String getOpenId(String code) {
-        String appid="wxf606eeb0e062cec4";
-        String secret = "4bec6eee61f9d6400febb0c27bc40118 ";
+        String appid="wx9b08b42b34258af7";
+        String secret = "615cbcd9c3b4d7ec4d510fd82b172842";
         String requestUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + secret + "&code=" + code + "&grant_type=authorization_code";
         String  json="";
         try {

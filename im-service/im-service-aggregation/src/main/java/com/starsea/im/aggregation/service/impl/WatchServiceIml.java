@@ -6,7 +6,7 @@ import com.starsea.im.aggregation.util.MathToolsUtil;
 import com.starsea.im.biz.dao.UserDao;
 import com.starsea.im.biz.dao.WatchDao;
 import com.starsea.im.biz.entity.UserEntity;
-import com.starsea.im.biz.entity.WatchAll_week;
+import com.starsea.im.biz.entity.WatchAllChildren;
 import com.starsea.im.biz.entity.WatchZheXian;
 import com.starsea.im.biz.entity.WatchForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -267,13 +267,13 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
         }else{
             int i=0;
             while(!now.equals(end)){
-                watchEntity.getDate()[i]=now.toString().substring(5);
+                watchEntity.getDate_m()[i]=now.toString().substring(5);
                 cal1.add(Calendar.DAY_OF_MONTH, +1);
                 Date time = cal1.getTime();
                 now=format.format(time);
                 i++;
             }
-            watchEntity.getDate()[i]=now.toString().substring(5);
+            watchEntity.getDate_m()[i]=now.toString().substring(5);
         }
         return watchEntity;
 
@@ -311,8 +311,8 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
     }
 
     @Override
-    public WatchAll_week queryOneTeacherAllChildrenByOpenIdWeek(String openId) {
-        WatchAll_week watchAll_week=new WatchAll_week();
+    public WatchAllChildren queryOneTeacherAllChildrenByOpenIdWeek(String openId) {
+        WatchAllChildren watchAll_week=new WatchAllChildren();
         UserEntity userEntity1 = userDao.queryUserByOpenId(openId);//查询老师的名字
         String name=userEntity1.getName();
         List<UserEntity> userEntities=userDao.queryChildrenUsers(name);//查询该老师的学生
@@ -356,6 +356,58 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
             //人际力
             for(int k=0;k<7;k++){
                 score.add(watchZheXian.getScore()[k][4]);
+            }
+            watchAll_week.getRenji().add(score);
+        }
+
+        return watchAll_week;
+    }
+
+    public WatchAllChildren queryOneTeacherAllChildrenByOpenIdMonth(String openId) {
+        WatchAllChildren watchAll_week=new WatchAllChildren();
+        UserEntity userEntity1 = userDao.queryUserByOpenId(openId);//查询老师的名字
+        String name=userEntity1.getName();
+        List<UserEntity> userEntities=userDao.queryChildrenUsers(name);//查询该老师的学生
+        List<String> childrenOpenid=new ArrayList<String>();//存储该老师的学生的家长记录时的openid
+        for(UserEntity userEntity:userEntities){
+            watchAll_week.getChildrenName().add(userEntity.getName());//存储学生的姓名
+            childrenOpenid.add(userEntity.getOpenId());
+        }
+        for(int i=0;i<childrenOpenid.size();i++){
+            WatchZheXian watchZheXian=queryLastWatchFormByOpenIdMonth(childrenOpenid.get(i));//获得一个学生的一月的记录
+            if(i==0) {//存储一月的日期
+                for (int j = 0; j < watchZheXian.getDate_m().length; j++) {
+                    watchAll_week.getDate().add(watchZheXian.getDate_m()[j]);
+                }
+            }
+            ArrayList<String> score=new ArrayList<String>();
+            //存储一个学生的自主力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][0]);
+            }
+            watchAll_week.getZizhu().add(score);
+            score.clear();
+            //专注力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][1]);
+            }
+            watchAll_week.getZhuanzhu().add(score);
+            score.clear();
+            //意志力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][2]);
+            }
+            watchAll_week.getYizhi().add(score);
+            score.clear();
+            //情绪力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][3]);
+            }
+            watchAll_week.getQingxu().add(score);
+            score.clear();
+            //人际力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][4]);
             }
             watchAll_week.getRenji().add(score);
         }

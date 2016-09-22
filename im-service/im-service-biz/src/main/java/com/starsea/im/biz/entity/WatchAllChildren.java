@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016/9/20.
  */
-public class WatchAll_week {
+public class WatchAllChildren {
     private ArrayList<ArrayList<String>> zizhu=new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> zhuanzhu=new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> yizhi=new ArrayList<ArrayList<String>>();

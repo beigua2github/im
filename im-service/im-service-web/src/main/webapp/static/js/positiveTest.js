@@ -24,4 +24,7 @@ $(document).ready(function () {
             window.location.href="../../keyPoints.html";
         });
     }
+    $('.p4').click(function(){
+        window.location.href="../../common_fourPoint.html";
+    });
 });

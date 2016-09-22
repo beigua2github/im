@@ -10,7 +10,8 @@ $(document).ready(function () {
     if(!childOpenid){
         childOpenid="none";
     }
-    if(document.referrer.substring(-17,document.referrer.length)=='picture_self.html'){
+    if(document.referrer.substring(document.referrer.length-17)=='picture_self.html'){
+        //alert(11);
         childOpenid="none";
     }
     //alert(childOpenid);
@@ -73,9 +74,10 @@ $(document).ready(function () {
                     if (log[i].content.length < 50) {
                         l = log[i].content.length;
                     }
+                    p2.className="xiaoshi";
                     p.innerHTML = log[i].content.substring(0, l);
                     p2.innerHTML = log[i].content;
-                    p2.style = "display:none";
+
                     input_detail.className = "cd-read-more";
                     input_detail.value = "查看详情";
                     input_detail.type = "button";

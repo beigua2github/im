@@ -12,6 +12,7 @@
 <title></title>
 <link href="/static/css/common_fourPoint.css" rel="stylesheet" type="text/css" />
 <script src="static/js/jquery.min.js"></script>
+<script src="static/js/cookie_openid.js"></script>
 <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
 
 </head>
@@ -22,25 +23,45 @@
         <img src="/static/image/head.jpg" />
     </div>
     <div class="t_tit">
-        <p>学习分析</p>
+        <p>我的</p>
     </div>
 </div>
 
-<div class="fourPoint">
-    <input type="button" class="point p1" value="成长重点" />
-    <input type="button" class="point p2" value="学习策略" />
+<div class="fourPoint div_1">
+    <input type="button" class="point p1" value="班级汇总" />
+    <input type="button" class="point p2" value="学校汇总" />
     <input type="button" class="point p3" value="今日发现" />
+    <input type="button" class="point p6" value="返回" />
+</div>
+<div class="fourPoint div_2" style="display:none">
+    <input type="button" class="point p4" value="成长重点" />
+    <input type="button" class="point p5" value="学习策略" />
 </div>
 <script>
     $(document).ready(function(){
         $('.p1').click(function(){
-            window.location.href="growKeyMap.html";
+            setCookie("ejia_table","class",1);
+            $('.div_1').css('display','none');
+            $('.div_2').css('display','block');
+//            window.location.href="growKeyMap.html";
         });
         $('.p2').click(function(){
-            window.location.href="..";
+            setCookie("ejia_table","school",1);
+            $('.div_1').css('display','none');
+            $('.div_2').css('display','block');
+//            window.location.href="..";
         });
         $('.p3').click(function(){
             window.location.href="newFind.html";
+        })
+        $('.p4').click(function(){
+            window.location.href="growKeyMap.html";
+        })
+        $('.p5').click(function(){
+            window.location.href="..";
+        })
+        $('.p6').click(function(){
+            window.location.href="common_fourPoint.html";
         })
     });
 </script>

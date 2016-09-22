@@ -4,8 +4,8 @@
 //获取openid
 function getOpenid(){
     var openid = getCookie("openid");
-    if (!openid) {
-        window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf606eeb0e062cec4&redirect_uri=http%3A%2F%2Fwww.elastictime.cn%2Fstarsea%2Fopenid&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+    if (openid==false) {
+        window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9b08b42b34258af7&redirect_uri=http%3A%2F%2Fwww.elastictime.cn%2Fstarsea%2Fopenid&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
     }
     return openid;
 }
@@ -13,7 +13,8 @@ function getOpenid(){
 $(document).ready(function () {
     //删除cookie的方法， 第三个参数设置为负的
     //setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",3000);
-    //setCookie("role",'t',1);
+    //setCookie("role",'t',-1);
+
     var openid=getOpenid();
     var role = getCookie("role");//p为家长 t为老师
     //alert(role);
@@ -29,6 +30,7 @@ $(document).ready(function () {
             },
             async: false,
             success: function (data) {
+                //alert(1);
                 var f=data['msg']['msg']['role'];
                 //var f="t";
                 if(f=="老师") {
@@ -39,10 +41,10 @@ $(document).ready(function () {
                     setCookie("role","p",3000);
                     role="p";
                 }else{
-                    alert("没有权限");
+                    //alert("common:"+openid);
+                    //alert("没有权限");
                     //WeixinJSBridge.invoke('closeWindow',{},function(res){});
-                    //window.location.href='../../userMessage.html';
-
+                    window.location.href='../../userMessage.html';
                 }
             }
         });
@@ -71,6 +73,13 @@ $(document).ready(function () {
         $('.fourPoint').css('display', 'none');
         $('.children').css('display', 'block');
         $('.head').css('display', 'none');
+        //if(document.referrer.substring(document.referrer.length-17)=='positiveTest.html'||document.referrer.substring(document.referrer.length-12)=='picture.html'){
+        //    //alert(document.referrer.substring(document.referrer.length-17));
+        //    //alert(document.referrer.substring(document.referrer.length-12));
+        //    $('.fourPoint').css('display','block');
+        //    $('.children').css('display','none');
+        //    $('.head').css('display', 'block');
+        //}
         //children=[{openid:"o45t9wZx7eQo5VIB4nTY_76TCW4w",name:"小明",school:"华师",class:"一年级"},
         //    {openid:"cdscvdsvsdd",name:"小红",school:"华师aaaaaaa",class:"二年级aaaaa"},
         //    {openid:"cevrvrvr",name:"小白",school:"华师",class:"三年级"},
@@ -120,7 +129,7 @@ $(document).ready(function () {
             var text_child = document.createElement("label");
             text_child.className = "text";
             text_child.innerHTML = "学校：" + children[i].school + "<br/>年级：" + children[i].class;
-            text_child.style = "display:none";
+            //text_child.style = "display:none";
             //var ok_child = document.createElement('button');
             //ok_child.innerHTML = "确定";
             //ok_child.className = "ok";
@@ -159,10 +168,8 @@ $(document).ready(function () {
             div_child.appendChild(button_child);
             div_child.appendChild(text_child);
             div.appendChild(div_child);
-            if (i == 3) {
-                div.appendChild(button);
-            }
         }
+        div.appendChild(button);
         $('.ok').click(function(){
             setCookie('childOpenid', $('.select').val(), 1);
             $('.fourPoint').css('display', 'block');

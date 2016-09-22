@@ -27,7 +27,7 @@
     <script src="static/js/cookie_openid.js"></script>
 
     <link href="static/css/custom.css" rel="stylesheet" type="text/css"/>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>-->
     <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="static/css/default.css">
     <!-- <link href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -243,16 +243,16 @@
 //            alert(max+1);
             if(result[max]>=0.5){ //1,2
                 if(selectResult.indexOf(max+1)!=-1){ //1
-                    alert('标题在选的4个里');
+//                    alert('标题在选的4个里');
                     custom_f=1;
                  }else{ //2
-                    alert('标题在未选的3个里');
+//                    alert('标题在未选的3个里');
                     for(var i=0;i<content[max].length;i++){
                         customResult[i]=content[max][i];
                     }
                 }
             }else{//3
-                alert("没有符合条件的");
+//                alert("没有符合条件的");
                 custom_f=1;
             }
         }else{

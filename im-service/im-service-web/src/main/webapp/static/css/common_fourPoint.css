@@ -61,64 +61,72 @@ h2{
 }
 
 .div0{
-    margin:20vw 8vw 0 10vw;
+    position: absolute;
+    top: 10%;
+    left:10%;
     -webkit-animation: bounce-down0 2.3s linear infinite;
     animation: bounce-down0 2.3s linear infinite;
 }
 .div1{
-    position: relative;
-    top:-7vw;
+    position: absolute;
+    top:5%;
+    left:40%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
 .div2{
-    position: relative;
-    right: -10vw;
+    position: absolute;
+    top: 10%;
+    right:10%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
 .div3{
-    vertical-align: middle;
-    margin-left: 2vw;
+    position: absolute;
+    top: 40%;
+    left: 3%;
     -webkit-animation: bounce-down0 2.3s linear infinite;
     animation: bounce-down0 2.3s linear infinite;
 }
 .div4{
-    vertical-align: middle;
-    margin-left: 3vw;
-    position: relative;
-    right: -2vw;
+    position: absolute;
+    top: 40%;
+    right: 3%;
     -webkit-animation: bounce-down0 2.3s linear infinite;
     animation: bounce-down0 2.3s linear infinite;
 }
 .div5{
-    margin:0 8vw 20vw 10vw;
+    position: absolute;
+    bottom: 20%;
+    left:10%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
 .div6{
-    position: relative;
-    bottom:-7vw;
+    position: absolute;
+    bottom:15%;
+    left:40%;
     -webkit-animation: bounce-down0 2.3s linear infinite;
     animation: bounce-down0 2.3s linear infinite;
 }
 .div7{
-    position: relative;
-    right: -10vw;
+    position: absolute;
+    bottom: 20%;
+    right:10%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
 .div8{
     position: absolute;
-    top: 1vw;
-    left: 1vw;
+    top: 25%;
+    left:15%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
 .div9{
     position: absolute;
-    bottom: 1vw;
-    left: 1vw;
+    top: 25%;
+    right:15%;
     -webkit-animation: bounce-down1 2.3s linear infinite;
     animation: bounce-down1 2.3s linear infinite;
 }
@@ -134,12 +142,13 @@ h2{
     border-radius:800px;
     border:5px solid yellow;
 
-    position: relative;
-    /*top: 40%;*/
-    left: 4%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
     /*height: 40%;*/
     /*width: 50%;*/
-    /*margin: -15% 0 0 -25%;*/
+    margin: -10% 0 0 -25%;
+    z-index: -1;
 }
 
 /*label{*/
@@ -188,7 +197,9 @@ h2{
     width:30%;
     top:0;
 }
-
+.text{
+    display: none;
+}
 
 
 @-webkit-keyframes bounce-down0 {

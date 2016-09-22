@@ -67,8 +67,8 @@
     });
     //setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",20);
     $("#signupBtn").click(function() {
-        var openid=getCookie('openId');
-//        alert(openid);
+        var openid=getCookie('openid');
+//        alert("注册:"+openid);
         var teacher=$('#teacher').val();
         var role=$('input.role:checked').val();
         var myName= $("#Name").val();
@@ -79,40 +79,58 @@
         var organization= $("#Organization").val();
         var evaluationPerson= $("#EvaluationPerson").val();
         var email= $("#email").val();
-//        alert(role+sex);
 
-        $.ajax({
-            url: '../starsea/user/signup',//插入数据的接口
-            data: {
-                openId:openid,
-                name:myName,
-                age:age,
-                sex:sex,
-                school:school,
-                myClass:myClass,
-                organization:organization,
-                evaluationPerson:evaluationPerson,
-                role:role,
-                email:email,
-                teacher:teacher
-            },
-            type: 'post',
-            cache: false,
-            dataType: 'json',
-            success: function (data) {
-                if (data.code == 200) {
-                    alert("注册完成");
-//                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
-                    window.location.href="common_fourPoint.html";
-                }
-                else {
-                    alert("查询失败: " + data.msg);
-                }
-            },
-            error: function () {
-                alert("服务器处理异常");
+
+        var f=0;
+
+        if(role=="家长"){
+            if(teacher&&role&&myName&&age&&sex&&school&&myClass&&organization&&evaluationPerson&&email){
+                f=1;
+            }else{
+                alert("请填写完整信息");
             }
-        });
+        }else{
+            if(role&&myName&&age&&sex&&school&&email&&organization){
+                f=1;
+            }else{
+                alert("请填写完整信息");
+            }
+        }
+//        alert(role+sex);
+        if(f==1){
+            $.ajax({
+                url: '../starsea/user/signup',//插入数据的接口
+                data: {
+                    openId:openid,
+                    name:myName,
+                    age:age,
+                    sex:sex,
+                    school:school,
+                    myClass:myClass,
+                    organization:organization,
+                    evaluationPerson:evaluationPerson,
+                    role:role,
+                    email:email,
+                    teacher:teacher
+                },
+                type: 'post',
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert("注册完成");
+    //                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                        window.location.href="common_fourPoint.html";
+                    }
+                    else {
+                        alert("查询失败: " + data.msg);
+                    }
+                },
+                error: function () {
+                    alert("服务器处理异常");
+                }
+            });
+        }
     });
 
 

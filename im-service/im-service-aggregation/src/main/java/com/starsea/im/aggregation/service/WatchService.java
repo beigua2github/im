@@ -4,7 +4,7 @@ import com.starsea.im.aggregation.constant.DataSourceType;
 import com.starsea.im.aggregation.dto.WatchFormDto;
 import com.starsea.im.biz.annotation.DataSource;
 
-import com.starsea.im.biz.entity.WatchAll_week;
+import com.starsea.im.biz.entity.WatchAllChildren;
 import com.starsea.im.biz.entity.WatchZheXian;
 import com.starsea.im.biz.entity.WatchForm;
 
@@ -43,5 +43,8 @@ public interface WatchService {
     public Long queryAvgWatchFormByOpenIdDay(String openId,int day);
 
     @DataSource(DataSourceType.READ)
-    public WatchAll_week queryOneTeacherAllChildrenByOpenIdWeek(String openId);
+    public WatchAllChildren queryOneTeacherAllChildrenByOpenIdWeek(String openId);
+
+    @DataSource(DataSourceType.READ)
+    public WatchAllChildren queryOneTeacherAllChildrenByOpenIdMonth(String openId);
 }
