@@ -44,11 +44,11 @@ body{width: 100vw; height: 100vh; font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-ser
 
 /*月份维度*/
 .month_mask{width:100%; height:100%; position:fixed; top:0vw;display:none;}
-.month{z-index:101; width:100%; height:100%; color:#FFFFFF; background:#f05150;}
+.month{z-index:101; width:100%; height:100%; color:#FFFFFF; background:#f05150;display: none;}
 
 /*一周维度*/
 .week_mask{width:100%; height:100%; position:fixed; top:0vw;display:none;}
-.week{z-index:101; width:100%; height:100%; color:#FFFFFF; background:#f05150;}
+.week{z-index:101; width:100%; height:100%; color:#FFFFFF; background:#f05150;display: none;}
 
 
 /*通用内容部分*/
