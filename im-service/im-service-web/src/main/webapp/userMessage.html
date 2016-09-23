@@ -57,6 +57,10 @@
 </div>
 
 <script type = "text/javascript">
+    if(getCookie("zhuce")=="yes"){
+        alert("已经注册");
+        WeixinJSBridge.invoke('closeWindow',{},function(res){});
+    }
     $('.a').click(function(){
         $('.parent').css('display','none');
         $('.username').html("姓名：");
@@ -120,6 +124,7 @@
                     if (data.code == 200) {
                         alert("注册完成");
     //                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                        setCookie("zhuce","yes",10000);
                         window.location.href="common_fourPoint.html";
                     }
                     else {

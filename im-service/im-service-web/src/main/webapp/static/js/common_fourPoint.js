@@ -70,16 +70,20 @@ $(document).ready(function () {
     //老师
     else if(role=='t') {
         var children = [];
-        $('.fourPoint').css('display', 'none');
-        $('.children').css('display', 'block');
-        $('.head').css('display', 'none');
-        //if(document.referrer.substring(document.referrer.length-17)=='positiveTest.html'||document.referrer.substring(document.referrer.length-12)=='picture.html'){
-        //    //alert(document.referrer.substring(document.referrer.length-17));
-        //    //alert(document.referrer.substring(document.referrer.length-12));
-        //    $('.fourPoint').css('display','block');
-        //    $('.children').css('display','none');
-        //    $('.head').css('display', 'block');
-        //}
+        //$('.fourPoint').css('display', 'none');
+        //$('.children').css('display', 'block');
+        //$('.head').css('display', 'none');
+        if(document.referrer.substring(document.referrer.length-17)=='positiveTest.html'||document.referrer.substring(document.referrer.length-12)=='picture.html'){
+            //alert(document.referrer.substring(document.referrer.length-17));
+            //alert(document.referrer.substring(document.referrer.length-12));
+            $('.fourPoint').css('display','block');
+            $('.children').css('display','none');
+            $('.head').css('display', 'block');
+        }else{
+            $('.fourPoint').css('display', 'none');
+            $('.children').css('display', 'block');
+            $('.head').css('display', 'none');
+        }
         //children=[{openid:"o45t9wZx7eQo5VIB4nTY_76TCW4w",name:"小明",school:"华师",class:"一年级"},
         //    {openid:"cdscvdsvsdd",name:"小红",school:"华师aaaaaaa",class:"二年级aaaaa"},
         //    {openid:"cevrvrvr",name:"小白",school:"华师",class:"三年级"},
@@ -176,17 +180,20 @@ $(document).ready(function () {
             $('.children').css('display', 'none');
             $('.display').css('display','none');
             $('.head').css('display', 'block');
-            $('.p1').click(function () {
-                window.location.href = "../../positiveTest.html";
-            });
-            $('.p2').click(function () {
-                window.location.href = "../../watchForm.html";
-            });
-            $('.p3').click(function () {
-                window.location.href = "../../picture.html";
-            });
-            $('.p4').click(function () {
-                window.location.href = "../../newFind.html";});
         });
+        $('.p5').css("display","block").click(function(){
+            window.location.href="../../common_fourPoint.html";
+        });
+        $('.p1').click(function () {
+            window.location.href = "../../positiveTest.html";
+        });
+        $('.p2').click(function () {
+            window.location.href = "../../watchForm.html";
+        });
+        $('.p3').click(function () {
+            window.location.href = "../../picture.html";
+        });
+        $('.p4').click(function () {
+            window.location.href = "../../newFind.html";});
     }
 });

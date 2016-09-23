@@ -414,4 +414,104 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
 
         return watchAll_week;
     }
+
+    public WatchAllChildren queryAllChildrenByOpenIdWeek() {
+        WatchAllChildren watchAll=new WatchAllChildren();
+        List<UserEntity> userEntities=userDao.queryAllChildren();//查询该老师的学生
+        List<String> childrenOpenid=new ArrayList<String>();//存储所有学生的家长记录时的openid
+        for(UserEntity userEntity:userEntities){
+            watchAll.getChildrenName().add(userEntity.getName());//存储学生的姓名
+            childrenOpenid.add(userEntity.getOpenId());
+        }
+        for(int i=0;i<childrenOpenid.size();i++){
+            WatchZheXian watchZheXian=queryLastWatchFormByOpenIdWeek(childrenOpenid.get(i));//获得一个学生的一周的记录
+            if(i==0) {//存储一周的日期
+                for (int j = 0; j < watchZheXian.getDate().length; j++) {
+                    watchAll.getDate().add(watchZheXian.getDate()[j]);
+                }
+            }
+            ArrayList<String> score=new ArrayList<String>();
+            //存储一个学生的自主力
+            for(int k=0;k<7;k++){
+                score.add(watchZheXian.getScore()[k][0]);
+            }
+            watchAll.getZizhu().add(score);
+            score.clear();
+            //专注力
+            for(int k=0;k<7;k++){
+                score.add(watchZheXian.getScore()[k][1]);
+            }
+            watchAll.getZhuanzhu().add(score);
+            score.clear();
+            //意志力
+            for(int k=0;k<7;k++){
+                score.add(watchZheXian.getScore()[k][2]);
+            }
+            watchAll.getYizhi().add(score);
+            score.clear();
+            //情绪力
+            for(int k=0;k<7;k++){
+                score.add(watchZheXian.getScore()[k][3]);
+            }
+            watchAll.getQingxu().add(score);
+            score.clear();
+            //人际力
+            for(int k=0;k<7;k++){
+                score.add(watchZheXian.getScore()[k][4]);
+            }
+            watchAll.getRenji().add(score);
+        }
+
+        return watchAll;
+    }
+
+    public WatchAllChildren queryAllChildrenByOpenIdMonth() {
+        WatchAllChildren watchAll_week=new WatchAllChildren();
+        List<UserEntity> userEntities=userDao.queryAllChildren();//查询该老师的学生
+        List<String> childrenOpenid=new ArrayList<String>();//存储所有学生的家长记录时的openid
+        for(UserEntity userEntity:userEntities){
+            watchAll_week.getChildrenName().add(userEntity.getName());//存储学生的姓名
+            childrenOpenid.add(userEntity.getOpenId());
+        }
+        for(int i=0;i<childrenOpenid.size();i++){
+            WatchZheXian watchZheXian=queryLastWatchFormByOpenIdMonth(childrenOpenid.get(i));//获得一个学生的一月的记录
+            if(i==0) {//存储一月的日期
+                for (int j = 0; j < watchZheXian.getDate_m().length; j++) {
+                    watchAll_week.getDate().add(watchZheXian.getDate_m()[j]);
+                }
+            }
+            ArrayList<String> score=new ArrayList<String>();
+            //存储一个学生的自主力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][0]);
+            }
+            watchAll_week.getZizhu().add(score);
+            score.clear();
+            //专注力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][1]);
+            }
+            watchAll_week.getZhuanzhu().add(score);
+            score.clear();
+            //意志力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][2]);
+            }
+            watchAll_week.getYizhi().add(score);
+            score.clear();
+            //情绪力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][3]);
+            }
+            watchAll_week.getQingxu().add(score);
+            score.clear();
+            //人际力
+            for(int k=0;k<30;k++){
+                score.add(watchZheXian.getScore_m()[k][4]);
+            }
+            watchAll_week.getRenji().add(score);
+        }
+
+        return watchAll_week;
+    }
 }

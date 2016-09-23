@@ -150,12 +150,21 @@ public class WatchController extends AjaxBase {
         return setResponseData(serviceResult);
     }
 
-//    @RequestMapping(value = "/queryOneTeacherAllChildrenByOpenIdMonth", method = RequestMethod.GET)
-//    @ResponseBody
-//    public ServiceResult queryOneTeacherAllChildrenByOpenIdMonth(@RequestParam(value = "openId") String openId) {
-//        ServiceResult serviceResult = new ServiceResult();
-//        serviceResult.setCode(200);
-//        serviceResult.setMsg(watchService.queryOneTeacherAllChildrenByOpenIdMonth(openId));
-//        return setResponseData(serviceResult);
-//    }
+    @RequestMapping(value = "/queryAllChildrenByOpenIdWeek", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryAllChildrenByOpenIdWeek() {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryAllChildrenByOpenIdWeek());
+        return setResponseData(serviceResult);
+    }
+
+    @RequestMapping(value = "/queryAllChildrenByOpenIdMonth", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResult queryAllChildrenByOpenIdMonth() {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setCode(200);
+        serviceResult.setMsg(watchService.queryAllChildrenByOpenIdMonth());
+        return setResponseData(serviceResult);
+    }
 }

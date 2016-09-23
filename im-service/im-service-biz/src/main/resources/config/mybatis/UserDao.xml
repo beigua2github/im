@@ -31,6 +31,13 @@
     ]]>
     </select>
 
+    <select id="queryAllChildren"  resultType="userEntity">
+        <![CDATA[
+        select * from test.user where Role="家长"
+    ]]>
+    </select>
+
+
     <insert id="addUser" parameterType="userEntity">
         insert into test.user(OpenId,Name,Age,Sex,MyClass,School,Organization,EvaluationPerson,CreateTime,Email,Role,Teacher)
                     values(#{openId},#{name},#{age},#{sex},#{myClass},#{school},#{organization},#{evaluationPerson},#{createTime},#{email},#{role},#{teacher})

@@ -47,4 +47,8 @@ public interface WatchService {
 
     @DataSource(DataSourceType.READ)
     public WatchAllChildren queryOneTeacherAllChildrenByOpenIdMonth(String openId);
+    @DataSource(DataSourceType.READ)
+    public WatchAllChildren queryAllChildrenByOpenIdMonth();
+    @DataSource(DataSourceType.READ)
+    public WatchAllChildren queryAllChildrenByOpenIdWeek();
 }

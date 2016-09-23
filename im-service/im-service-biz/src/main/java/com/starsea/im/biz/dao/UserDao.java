@@ -29,4 +29,7 @@ public interface UserDao {
     @DataSource("read")
     public List<UserEntity> queryChildrenUsers(String teacher);
 
+    @DataSource("read")
+    public List<UserEntity> queryAllChildren();
+
 }
