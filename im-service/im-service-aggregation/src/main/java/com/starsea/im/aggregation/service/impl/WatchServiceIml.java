@@ -316,6 +316,27 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
         UserEntity userEntity1 = userDao.queryUserByOpenId(openId);//查询老师的名字
         String name=userEntity1.getName();
         List<UserEntity> userEntities=userDao.queryChildrenUsers(name);//查询该老师的学生
+        if(userEntities.size()==0){
+            Date today = new Date();
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(today);
+            cal1.add(Calendar.DAY_OF_MONTH,-1);
+            Date dateEnd=cal1.getTime();
+            cal1.add(Calendar.DAY_OF_MONTH, -6);
+            Date dateStart = cal1.getTime();
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String start=format.format(dateStart);
+            String end=format.format(dateEnd);
+            String now=start;
+            while(!now.equals(end)){
+                watchAll_week.getDate().add(now.toString().substring(5));
+                cal1.add(Calendar.DAY_OF_MONTH, +1);
+                Date time = cal1.getTime();
+                now=format.format(time);
+            }
+            watchAll_week.getDate().add(now.toString().substring(5));
+        }
         List<String> childrenOpenid=new ArrayList<String>();//存储该老师的学生的家长记录时的openid
         for(UserEntity userEntity:userEntities){
             watchAll_week.getChildrenName().add(userEntity.getName());//存储学生的姓名
@@ -328,36 +349,36 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
                     watchAll_week.getDate().add(watchZheXian.getDate()[j]);
                 }
             }
-            ArrayList<String> score=new ArrayList<String>();
+            ArrayList<String> score1=new ArrayList<String>();
             //存储一个学生的自主力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][0]);
+                score1.add(watchZheXian.getScore()[k][0]);
             }
-            watchAll_week.getZizhu().add(score);
-            score.clear();
+            watchAll_week.getZizhu().add(score1);
+            ArrayList<String> score2=new ArrayList<String>();
             //专注力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][1]);
+                score2.add(watchZheXian.getScore()[k][1]);
             }
-            watchAll_week.getZhuanzhu().add(score);
-            score.clear();
+            watchAll_week.getZhuanzhu().add(score2);
+            ArrayList<String> score3=new ArrayList<String>();
             //意志力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][2]);
+                score3.add(watchZheXian.getScore()[k][2]);
             }
-            watchAll_week.getYizhi().add(score);
-            score.clear();
+            watchAll_week.getYizhi().add(score3);
+            ArrayList<String> score4=new ArrayList<String>();
             //情绪力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][3]);
+                score4.add(watchZheXian.getScore()[k][3]);
             }
-            watchAll_week.getQingxu().add(score);
-            score.clear();
+            watchAll_week.getQingxu().add(score4);
+            ArrayList<String> score5=new ArrayList<String>();
             //人际力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][4]);
+                score5.add(watchZheXian.getScore()[k][4]);
             }
-            watchAll_week.getRenji().add(score);
+            watchAll_week.getRenji().add(score5);
         }
 
         return watchAll_week;
@@ -368,6 +389,27 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
         UserEntity userEntity1 = userDao.queryUserByOpenId(openId);//查询老师的名字
         String name=userEntity1.getName();
         List<UserEntity> userEntities=userDao.queryChildrenUsers(name);//查询该老师的学生
+        if(userEntities.size()==0){
+            Date today = new Date();
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(today);
+            cal1.add(Calendar.DAY_OF_MONTH,-1);
+            Date dateEnd=cal1.getTime();
+            cal1.add(Calendar.DAY_OF_MONTH, -29);
+            Date dateStart = cal1.getTime();
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String start=format.format(dateStart);
+            String end=format.format(dateEnd);
+            String now=start;
+            while(!now.equals(end)){
+                watchAll_week.getDate().add(now.toString().substring(5));
+                cal1.add(Calendar.DAY_OF_MONTH, +1);
+                Date time = cal1.getTime();
+                now=format.format(time);
+            }
+            watchAll_week.getDate().add(now.toString().substring(5));
+        }
         List<String> childrenOpenid=new ArrayList<String>();//存储该老师的学生的家长记录时的openid
         for(UserEntity userEntity:userEntities){
             watchAll_week.getChildrenName().add(userEntity.getName());//存储学生的姓名
@@ -380,36 +422,36 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
                     watchAll_week.getDate().add(watchZheXian.getDate_m()[j]);
                 }
             }
-            ArrayList<String> score=new ArrayList<String>();
+            ArrayList<String> score1=new ArrayList<String>();
             //存储一个学生的自主力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][0]);
+                score1.add(watchZheXian.getScore_m()[k][0]);
             }
-            watchAll_week.getZizhu().add(score);
-            score.clear();
+            watchAll_week.getZizhu().add(score1);
+            ArrayList<String> score2=new ArrayList<String>();
             //专注力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][1]);
+                score2.add(watchZheXian.getScore_m()[k][1]);
             }
-            watchAll_week.getZhuanzhu().add(score);
-            score.clear();
+            watchAll_week.getZhuanzhu().add(score2);
+            ArrayList<String> score3=new ArrayList<String>();
             //意志力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][2]);
+                score3.add(watchZheXian.getScore_m()[k][2]);
             }
-            watchAll_week.getYizhi().add(score);
-            score.clear();
+            watchAll_week.getYizhi().add(score3);
+            ArrayList<String> score4=new ArrayList<String>();
             //情绪力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][3]);
+                score4.add(watchZheXian.getScore_m()[k][3]);
             }
-            watchAll_week.getQingxu().add(score);
-            score.clear();
+            watchAll_week.getQingxu().add(score4);
+            ArrayList<String> score5=new ArrayList<String>();
             //人际力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][4]);
+                score5.add(watchZheXian.getScore_m()[k][4]);
             }
-            watchAll_week.getRenji().add(score);
+            watchAll_week.getRenji().add(score5);
         }
 
         return watchAll_week;
@@ -419,6 +461,27 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
         WatchAllChildren watchAll=new WatchAllChildren();
         List<UserEntity> userEntities=userDao.queryAllChildren();//查询该老师的学生
         List<String> childrenOpenid=new ArrayList<String>();//存储所有学生的家长记录时的openid
+        if(userEntities.size()==0){
+            Date today = new Date();
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(today);
+            cal1.add(Calendar.DAY_OF_MONTH,-1);
+            Date dateEnd=cal1.getTime();
+            cal1.add(Calendar.DAY_OF_MONTH, -6);
+            Date dateStart = cal1.getTime();
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String start=format.format(dateStart);
+            String end=format.format(dateEnd);
+            String now=start;
+            while(!now.equals(end)){
+                watchAll.getDate().add(now.toString().substring(5));
+                cal1.add(Calendar.DAY_OF_MONTH, +1);
+                Date time = cal1.getTime();
+                now=format.format(time);
+            }
+            watchAll.getDate().add(now.toString().substring(5));
+        }
         for(UserEntity userEntity:userEntities){
             watchAll.getChildrenName().add(userEntity.getName());//存储学生的姓名
             childrenOpenid.add(userEntity.getOpenId());
@@ -430,36 +493,36 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
                     watchAll.getDate().add(watchZheXian.getDate()[j]);
                 }
             }
-            ArrayList<String> score=new ArrayList<String>();
+            ArrayList<String> score1=new ArrayList<String>();
             //存储一个学生的自主力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][0]);
+                score1.add(watchZheXian.getScore()[k][0]);
             }
-            watchAll.getZizhu().add(score);
-            score.clear();
+            watchAll.getZizhu().add(score1);
+            ArrayList<String> score2=new ArrayList<String>();
             //专注力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][1]);
+                score2.add(watchZheXian.getScore()[k][1]);
             }
-            watchAll.getZhuanzhu().add(score);
-            score.clear();
+            watchAll.getZhuanzhu().add(score2);
+            ArrayList<String> score3=new ArrayList<String>();
             //意志力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][2]);
+                score3.add(watchZheXian.getScore()[k][2]);
             }
-            watchAll.getYizhi().add(score);
-            score.clear();
+            watchAll.getYizhi().add(score3);
+            ArrayList<String> score4=new ArrayList<String>();
             //情绪力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][3]);
+                score4.add(watchZheXian.getScore()[k][3]);
             }
-            watchAll.getQingxu().add(score);
-            score.clear();
+            watchAll.getQingxu().add(score4);
+            ArrayList<String> score5=new ArrayList<String>();
             //人际力
             for(int k=0;k<7;k++){
-                score.add(watchZheXian.getScore()[k][4]);
+                score5.add(watchZheXian.getScore()[k][4]);
             }
-            watchAll.getRenji().add(score);
+            watchAll.getRenji().add(score5);
         }
 
         return watchAll;
@@ -468,6 +531,27 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
     public WatchAllChildren queryAllChildrenByOpenIdMonth() {
         WatchAllChildren watchAll_week=new WatchAllChildren();
         List<UserEntity> userEntities=userDao.queryAllChildren();//查询该老师的学生
+        if(userEntities.size()==0){
+            Date today = new Date();
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(today);
+            cal1.add(Calendar.DAY_OF_MONTH,-1);
+            Date dateEnd=cal1.getTime();
+            cal1.add(Calendar.DAY_OF_MONTH, -6);
+            Date dateStart = cal1.getTime();
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String start=format.format(dateStart);
+            String end=format.format(dateEnd);
+            String now=start;
+            while(!now.equals(end)){
+                watchAll_week.getDate().add(now.toString().substring(5));
+                cal1.add(Calendar.DAY_OF_MONTH, +1);
+                Date time = cal1.getTime();
+                now=format.format(time);
+            }
+            watchAll_week.getDate().add(now.toString().substring(5));
+        }
         List<String> childrenOpenid=new ArrayList<String>();//存储所有学生的家长记录时的openid
         for(UserEntity userEntity:userEntities){
             watchAll_week.getChildrenName().add(userEntity.getName());//存储学生的姓名
@@ -480,36 +564,36 @@ public class WatchServiceIml implements com.starsea.im.aggregation.service.impl.
                     watchAll_week.getDate().add(watchZheXian.getDate_m()[j]);
                 }
             }
-            ArrayList<String> score=new ArrayList<String>();
+            ArrayList<String> score1=new ArrayList<String>();
             //存储一个学生的自主力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][0]);
+                score1.add(watchZheXian.getScore_m()[k][0]);
             }
-            watchAll_week.getZizhu().add(score);
-            score.clear();
+            watchAll_week.getZizhu().add(score1);
+            ArrayList<String> score2=new ArrayList<String>();
             //专注力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][1]);
+                score2.add(watchZheXian.getScore_m()[k][1]);
             }
-            watchAll_week.getZhuanzhu().add(score);
-            score.clear();
+            watchAll_week.getZhuanzhu().add(score2);
+            ArrayList<String> score3=new ArrayList<String>();
             //意志力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][2]);
+                score3.add(watchZheXian.getScore_m()[k][2]);
             }
-            watchAll_week.getYizhi().add(score);
-            score.clear();
+            watchAll_week.getYizhi().add(score3);
+            ArrayList<String> score4=new ArrayList<String>();
             //情绪力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][3]);
+                score4.add(watchZheXian.getScore_m()[k][3]);
             }
-            watchAll_week.getQingxu().add(score);
-            score.clear();
+            watchAll_week.getQingxu().add(score4);
+            ArrayList<String> score5=new ArrayList<String>();
             //人际力
             for(int k=0;k<30;k++){
-                score.add(watchZheXian.getScore_m()[k][4]);
+                score5.add(watchZheXian.getScore_m()[k][4]);
             }
-            watchAll_week.getRenji().add(score);
+            watchAll_week.getRenji().add(score5);
         }
 
         return watchAll_week;

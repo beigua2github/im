@@ -36,6 +36,7 @@
 <div class="fourPoint div_2" style="display:none">
     <input type="button" class="point p4" value="成长重点" />
     <input type="button" class="point p5" value="学习策略" />
+    <input type="button" class="point p7" value="返回" />
 </div>
 <script>
     $(document).ready(function(){
@@ -55,13 +56,16 @@
             window.location.href="newFind.html";
         })
         $('.p4').click(function(){
-            window.location.href="growKeyMap.html";
+            window.location.href="childrenzhexian.html";
         })
         $('.p5').click(function(){
             window.location.href="..";
         })
         $('.p6').click(function(){
             window.location.href="common_fourPoint.html";
+        })
+        $('.p7').click(function(){
+            window.location.reload();
         })
     });
 </script>

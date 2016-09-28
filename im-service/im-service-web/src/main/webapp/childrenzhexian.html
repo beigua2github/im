@@ -2,14 +2,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
-    <!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>-->
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="static/js/highcharts.js"></script>
     <script type="text/javascript" src="static/js/cookie_openid.js"></script>
-    <script type="text/javascript" src="static/js/watchFormZhexian.js"></script>
+    <script type="text/javascript" src="static/js/childrenzhexian.js"></script>
     <link href="static/css/childrenzhexian.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         body{
@@ -25,14 +21,7 @@
 
 <div class="whole">
     <!--首页头部信息-->
-    <div class="head">
-        <div class="t_pic">
-            <img src="static/image/head.jpg"/>
-        </div>
-        <div class="t_tit">
-            <p>请选择不同时间维度的图表分析</p>
-        </div>
-    </div>
+
 
     <!--首页时间维度选择-->
     <div class="method">
@@ -46,32 +35,33 @@
     <div class="week">
         <div class="con">
             <!--<div id="rabar3" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>-->
-            <div class="line" id="line1" style="display:block;min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line2" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line3" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line4" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line5" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
+            <div class="line" id="line1" style="display:block;min-width:100%;height:95vw;margin-top: 5vw;"></div>
+            <!--<div class="line" id="line2" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line3" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line4" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line5" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
         </div>
     </div>
 
     <!--一月分析-->
-    <div class="month1">
-        <div class="con">
-            <div class="line" id="line6" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line7" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line8" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line9" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <div class="line" id="line10" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>
-            <!--<div id="rabar2" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>-->
-        </div>
-    </div>
+    <!--<div class="month1">-->
+        <!--<div class="con">-->
+            <!--<div class="line" id="line6" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line7" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line8" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line9" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line10" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--&lt;!&ndash;<div id="rabar2" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="tail">
-        <button id="c1" style="opacity: 1">自主力</button>
+        <button id="c1" style="opacity: 1" class="a">自主力</button>
         <button id="c2">专注力</button>
         <button id="c3">意志力</button>
         <button id="c4">情绪力</button>
         <button id="c5">人际力</button>
+        <button id="c6">返回</button>
     </div>
 
     <!--提示遮罩层1,正在获取数据-->
@@ -88,10 +78,17 @@
 </html>
 
 <script>
+    var category = ['自主力', '专注力', '意志力', '情绪', '人际'];//存放用户选中的五大重点
+    var f=0;//判断是周还是月 0周 1月
+    var data=[];//动态添加折线图数据
+    var title="";//折线图标题
     //图表的主题
     Highcharts.theme = {
         colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
             "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+        credits: {
+            enabled: false   //右下角不显示LOGO
+        },
         chart: {
             backgroundColor: {
                 linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
@@ -334,375 +331,471 @@
     var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 
     $(document).ready(function () {
+        allWeek();
+        if(select=="class") {//班
+            title='全班学生自主力一周分析';
+            for (var i = 0; i < childrenName_t.length;i++) {
+                data[i]={name:"",data:""};
+                data[i].name=childrenName_t[i];
+                data[i].data=zizhu_wt[i];
+                for(var j=0;j<data[i].data.length;j++){
+                    data[i].data[j]=parseInt(data[i].data[j]);
+                }
+            }
 
+        }else if(select=="school"){//校
+            title='全校学生自主力一周分析';
+            for (var i = 0; i < childrenName_a.length;i++) {
+                data[i]={name:"",data:""};
+                data[i].name=childrenName_a[i];
+                data[i].data=zizhu_wa[i];
+                for(var j=0;j<data[i].data.length;j++){
+                    data[i].data[j]=parseInt(data[i].data[j]);
+                }
+            }
+        }
+        $('#line1').highcharts({
+            chart: {type: 'line'},
+            title: {text: title, y: 10},
+//			subtitle: {text: 'Source: Teacher and Parents'},
+            xAxis: {
+                categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+            },
+            yAxis: {
+                title: {text: '分数'},
+                categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                lineWidth: 1
+            },
+            series: data
+            //series结束
+        });//#line结束
+
+        $('#c6').click(function(){
+           window.location.href="picture_self.html"
+        });
         //选择一周或者一月分析
         $('#button_method2').click(function () {
+            f=1;
             $('#button_method1').attr('flag', '0');
             $('#button_method1').css('opacity', '0.5');
             $('#button_method2').attr('flag', '1');
             $(this).css('opacity', '1');
+            if(date_m.length==0){
+                allMonth();
+            }
+            display();
         });
         $('#button_method1').click(function () {
+            f=0;
             $('#button_method2').attr('flag', '0');
             $('#button_method2').css('opacity', '0.5');
             $('#button_method1').attr('flag', '1');
             $(this).css('opacity', '1');
+            if(date_w.length==0){
+                allWeek();
+            }
+            display();
         });
+
+        $('.tail button').click(function(){
+            $('button').removeClass("a");
+            $(this).addClass("a");
+            $('.tail button').css('opacity', '0.5');
+            $(this).css('opacity', '1');
+
+            display();
+        });
+
+
         //选择一个重点
-        $('#c1').click(function () {
-            $('.line').css('display', 'none');
-            $('.tail button').css('opacity', '0.5');
-            $(this).css('opacity', '1');
-            if ($('#button_method2').attr('flag') == 1) {
-                $('#line6').css('display', 'block')
-            }
-            else {
-                $('#line1').css('display', 'block')
-            }
-        });
-        $('#c2').click(function () {
-            $('.line').css('display', 'none');
-            $('.tail button').css('opacity', '0.5');
-            $(this).css('opacity', '1');
-            if ($('#button_method2').attr('flag') == 1) {
-                $('#line7').css('display', 'block')
-            }
-            else {
-                $('#line2').css('display', 'block')
-            }
-        });
-        $('#c3').click(function () {
-            $('.line').css('display', 'none');
-            $('.tail button').css('opacity', '0.5');
-            $(this).css('opacity', '1');
-            if ($('#button_method2').attr('flag') == 1) {
-                $('#line8').css('display', 'block')
-            }
-            else {
-                $('#line3').css('display', 'block')
-            }
-        });
-        $('#c4').click(function () {
-            $('.line').css('display', 'none');
-            $('.tail button').css('opacity', '0.5');
-            $(this).css('opacity', '1');
-            if ($('#button_method2').attr('flag') == 1) {
-                $('#line9').css('display', 'block')
-            }
-            else {
-                $('#line4').css('display', 'block')
-            }
-        });
-        $('#c5').click(function () {
-            $('.line').css('display', 'none');
-            $('.tail button').css('opacity', '0.5');
-            $(this).css('opacity', '1');
-            if ($('#button_method2').attr('flag') == 1) {
-                $('#line10').css('display', 'block')
-            }
-            else {
-                $('#line5').css('display', 'block')
-            }
-        });
-
-
-        //折线图和雷达图
-        $(function () {
-
-            var a = [1, 2, 3, 4, 5, 6, 7];//测试数据
-
-            var category = ['自主力', '专注力', '意志力', '情绪', '人际'];//存放用户选中的五大重点
-
-            var month1 = new Array();//存放第一个孩子月份分析的数据
-            var month2 = new Array();//存放第二个孩子月份分析的数据
-            var week = new Array();//存放一周分析的数据
-
-            //存放第一个孩子的分数
-            var score1 = [[4, 5, 2, 5, 9], [3, 7, 2, 8, 2], [6, 8, 2, 7, 5],
-                [4, 2, 6, 4, 2], [2, 4, 6, 2, 4], [8, 4, 2, 5, 3],
-                [5, 2, 7, 2, 5], [4, 5, 2, 5, 9], [3, 7, 2, 8, 2],
-                [6, 8, 2, 7, 5], [4, 2, 6, 4, 2], [2, 4, 6, 2, 4],
-                [8, 4, 2, 5, 3], [5, 2, 7, 2, 5], [4, 5, 2, 5, 9],
-                [3, 7, 2, 8, 2], [6, 8, 2, 7, 5], [4, 2, 6, 4, 2],
-                [2, 4, 6, 2, 4], [8, 4, 2, 5, 3], [5, 2, 7, 2, 5],
-                [4, 5, 2, 5, 9], [3, 7, 2, 8, 2], [6, 8, 2, 7, 5],
-                [4, 2, 6, 4, 2], [2, 4, 6, 2, 4], [8, 4, 2, 5, 3],
-                [5, 2, 7, 2, 5], [4, 5, 2, 5, 9], [3, 7, 2, 8, 2]];
-            //存放第二个孩子的分数
-            var score2 = [[6, 8, 2, 7, 5], [9, 9, 6, 7, 5], [3, 3, 4, 5, 6],
-                [6, 6, 7, 6, 7], [8, 7, 6, 8, 9], [8, 4, 2, 5, 3],
-                [4, 5, 2, 5, 9], [6, 4, 6, 3, 6], [6, 6, 7, 6, 7],
-                [2, 4, 6, 2, 4], [9, 9, 6, 7, 5], [6, 6, 7, 6, 7],
-                [6, 7, 8, 5, 6], [2, 4, 6, 2, 4], [1, 2, 3, 2, 2],
-                [8, 4, 5, 6, 7], [6, 8, 2, 7, 5], [2, 4, 6, 2, 4],
-                [6, 8, 2, 7, 5], [6, 6, 7, 6, 7], [4, 3, 6, 7, 2],
-                [8, 7, 6, 8, 9], [6, 6, 7, 6, 7], [6, 8, 2, 7, 5],
-                [2, 4, 5, 7, 4], [2, 4, 6, 2, 4], [8, 7, 6, 8, 9],
-                [9, 9, 6, 7, 5], [2, 4, 6, 2, 4], [6, 6, 7, 6, 7]];
-            //存放日期
-            var date = ['9-1', '9-2', '9-3', '9-4', '9-5', '9-6', '9-7',
-                '9-8', '9-9', '9-10', '9-11', '9-12', '9-13', '9-14',
-                '9-15', '9-16', '9-17', '9-18', '9-19', '9-20', '9-21',
-                '9-22', '9-23', '9-24', '9-25', '9-26', '9-27', '9-28',
-                '9-29', '9-30'];
-
-            //score1二维矩阵转换为month1二维矩阵,3天为一个周期
-            for (var i = 0; i < 10; i++) {
-                month1[i] = new Array();
-            }
-
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month1[i][j] = 0;
-
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 3; j++)
-                    for (var k = 0; k < 5; k++)
-                        month1[i][k] += score1[i * 3 + j][k];
-
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month1[i][j] /= 7;
-
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month1[i][j] = Math.round(month1[i][j]);
-            console.log(month1);
-
-            //score2二维矩阵转换为month2二维矩阵,3天为一个周期
-            for (var i = 0; i < 10; i++) {
-                month2[i] = new Array();
-            }
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month2[i][j] = 0;
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 3; j++)
-                    for (var k = 0; k < 5; k++)
-                        month2[i][k] += score2[i * 3 + j][k];
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month2[i][j] /= 7;
-            for (var i = 0; i < 10; i++)
-                for (var j = 0; j < 5; j++)
-                    month2[i][j] = Math.round(month2[i][j]);
-            console.log(month2);
-
-
-            //一周自主力折线图
-            $('#line1').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一周自主力分析', y: 40},
-                xAxis: {
-                    categories: [date[0], date[1], date[2], date[3], date[4], date[5], date[6]]
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [score1[0][0], score1[1][0], score1[2][0], score1[3][0], score1[4][0], score1[5][0], score1[6][0]]
-                    },
-                    {
-                        name: '小红',
-                        data: [score2[0][0], score2[1][0], score2[2][0], score2[3][0], score2[4][0], score2[5][0], score2[6][0]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一周专注力折线图
-            $('#line2').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一周专注力分析', y: 40},
-                xAxis: {
-                    categories: [date[0], date[1], date[2], date[3], date[4], date[5], date[6]]
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [score1[0][1], score1[1][1], score1[2][1], score1[3][1], score1[4][1], score1[5][1], score1[6][1]]
-                    },
-                    {
-                        name: '小红',
-                        data: [score2[0][1], score2[1][1], score2[2][1], score2[3][1], score2[4][1], score2[5][1], score2[6][1]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一周意志力折线图
-            $('#line3').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一周意志力分析', y: 40},
-                xAxis: {
-                    categories: [date[0], date[1], date[2], date[3], date[4], date[5], date[6]]
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [score1[0][2], score1[1][2], score1[2][2], score1[3][2], score1[4][2], score1[5][2], score1[6][2]]
-                    },
-                    {
-                        name: '小红',
-                        data: [score2[0][2], score2[1][2], score2[2][2], score2[3][2], score2[4][2], score2[5][2], score2[6][2]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一周情绪力折线图
-            $('#line4').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一周情绪力分析', y: 40},
-                xAxis: {
-                    categories: [date[0], date[1], date[2], date[3], date[4], date[5], date[6]]
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [score1[0][3], score1[1][3], score1[2][3], score1[3][3], score1[4][3], score1[5][3], score1[6][3]]
-                    },
-                    {
-                        name: '小红',
-                        data: [score2[0][3], score2[1][3], score2[2][3], score2[3][3], score2[4][3], score2[5][3], score2[6][3]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一周人际力折线图
-            $('#line5').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一周人际力分析', y: 40},
-                xAxis: {
-                    categories: [date[0], date[1], date[2], date[3], date[4], date[5], date[6]]
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [score1[0][4], score1[1][4], score1[2][4], score1[3][4], score1[4][4], score1[5][4], score1[6][4]]
-                    },
-                    {
-                        name: '小红',
-                        data: [score2[0][4], score2[1][4], score2[2][4], score2[3][4], score2[4][4], score2[5][4], score2[6][4]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一月自主力折线图
-            $('#line6').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一月自主力分析', y: 40},
-                xAxis: {
-                    categories: ['第1周期', '第2周期', '第3周期', '第4周期', '第5周期', '第6期', '第7周期', '第8周期', '第9周期', '第10周期']
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [month1[0][0], month1[1][0], month1[2][0], month1[3][0], month1[4][0],
-                            month1[5][0], month1[6][0], month1[7][0], month1[8][0], month1[9][0]]
-                    },
-                    {
-                        name: '小红',
-                        data: [month2[0][0], month2[1][0], month2[2][0], month2[3][0], month2[4][0],
-                            month2[5][0], month2[6][0], month2[7][0], month2[8][0], month2[9][0]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一月专注力折线图
-            $('#line7').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一月专注力分析', y: 40},
-                xAxis: {
-                    categories: ['第一部分', '第二部分', '第三部分', '第四部分', '第五部分']
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [month1[0][1], month1[1][1], month1[2][1], month1[3][1], month1[4][1],
-                            month1[5][1], month1[6][1], month1[7][1], month1[8][1], month1[9][1]]
-                    },
-                    {
-                        name: '小红',
-                        data: [month2[0][1], month2[1][1], month2[2][1], month2[3][1], month2[4][1],
-                            month2[5][1], month2[6][1], month2[7][1], month2[8][1], month2[9][1]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一月意志力折线图
-            $('#line8').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一月意志力分析', y: 40},
-                xAxis: {
-                    categories: ['第一部分', '第二部分', '第三部分', '第四部分', '第五部分']
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                    {
-                        name: '小白',
-                        data: [month1[0][2], month1[1][2], month1[2][2], month1[3][2], month1[4][2],
-                            month1[5][2], month1[6][2], month1[7][2], month1[8][2], month1[9][2]]
-                    },
-                    {
-                        name: '小红',
-                        data: [month2[0][2], month2[1][2], month2[2][2], month2[3][2], month2[4][2],
-                            month2[5][2], month2[6][2], month2[7][2], month2[8][2], month2[9][2]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一月情绪力折线图
-            $('#line9').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一月情绪力分析', y: 40},
-                xAxis: {
-                    categories: ['第一部分', '第二部分', '第三部分', '第四部分', '第五部分']
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                     {
-                        name: '小白',
-                        data: [month1[0][3], month1[1][3], month1[2][3], month1[3][3], month1[4][3],
-                            month1[5][3], month1[6][3], month1[7][3], month1[8][3], month1[9][3]]
-                    },
-                    {
-                        name: '小红',
-                        data: [month2[0][3], month2[1][3], month2[2][3], month2[3][3], month2[4][3],
-                            month2[5][3], month2[6][3], month2[7][3], month2[8][3], month2[9][3]]
-                    }
-                ]//series结束
-            });//#line结束
-
-            //一月人际力折线图
-            $('#line10').highcharts({
-                chart: {type: 'line'},
-                title: {text: '一月人际力分析', y: 40},
-//			subtitle: {text: 'Source: Teacher and Parents'},
-                xAxis: {
-                    categories: ['第一部分', '第二部分', '第三部分', '第四部分', '第五部分']
-                },
-                yAxis: {title: {text: '分数'}},
-                series: [
-                     {
-                        name: '小白',
-                        data: [month1[0][4], month1[1][4], month1[2][4], month1[3][4], month1[4][4],
-                            month1[5][4], month1[6][4], month1[7][4], month1[8][4], month1[9][4]]
-                    },
-                    {
-                        name: '小红',
-                        data: [month2[0][4], month2[1][4], month2[2][4], month2[3][4], month2[4][4],
-                            month2[5][4], month2[6][4], month2[7][4], month2[8][4], month2[9][4]]
-                    }
-                ]//series结束
-            });//#line结束
-
-
-        });
+//        $('#c1').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line6').css('display', 'block')
+////            }
+////            else {
+////                $('#line1').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zizhu_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zizhu_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生自主力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zizhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zizhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//
+//
+//
+//        $('#c2').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line7').css('display', 'block')
+////            }
+////            else {
+////                $('#line2').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生专注力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//        $('#c3').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line8').css('display', 'block')
+////            }
+////            else {
+////                $('#line3').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生意志力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=yizhi_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生意志力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=yizhi_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生专注力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//        $('#c4').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+//            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+//            if ($('#button_method2').attr('flag') == 1) {
+//                $('#line9').css('display', 'block')
+//            }
+//            else {
+//                $('#line4').css('display', 'block')
+//            }
+//        });
+//        $('#c5').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+//            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+//            if ($('#button_method2').attr('flag') == 1) {
+//                $('#line10').css('display', 'block')
+//            }
+//            else {
+//                $('#line5').css('display', 'block')
+//            }
+//        });
+//
     });
 
-
+    function display(){
+        var zhongdian=$('.a').attr('id').substring(1);
+        var toData_wt=new Array();
+        var toData_wa=new Array();
+        var toData_mt=new Array();
+        var toData_ma=new Array();
+        var dateTu=new Array();
+        if(zhongdian=='1'){//自主力
+            zhongdian="自主力";
+            toData_wt=zizhu_wt;
+            toData_wa=zizhu_wa;
+            toData_mt=zizhu_mt;
+            toData_ma=zizhu_ma;
+        }else if(zhongdian=='2'){
+            zhongdian="专注力";
+            toData_wt=zhuanzhu_wt;
+            toData_wa=zhuanzhu_wa;
+            toData_mt=zhuanzhu_mt;
+            toData_ma=zhuanzhu_ma;
+        }else if(zhongdian=='3'){
+            zhongdian="意志力";
+            toData_wt=yizhi_wt;
+            toData_wa=yizhi_wa;
+            toData_mt=yizhi_mt;
+            toData_ma=yizhi_ma;
+        }else if(zhongdian=='4'){
+            zhongdian="情绪力";
+            toData_wt=qingxu_wt;
+            toData_wa=qingxu_wa;
+            toData_mt=qingxu_mt;
+            toData_ma=qingxu_ma;
+        }else if(zhongdian=='5'){
+            zhongdian="人际力";
+            toData_wt=renji_wt;
+            toData_wa=renji_wa;
+            toData_mt=renji_mt;
+            toData_ma=renji_ma;
+        }
+        if(f==0) {//周
+            if (select == "class") {//班
+                title = "全班学生" + zhongdian + "一周分析";
+                for (var i = 0; i < childrenName_t.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_t[i];
+                    data[i].data = toData_wt[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            } else if (select == "school") {//校
+                title = "全校学生" + zhongdian + "一周分析";
+                for (var i = 0; i < childrenName_a.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_a[i];
+                    data[i].data = toData_wa[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            }
+        }else if(f==1) {//月
+            if (select == "class") {//班
+                title = "全班学生" + zhongdian + "一月分析";
+                for (var i = 0; i < childrenName_t.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_t[i];
+                    data[i].data = toData_mt[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            } else if (select == "school") {//校
+                title = "全校学生" + zhongdian + "一月分析";
+                for (var i = 0; i < childrenName_a.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_a[i];
+                    data[i].data = toData_ma[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            }
+        }
+        if(f==0){
+            dateTu=date_w;
+        }else if(f==1){
+            dateTu=date_m;
+        }
+        $('#line1').highcharts({
+            chart: {type: 'line'},
+            title: {text: title, y: 10},
+            xAxis: {
+                categories: dateTu
+            },
+            yAxis: {
+                title: {text: '分数'},
+                categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                lineWidth: 1
+            },
+            series: data
+            //series结束
+        });//#line结束
+    }
 </script>
