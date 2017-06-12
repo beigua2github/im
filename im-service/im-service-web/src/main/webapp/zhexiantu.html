@@ -1,0 +1,717 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>-->
+	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>-->
+	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>-->
+	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>-->
+	<!--&lt;!&ndash;<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>&ndash;&gt;-->
+	<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>-->
+	<script src="static/js/jquery-1.11.0.min.js"></script>
+	<script src="static/js/highcharts.js"></script>
+	<script type="text/javascript" src="static/js/cookie_openid.js"></script>
+	<script type="text/javascript" src="static/js/watchFormZhexian.js"></script>
+	<link href="static/css/zhexiantu.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+		body{
+			background-color: #f05150;
+		}
+	</style>
+</head>
+
+
+<body>
+<!--<div id="line" style="min-width:100vw;height:60vw;margin-top: 10vw;"></div>-->
+<!--<div id="rabar" style="min-width: 100vw;height: 60vw;margin-top: 10vw"></div>-->
+
+<div class="whole">
+	<!--首页头部信息-->
+	<div class="head">
+		<div class="t_pic">
+			<img src="static/image/head.jpg"/>
+		</div>
+		<div class="t_tit">
+			<p>请选择不同时间维度的图表分析</p>
+		</div>
+	</div>
+
+	<!--首页时间维度选择-->
+	<div class="method">
+		<!--<button id="button_method1">年度分析</button>-->
+		<button id="button_method2">一月分析</button>
+		<button id="button_method3">一周分析</button>
+		<button id="back">返回</button>
+	</div>
+
+	<!--一月分析-->
+	<div class="month">
+		<div class="con">
+			<div id="line2" style="min-width:100%;height:110vw;margin-top: 5vw;"></div>
+			<!--<div id="rabar2" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>-->
+		</div>
+		<div class="tail">
+			<button class="button_back" id="button_back2">返回</button>
+		</div>
+	</div>
+
+	<!--一周分析-->
+	<div class="week">
+		<div class="con">
+			<!--<div id="rabar3" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>-->
+			<div id="line3" style="min-width:100%;height:110vw;margin-top: 5vw;"></div>
+
+		</div>
+		<div class="tail">
+			<button class="button_back" id="button_back3">返回</button>
+		</div>
+	</div>
+
+
+	<!--提示遮罩层1,正在获取数据-->
+	<div class="ts_mask">
+		<div class="tishi">
+			<div class="qd"></div>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+<script>
+	var category=['自主力','专注力','意志力','情绪','人际'];//存放用户选中的五大重点
+	//图表的主题
+	Highcharts.theme = {
+		colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+			"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+		credits: {
+						enabled: false   //右下角不显示LOGO
+					},
+		chart: {
+			backgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				stops: [
+					[0, 'rgb(96, 96, 96)'],
+					[1, 'rgb(16, 16, 16)']
+				]
+			},
+			borderWidth: 0,
+			borderRadius: 0,
+			plotBackgroundColor: null,
+			plotShadow: false,
+			plotBorderWidth: 0
+		},
+		title: {
+			style: {
+				color: '#FFF',
+				font: '4vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+			}
+		},
+		subtitle: {
+			style: {
+				color: '#DDD',
+				font: '1.5vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+			}
+		},
+		xAxis: {
+			gridLineWidth: 0,
+			lineColor: '#999',
+			tickColor: '#999',
+			labels: {
+				style: {
+					color: '#999',
+					fontWeight: 'bold'
+				}
+			},
+			title: {
+				style: {
+					color: '#AAA',
+					font: 'bold 5vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+				}
+			}
+		},
+		yAxis: {
+			alternateGridColor: null,
+			minorTickInterval: null,
+			gridLineColor: 'rgba(255, 255, 255, .1)',
+			minorGridLineColor: 'rgba(255,255,255,0.07)',
+			lineWidth: 0,
+			tickWidth: 0,
+			labels: {
+				style: {
+					color: '#999',
+					fontWeight: 'bold'
+				}
+			},
+			title: {
+				style: {
+					color: '#AAA',
+					font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+				}
+			}
+		},
+		legend: {
+			itemStyle: {
+				color: '#CCC'
+			},
+			itemHoverStyle: {
+				color: '#FFF'
+			},
+			itemHiddenStyle: {
+				color: '#333'
+			}
+		},
+		labels: {
+			style: {
+				color: '#CCC'
+			}
+		},
+		tooltip: {
+			backgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				stops: [
+					[0, 'rgba(96, 96, 96, .8)'],
+					[1, 'rgba(16, 16, 16, .8)']
+				]
+			},
+			borderWidth: 0,
+			style: {
+				color: '#FFF'
+			}
+		},
+		plotOptions: {
+			series: {
+				nullColor: '#444444'
+			},
+			line: {
+				dataLabels: {
+					color: '#CCC'
+				},
+				marker: {
+					lineColor: '#333'
+				}
+			},
+			spline: {
+				marker: {
+					lineColor: '#333'
+				}
+			},
+			scatter: {
+				marker: {
+					lineColor: '#333'
+				}
+			},
+			candlestick: {
+				lineColor: 'white'
+			}
+		},
+		toolbar: {
+			itemStyle: {
+				color: '#CCC'
+			}
+		},
+		navigation: {
+			buttonOptions: {
+				symbolStroke: '#DDDDDD',
+				hoverSymbolStroke: '#FFFFFF',
+				theme: {
+					fill: {
+						linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+						stops: [
+							[0.4, '#606060'],
+							[0.6, '#333333']
+						]
+					},
+					stroke: '#000000'
+				}
+			}
+		},
+		// scroll charts
+		rangeSelector: {
+			buttonTheme: {
+				fill: {
+					linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+					stops: [
+						[0.4, '#888'],
+						[0.6, '#555']
+					]
+				},
+				stroke: '#000000',
+				style: {
+					color: '#CCC',
+					fontWeight: 'bold'
+				},
+				states: {
+					hover: {
+						fill: {
+							linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+							stops: [
+								[0.4, '#BBB'],
+								[0.6, '#888']
+							]
+						},
+						stroke: '#000000',
+						style: {
+							color: 'white'
+						}
+					},
+					select: {
+						fill: {
+							linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+							stops: [
+								[0.1, '#000'],
+								[0.3, '#333']
+							]
+						},
+						stroke: '#000000',
+						style: {
+							color: 'yellow'
+						}
+					}
+				}
+			},
+			inputStyle: {
+				backgroundColor: '#333',
+				color: 'silver'
+			},
+			labelStyle: {
+				color: 'silver'
+			}
+		},
+		navigator: {
+			handles: {
+				backgroundColor: '#666',
+				borderColor: '#AAA'
+			},
+			outlineColor: '#CCC',
+			maskFill: 'rgba(16, 16, 16, 0.5)',
+			series: {
+				color: '#7798BF',
+				lineColor: '#A6C7ED'
+			}
+		},
+		scrollbar: {
+			barBackgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				stops: [
+					[0.4, '#888'],
+					[0.6, '#555']
+				]
+			},
+			barBorderColor: '#CCC',
+			buttonArrowColor: '#CCC',
+			buttonBackgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				stops: [
+					[0.4, '#888'],
+					[0.6, '#555']
+				]
+			},
+			buttonBorderColor: '#CCC',
+			rifleColor: '#FFF',
+			trackBackgroundColor: {
+				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				stops: [
+					[0, '#000'],
+					[1, '#333']
+				]
+			},
+			trackBorderColor: '#666'
+		},
+		// special colors for some of the demo examples
+		legendBackgroundColor: 'rgba(48, 48, 48, 0.8)',
+		background2: 'rgb(70, 70, 70)',
+		dataLabelsColor: '#444',
+		textColor: '#E0E0E0',
+		maskColor: 'rgba(255,255,255,0.3)'
+	};
+	// Apply the theme
+	var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+
+	$(document).ready(function () {
+		$('#back').click(function(){
+			window.location.href="picture.html";
+		});
+		//月份分析
+		$("#button_method2").click(function () {
+				month();
+//				var monthData=new Array();//存放月份分析的数据
+//				for(var i=0;i<10;i++){
+//				monthData[i]=new Array();
+//			}
+
+			for(var i=0;i<30;i++)
+				for(var j=0;j<5;j++)
+					score[i][j]=parseInt(score[i][j]);
+
+//			for(var i=0;i<10;i++)
+//				for(var j=0;j<3;j++)
+//					for (var k=0;k<5;k++)
+//						monthData[i][k]+=score[i*3+j][k];
+//
+//			for(var i=0;i<10;i++)
+//				for(var j=0;j<5;j++)
+//					monthData[i][j]/=7;
+//
+//			for(var i=0;i<10;i++)
+//				for(var j=0;j<5;j++)
+//					monthData[i][j]=Math.round(monthData[i][j]);
+//			console.log(month);
+
+
+			//月份折线图
+			$('#line2').highcharts({
+				chart: { type: 'line'},
+				title: { text: '一月五大成长重点分析', y:10},
+	//			subtitle: {text: 'Source: Teacher and Parents'},
+				xAxis: {
+					tickInterval: 4,
+					categories: [date[0],date[1],date[2],date[3],date[4],date[5],date[6],date[7],date[8],date[9],date[10],date[11],date[12],date[13],date[14],date[15],date[16],date[17],date[18],date[19],date[20],date[21],date[22],date[23],date[24],date[25],date[26],date[27],date[28],date[29]],
+					lineWidth: 1
+				},
+				yAxis: {title: {text: '分数'},
+					categories:[0,1,2,3,4,5,6,7,8,9,10],
+					lineWidth: 1
+				},
+				series: [
+					{
+						name: category[0],
+						data: [score[0][0],score[1][0],score[2][0],score[3][0],score[4][0],score[5][0],score[6][0],score[7][0],score[8][0],score[9][0],
+							score[10][0],score[11][0],score[12][0],score[13][0],score[14][0],score[15][0],score[16][0],score[17][0],score[18][0],score[19][0],
+							score[20][0],score[21][0],score[22][0],score[23][0],score[24][0],score[25][0],score[26][0],score[27][0],score[28][0],score[29][0]]
+					},
+					{
+						name: category[1],
+						data: [score[0][1],score[1][1],score[2][1],score[3][1],score[4][1],score[5][1],score[6][1],score[7][1],score[8][1],score[9][1],
+						score[10][1],score[11][1],score[12][1],score[13][1],score[14][1],score[15][1],score[16][1],score[17][1],score[18][1],score[19][1],
+						score[20][1],score[21][1],score[22][1],score[23][1],score[24][1],score[25][1],score[26][1],score[27][1],score[28][1],score[29][1]]
+					},
+					{
+						name: category[2],
+						data: [score[0][2],score[1][2],score[2][2],score[3][2],score[4][2],score[5][2],score[6][2],score[7][2],score[8][2],score[9][2],
+							score[10][2],score[11][2],score[12][2],score[13][2],score[14][2],score[15][2],score[16][2],score[17][2],score[18][2],score[19][2],
+							score[20][2],score[21][2],score[22][2],score[23][2],score[24][2],score[25][2],score[26][2],score[27][2],score[28][2],score[29][2]]
+					},
+					{
+						name: category[3],
+						data: [score[0][3],score[1][3],score[2][3],score[3][3],score[4][3],score[5][3],score[6][3],score[7][3],score[8][3],score[9][3],
+							score[10][3],score[11][3],score[12][3],score[13][3],score[14][3],score[15][3],score[16][3],score[17][3],score[18][3],score[19][3],
+							score[20][3],score[21][3],score[22][3],score[23][3],score[24][3],score[25][3],score[26][3],score[27][3],score[28][3],score[29][3]]
+					},
+					{
+						name: category[4],
+						data: [score[0][4],score[1][4],score[2][4],score[3][4],score[4][4],score[5][4],score[6][4],score[7][4],score[8][4],score[9][4],
+							score[10][4],score[11][4],score[12][4],score[13][4],score[14][4],score[15][4],score[16][4],score[17][4],score[18][4],score[19][4],
+							score[20][4],score[21][4],score[22][4],score[23][4],score[24][4],score[25][4],score[26][4],score[27][4],score[28][4],score[29][4]]
+					}
+				]//series结束
+			});//#line结束
+			$(".month").css('display','block');
+			$(".head").css('display','none');
+			$(".method").css('display','none');
+		});
+		$("#button_back2").click(function () {
+			$(".month").css('display','none');
+			$(".head").css('display','block');
+			$(".method").css('display','block');
+		});
+		//一周分析
+		$("#button_method3").click(function () {
+			week();
+			for(var i=0;i<7;i++){
+				for(var j=0;j<5;j++){
+					score[i][j]=parseInt(score[i][j]);
+				}
+			}
+			$('#line3').highcharts({
+				chart: { type: 'line'},
+				title: { text: '一周五大成长重点分析', y:10},
+//			subtitle: {text: 'Source: Teacher and Parents'},
+				xAxis: {
+					categories: [date[0], date[1], date[2], date[3],date[4],date[5],date[6]]
+				},
+				yAxis: {title: {text: '分数'},
+					categories:[0,1,2,3,4,5,6,7,8,9,10],
+					lineWidth: 1},
+				series: [
+					{
+						name: category[0],
+						data: [score[0][0],score[1][0],score[2][0],score[3][0],score[4][0],score[5][0],score[6][0]]
+					},
+					{
+						name: category[1],
+						data: [score[0][1],score[1][1],score[2][1],score[3][1],score[4][1],score[5][1],score[6][1]]
+					},
+					{
+						name: category[2],
+						data: [score[0][2],score[1][2],score[2][2],score[3][2],score[4][2],score[5][2],score[6][2]]
+					},
+					{
+						name: category[3],
+						data: [score[0][3],score[1][3],score[2][3],score[3][3],score[4][3],score[5][3],score[6][3]]
+					},
+					{
+						name: category[4],
+						data: [score[0][4],score[1][4],score[2][4],score[3][4],score[4][4],score[5][4],score[6][4]]
+					}
+				]//series结束
+			});//#line结束
+			$(".week").css('display','block');
+			$(".head").css('display','none');
+			$(".method").css('display','none');
+		});
+		$("#button_back3").click(function () {
+			$(".week").css('display','none');
+			$(".head").css('display','block');
+			$(".method").css('display','block');
+		});
+//		var a=[1,2,3,4,5,6,7];//测试数据
+//
+//		var category=['自主力','专注力','意志力','情绪','人际'];//存放用户选中的五大重点
+//
+//		var month=new Array();//存放月份分析的数据
+//		var week=new Array();//存放一周分析的数据
+
+
+		//存放分数
+//		var score=[[4,5,2,5,9],[3,7,2,8,2],[6,8,2,7,5],
+//					[4,2,6,4,2],[2,4,6,2,4],[8,4,2,5,3],
+//					[5,2,7,2,5],[4,5,2,5,9],[3,7,2,8,2],
+//					[6,8,2,7,5],[4,2,6,4,2],[2,4,6,2,4],
+//					[8,4,2,5,3],[5,2,7,2,5],[4,5,2,5,9],
+//					[3,7,2,8,2],[6,8,2,7,5],[4,2,6,4,2],
+//					[2,4,6,2,4],[8,4,2,5,3],[5,2,7,2,5],
+//					[4,5,2,5,9],[3,7,2,8,2],[6,8,2,7,5],
+//					[4,2,6,4,2],[2,4,6,2,4],[8,4,2,5,3],
+//					[5,2,7,2,5],[4,5,2,5,9],[3,7,2,8,2]];
+//		//存放日期
+//		var date=['9-1','9-2','9-3','9-4','9-5','9-6','9-7',
+//					'9-8','9-9','9-10','9-11','9-12','9-13','9-14',
+//					'9-15','9-16','9-17','9-18','9-19','9-20','9-21',
+//					'9-22','9-23','9-24','9-25','9-26','9-27','9-28',
+//					'9-29','9-30'];
+
+		//score二维矩阵转换为month二维矩阵,3天为一个周期
+//		console.log(score[0][0]);
+
+//		for(var i=0;i<10;i++){
+//			month[i]=new Array();
+//		}
+//
+//		for(var i=0;i<10;i++)
+//			for(var j=0;j<5;j++)
+//				month[i][j]=0;
+//
+//		for(var i=0;i<10;i++)
+//			for(var j=0;j<3;j++)
+//				for (var k=0;k<5;k++)
+//					month[i][k]+=score[i*3+j][k];
+//
+//		for(var i=0;i<10;i++)
+//			for(var j=0;j<5;j++)
+//				month[i][j]/=7;
+//
+//		for(var i=0;i<10;i++)
+//			for(var j=0;j<5;j++)
+//				month[i][j]=Math.round(month[i][j]);
+//		console.log(month);
+//
+//
+//		//月份折线图
+//		$('#line2').highcharts({
+//			chart: { type: 'line'},
+//			title: { text: '月份五大成长重点分析', y:40},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//			xAxis: {
+//				categories: ['第一部分','第二部分','第三部分','第四部分','第五部分']
+//			},
+//			yAxis: {title: {text: '分数'}},
+//			series: [
+//				{
+//					name: category[0],
+//					data: [month[0][0],month[1][0],month[2][0],month[3][0],month[4][0]]
+//				},
+//				{
+//					name: category[1],
+//					data: [month[0][1],month[1][1],month[2][1],month[3][1],month[4][1]]
+//				},
+//				{
+//					name: category[2],
+//					data: [month[0][2],month[1][2],month[2][2],month[3][2],month[4][2]]
+//				},
+//				{
+//					name: category[3],
+//					data: [month[0][3],month[1][3],month[2][3],month[3][3],month[4][3]]
+//				},
+//				{
+//					name: category[4],
+//					data: [month[0][4],month[1][4],month[2][4],month[3][4],month[4][4]]
+//				}
+//			]//series结束
+//		});//#line结束
+		//一周折线图
+//		$('#line3').highcharts({
+//			chart: { type: 'line'},
+//			title: { text: '一周五大成长重点分析', y:40},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//			xAxis: {
+//				categories: [date[0], date[1], date[2], date[3],date[4],date[5],date[6]]
+//			},
+//			yAxis: {title: {text: '分数'}},
+//			series: [
+//				{
+//					name: category[0],
+//					data: [score[0][0],score[1][0],score[2][0],score[3][0],score[4][0],score[5][0],score[6][0]]
+//				},
+//				{
+//					name: category[1],
+//					data: [score[0][1],score[1][1],score[2][1],score[3][1],score[4][1],score[5][1],score[6][1]]
+//				},
+//				{
+//					name: category[2],
+//					data: [score[0][2],score[1][2],score[2][2],score[3][2],score[4][2],score[5][2],score[6][2]]
+//				},
+//				{
+//					name: category[3],
+//					data: [score[0][3],score[1][3],score[2][3],score[3][3],score[4][3],score[5][3],score[6][3]]
+//				},
+//				{
+//					name: category[4],
+//					data: [score[0][4],score[1][4],score[2][4],score[3][4],score[4][4],score[5][4],score[6][4]]
+//				}
+//			]//series结束
+//		});//#line结束
+
+
+//		//月份蜘蛛图
+//		$('#rabar2').highcharts({
+//			chart: {polar: true, type: 'line'},
+//			title: {text: '月份五大重点分析', y:40},
+//			pane: {size: '90%'},
+//			xAxis: {
+//				categories: [category[0], category[1], category[2], category[3], category[4]],
+//				tickmarkPlacement: 'on',
+//				lineWidth: 0,
+//			},
+//			yAxis: {
+//				gridLineInterpolation: 'polygon',
+//				lineWidth: 0,
+//				min: 0,
+//				max: 10
+//			},
+//			tooltip: {
+//				shared: true,
+//				pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+//			},
+//			legend: {
+//				align: 'right',
+//				verticalAlign: 'top',
+//				y: 70,
+//				layout: 'vertical'
+//			},
+//			series: [
+//				{
+//					name: '第一周',
+//					data: [a[0], a[1], a[2], a[3], a[4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: '第二周',
+//					data: [9, 3, 4, 6, 8],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: '第三周',
+//					data: [4,5,7,2],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: '第四周',
+//					data: [7,2,7,2],
+//					pointPlacement: 'on'
+//				},
+//			]
+//		});//#rabar结束
+//		//一周蜘蛛图
+//		$('#rabar3').highcharts({
+//			chart: {polar: true, type: 'line'},
+//			title: {text: '一周五大重点分析', },
+//			pane: {size: '100%'},
+//			xAxis: {
+//				categories: [category[0], category[1], category[2], category[3], category[4]],
+//				tickmarkPlacement: 'on',
+//				lineWidth: 0,
+//			},
+//			yAxis: {
+//				gridLineInterpolation: 'polygon',
+//				lineWidth: 0,
+//				min: 0,
+//				max: 10
+//			},
+//			tooltip: {
+//				shared: true,
+//				pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+//			},
+//			legend: {
+//				align: 'right',
+//				verticalAlign: 'top',
+//				y: 70,
+//				layout: 'vertical'
+//			},
+//			series: [
+//				{
+//					name: date[0],
+//					data: [score[0][0],score[0][1],score[0][2],score[0][3],score[0][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[1],
+//					data: [score[1][0],score[1][1],score[1][2],score[1][3],score[1][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[2],
+//					data: [score[2][0],score[2][1],score[2][2],score[2][3],score[2][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[3],
+//					data: [score[3][0],score[3][1],score[3][2],score[3][3],score[3][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[4],
+//					data: [score[4][0],score[4][1],score[4][2],score[4][3],score[4][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[5],
+//					data: [score[5][0],score[5][1],score[5][2],score[5][3],score[5][4]],
+//					pointPlacement: 'on'
+//				},
+//				{
+//					name: date[6],
+//					data: [score[6][0],score[6][1],score[6][2],score[6][3],score[6][4]],
+//					pointPlacement: 'on'
+//				},
+//			]
+//		});//#rabar结束
+
+
+
+
+
+
+	});
+
+
+</script>

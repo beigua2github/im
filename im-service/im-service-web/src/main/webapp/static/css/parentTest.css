@@ -1,0 +1,52 @@
+/*页面初始化*/
+*{margin: 0;padding: 0;border: 0;list-style: none;}
+
+
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,
+dl,dt,dd,ul,ol,li,pre,form,fieldset,
+form,legend,button{
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;}
+
+body{width: 100vw; height: 100vh; font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;
+    background:#f05150; font-family:"微软雅黑"; }
+
+.whole{width:100vw;height:100vh;position:relative;background:#f05150;}
+
+/*首页头部信息*/
+.head{width:95vw; height:34vw; margin-left:5vw;}
+.t_pic{width:20vw; height:20vw; float:left; border-radius:10px; overflow:hidden; margin-top:8vw; margin-bottom:6vw;}
+.t_pic img{width:100%; height:auto;}
+.t_tit{width:70vw; height:10vw; margin-top:13vw; float:right; border-top:1px solid #fff; font-size:4vw;
+    color:#fff; letter-spacing:0.5vw; overflow:hidden;}
+.t_tit p{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+
+/*首页答题部分*/
+.div1{width: 100vw;height: auto;}
+.t_con{ width:100%; height:auto; margin:0 auto;}
+.con_tit{ width:80%; height:auto; margin:3vw 10vw; color:#fff; position:relative;}
+.con_tit p:nth-of-type(1){ font-size:6vw; line-height:10vw;}
+.con_tit p:nth-of-type(2){ font-size:4vw; line-height:5vw;}
+.con_con{ width:80vw; height:auto;margin: 3vw 10vw;color: #000;font-size: 4vw;}
+
+
+
+/*上下提按钮*/
+.t_btn{ width:90%; height:12vw; float:left; margin:5vw;}
+.t_btn button{ width:45%; height:12vw; float:left; font-size:4vw; text-align:center; line-height:12vw; border-radius:10px; visibility:visible;}
+.t_btn button:nth-of-type(1){ background:#fcb95a; color:#FFF;}
+.t_btn button:nth-of-type(2){ background:#ebebeb; color:#000; margin-left:10%;}
+
+
+
+
+/*得分结果部分*/
+.detail{ width:80%; margin: 5vw auto;  }
+.comment_label,.score_label{  color:white;  font-size: 110%;  }
+.p1{  margin-top: 5vw;  }
+.comment_label{  margin-top: 2vw;  }
+.score{  color: yellow;  font-size: 140%;  font-weight: bold;  }
+.comment_detal{  line-height: 8vw;  padding: 5vw;  color: yellow;  }
+.back{width:45%; height:12vw;background:#ebebeb; color:#000;text-align:center;line-height:12vw;border-radius:10px;}

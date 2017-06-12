@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>-->
+
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/move.js"></script>
+    <script type="text/javascript" src="static/js/modernizr.min.js"></script>
+    <script type='text/javascript' src="static/js/jquery.min.js"></script>
+    <!-- <script type='text/javascript' src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script> -->
+    <script type='text/javascript' src="static/js/bootstrap-slider.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="static/js/cookie_openid.js"></script>
+
+    <link href="static/css/custom.css" rel="stylesheet" type="text/css"/>
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet'>-->
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/default.css">
+    <!-- <link href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link href="static/css/bootstrap-slider.min.css" rel="stylesheet">
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
+    <script type="text/javascript" src="static/js/util.js"></script>
+
+</head>
+
+
+<body>
+<div class="whole">
+    <!--首页头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/custom.jpg"/>
+        </div>
+        <div class="t_tit">
+            <p>自定义能量圈</p>
+        </div>
+    </div>
+
+    <!--首页内容-->
+    <div class="content">
+        <div class="inputlabel">
+            <p>请输入自定义能量圈的大标题</p>
+            <input type="text" id="bigtitle" />
+            <p>请输入小标题(最多七个)</p>
+            <input type="text" id="smalltitle"/>
+            <button id="addlabel">添加</button>
+        </div>
+
+        <div class="addedlabel" id="addedlabel">
+            <p>已添加的标签</p>
+        </div>
+        <!--<button id="removelabel">移除</button>-->
+    </div>
+
+    <!--首页尾部-->
+    <div class="tail">
+        <button class="button_back" id="button_back">返回</button>
+        <button class="button_save" id="button_save">确定</button>
+    </div>
+
+
+    <!--提示遮罩层,正在提交数据-->
+    <div class="ts_mask2">
+        <div class="tishi2">
+            <div class="qd2"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+    //定义全局变量
+    var bigtitle;//存放自定义大标题
+    var label=new Array();//存放用户自定义的小标题  大标题在第一个位置
+    var customResult=[];//自定义最终结果
+    var selectResult=getCookie('enerySelect');//7选4的结果
+    var flag=0;//用于标志 自定义能量圈不显示时，是因为没有匹配到 还是因为匹配到了 但是在已经在那4个里面包含了
+//    setCookie("role","p",1);
+    var f=getCookie('role');
+    var openid;
+    if(f=='p'){
+        openid=getCookie('openid');
+    }else if(f=='t'){
+        openid=getCookie('childOpenid');
+    }
+    var custom_f=0;//用来标志  要不要进行小标题的匹配
+//    var custom=[];//存储所有小标题
+//    var customScore=[];//用于存储 小标题 的得分
+//    var n=0;
+
+    var content=[['学习策略','学习探索动力','学习计划性','学习反思','学习资源使用','学习改进'],
+        ['学习认知','重点信息抓取能力','重点信息理解','知识归纳','知识演绎','知识推理','知识联想','知识创造'],
+        ['自主力','自我意识（自我认识、发展意识）','自控（自控行为）','自觉（自觉意识）','自信（成就感、自我信任）','独立性','责任感'],
+        ['专注力','专注内容','过程沉浸','抗干扰','专注程度','专注持续时间'],
+        ['意志力','行为坚持性','问题解决','目标意识','耐挫性','自信'],
+        ['情绪力','情绪程度','引发行为','情绪原因','持续时间','情绪调控'],
+        ['人际力','语言互动（积极、非积极）','行为互动（积极：建议、合作、领导力；非积极：分裂、不良行为）']];
+    function Levenshtein_Distance_Percent(s,t){
+        var l=s.length>t.length?s.length:t.length;
+        var d=Levenshtein_Distance(s,t);
+        return (1-d/l).toFixed(4);
+    }
+    function Levenshtein_Distance(s,t){
+
+        var n=s.length;// length of s
+
+        var m=t.length;// length of t
+
+        var d=[];// matrix
+
+        var i;// iterates through s
+
+        var j;// iterates through t
+
+        var s_i;// ith character of s
+
+        var t_j;// jth character of t
+
+        var cost;// cost
+
+        // Step 1
+
+        if (n == 0) return m;
+
+        if (m == 0) return n;
+
+        // Step 2
+
+        for (i = 0; i <= n; i++) {
+
+            d[i]=[];
+
+            d[i][0] = i;
+
+        }
+
+        for (j = 0; j <= m; j++) {
+
+            d[0][j] = j;
+
+        }
+
+        // Step 3
+
+        for (i = 1; i <= n; i++) {
+
+            s_i = s.charAt (i - 1);
+
+            // Step 4
+
+            for (j = 1; j <= m; j++) {
+
+                t_j = t.charAt (j - 1);
+
+                // Step 5
+
+                if (s_i == t_j) {
+
+                    cost = 0;
+
+                }else{
+
+                    cost = 1;
+
+                }
+
+                // Step 6
+
+                d[i][j] = Minimum (d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1] + cost);
+
+            }
+
+        }
+
+        // Step 7
+
+        return d[n][m];
+
+    }
+    function Minimum(a,b,c){
+        return a<b?(a<c?a:c):(b<c?b:c);
+    }
+    function Max(array){
+        var max=0;
+        for(var i=1;i<array.length;i++){
+            if(array[max]<array[i]){
+                max=i;
+            }
+        }
+        return max;
+    }
+    function sort(array){
+        var temp = 0;
+        for (var i = 0; i < array.length; i++)
+        {
+            for (var j = 0; j < array.length - i-1; j++)
+            {
+                if (array[j].s < array[j + 1].s)
+                {
+                    temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+    }
+    // content自定义的内容 flag标志是标题还是内容
+    function pipei(con,flag){
+        /*
+        * 标题匹配规则：
+        * 1.标题在选的4个里： 看自定义内容匹配
+        * 2.标题在未选的3个里：将其内容填充到自定义内容中， 跳过自定义内容的匹配
+        * 3.标题都不在：看自定义内容匹配
+        * */
+        //先是标题匹配 如果匹配并录入数据 就不用进行内容匹配了
+         if(flag=='title'){
+            var result=[];
+            for(var i=0;i<content.length;i++){
+//                alert(con);
+//                alert(content[i][0]);
+                result[i]=Levenshtein_Distance_Percent(con,content[i][0]);
+//                alert(result[i]);
+            }
+            var max=Max(result);
+//            alert(result[max]);
+//            alert(max+1);
+            if(result[max]>=0.5){ //1,2
+                if(selectResult.indexOf(max+1)!=-1){ //1
+//                    alert('标题在选的4个里');
+                    custom_f=1;
+                 }else{ //2
+//                    alert('标题在未选的3个里');
+                    for(var i=0;i<content[max].length;i++){
+                        customResult[i]=content[max][i];
+                    }
+                }
+            }else{//3
+//                alert("没有符合条件的");
+                custom_f=1;
+            }
+        }else{
+             var res;
+             for(var i=0;i<content.length;i++){
+                 for(var j=1;j<content[i].length;j++){
+                     res=Levenshtein_Distance_Percent(con,content[i][j]);
+                     if(res>=0.4){//只能存7个
+                         if(customResult.indexOf(content[i][j])==-1){//数组中没有
+                             if(customResult.length<7){
+                                 customResult[customResult.length]={c:content[i][j],s:res}; //最后要转换成数组
+                             }else{//如果数组满七个 先进行一次排序，跟分数最低的比较
+                                 sort(customResult);//从大到小
+                                 if(customResult[6].s<res){
+                                     customResult[6]={c:content[i][j],s:res};
+                                 }
+                             }
+                         }else{//数组中有 判断是否进行更新
+                              for(var l=0;l<customResult.length;l++){
+                                  if(content[i][j]==customResult[l].c){
+                                      if(customResult[l].s<res){
+                                          customResult[l].s=res;
+                                      }
+                                  }
+                              }
+                         }
+                     }
+//                        custom[n]=content[i][j];
+//                        customScore[n]=res;
+//                        n++;
+                 }
+             }
+        }
+     }
+
+    $(document).ready(function () {
+
+        //添加按钮
+        $("#addlabel").click(function () {
+            if($("#bigtitle").val()==''){
+                alert('请先输出标题！');
+            }else {
+                if ($("#smalltitle").val() != "") {
+                    var length = label.length;
+                    label[length] = $("#smalltitle").val();//往数组里面加入新的小标题
+                    var tmp = '<button class="custom_label" click="0" a="1" id="label' + length + '">' + label[length] + '</button>';
+                    $("#addedlabel").append(tmp);
+                    $("#smalltitle").val('');
+                }
+                console.log(bigtitle, label);
+            }
+        });
+        $('#button_save').click(function(){
+            bigtitle=$("#bigtitle").val();//存放用户输入的大标题;
+            $(".ts_mask2").fadeIn(1000);
+            //匹配规则 先是标题匹配 如果匹配并录入数据 就不用进行内容匹配了
+            pipei(bigtitle,'title');
+            if(custom_f==1) {
+                for (var i = 0; i < label.length; i++) {
+                    pipei(label[i], 'content');
+                }
+                for(var i=0;i<customResult.length;i++){
+                    customResult[i]=customResult[i].c;
+                }
+            }
+//            alert(customResult);
+//            alert(openid);
+            //将结果数组转换为字符串 以逗号分隔
+            var result="";
+            for(var i=0;i<customResult.length;i++){
+                result+=customResult[i]+',';
+            }
+            result=result.substring(0,result.length-1);
+//            alert(openid);
+            $.ajax({
+                url: '../starsea/userenery/addUserEnery',
+                data: {
+                    openId:openid,
+                    enerySelect:selectResult,
+                    title:bigtitle,
+                    customResult:result,
+                    evaluationTime: getNowFormatDate()
+                },
+                type: 'post',
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        $(".ts_mask2").fadeOut(1000);
+                        //alert("success");
+                        setCookie('label_ejia','select',30);
+                        window.location.href = 'watchForm.html';
+                    }
+                },
+                error: function () {
+                    alert("服务器处理异常");
+                    $(".ts_mask2").fadeOut(1000);
+                }
+            });
+        });
+        $('#button_back').click(function(){
+            window.location.href='sevenChoosefive.html';
+        });
+    });
+</script>

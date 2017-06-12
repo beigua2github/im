@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.LabelDao">
+
+    <sql id = "keys">
+        LabelOne,  LabelTwo,  Content
+    </sql>
+
+    <insert id="addLabel" parameterType="LabelEntity">
+        INSERT INTO test.label
+        (<include refid="keys"/>)
+        VALUES (#{labelOne},#{labelTwo},#{content});
+    </insert>
+
+    <select id="queryLabel" resultType="LabelEntity">
+        SELECT * FROM test.label
+    </select>
+
+    <select id="queryLabelById" resultType="LabelEntity">
+        SELECT ID,LabelOne,LabelTwo,Content FROM test.label WHERE ID = #{id}
+    </select>
+
+</mapper>

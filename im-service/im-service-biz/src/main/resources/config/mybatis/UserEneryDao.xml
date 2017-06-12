@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.UserEneryDao">
+
+
+       <select id="queryEneryByOpenId" resultType="UserEneryEntity">
+              select * from test.UserEnery WHERE OpenId = #{openId} order by id desc limit 1
+       </select>
+
+
+       <insert id="addUserEnery" parameterType="UserEneryEntity">
+              insert into test.UserEnery(OpenId,EnerySelect,EvaluationTime,Title,CustomResult)
+              values(#{openId},#{enerySelect},#{evaluationTime},#{title},#{customResult})
+       </insert>
+
+        <update id="addScore" parameterType="UserEneryEntity">
+            update test.UserEnery set Score=#{score},Commont=#{commont} where OpenId=#{openId} order by id desc limit 1
+        </update>
+</mapper>

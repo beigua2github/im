@@ -1,0 +1,249 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,form,input,legend,button,textarea{margin:0;padding:0; vertical-align: baseline; background: transparent; border: 0; outline: 0; }
+ul,li{ float:left; font-family:"΢���ź�"; color:#6e5b2e;}
+/*body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif; background:#f05150; font-family:"΢���ź�";}*/
+body{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif; background:#f05150; font-family:"΢���ź�";}
+
+
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+.head{ width:95%; height:20vw; margin:8vw auto 8vw 5%;}
+.t_pic{ width:20vw; height:20vw; float:left; border-radius:10px; overflow:hidden;}
+.t_pic img{ width:100%; height:auto;}
+.t_tit{ width:70vw; height:10vw; margin-top:5vw; float:right; border-top:1px solid #fff; font-size:4vw; color:#fff; letter-spacing:0.5vw; overflow:hidden;}
+.t_tit p{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+/*�÷ֽ����ʽ*/
+h2{
+    text-align:center;
+    color: white;
+    margin-top:-15px;
+    font-size: 200%;
+}
+
+.point{
+    width: 70%;
+    height:10vw;
+    background-color:navajowhite;
+    display: block;
+    margin: 5vw auto;
+    margin-top: 15vw;
+    color: black;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+/*布局介绍*/
+/*先是按照文档流顺序在div中添加button，（老师的button的位置为第四个）然后在手动设置position:relative进行位置根据button的序号设定*/
+
+.child{
+    background:rgba(0,0,0,0.5);
+    border:2px solid white;
+    color: white;
+    padding: 2vw ;
+    font-size: 5vw;
+    width:20vw;
+    height: 20vw;
+    border-radius:600px;/*设置大点 以防止标签随页面变大时 不再是圆*/
+    /*float: left;*/
+    /*margin: 5vw;*/
+}
+.divChild{
+    display: inline-block;
+}
+
+.div0{
+    position: absolute;
+    top: 10%;
+    left:10%;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div1{
+    position: absolute;
+    top:5%;
+    left:40%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div2{
+    position: absolute;
+    top: 10%;
+    right:10%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div3{
+    position: absolute;
+    top: 40%;
+    left: 3%;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div4{
+    position: absolute;
+    top: 40%;
+    right: 3%;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div5{
+    position: absolute;
+    bottom: 20%;
+    left:10%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div6{
+    position: absolute;
+    bottom:15%;
+    left:40%;
+    -webkit-animation: bounce-down0 2.3s linear infinite;
+    animation: bounce-down0 2.3s linear infinite;
+}
+.div7{
+    position: absolute;
+    bottom: 20%;
+    right:10%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div8{
+    position: absolute;
+    top: 25%;
+    left:15%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.div9{
+    position: absolute;
+    top: 25%;
+    right:15%;
+    -webkit-animation: bounce-down1 2.3s linear infinite;
+    animation: bounce-down1 2.3s linear infinite;
+}
+.children{
+    top:80vw;
+    width: 95%;
+}
+.self{
+    background-image: url("../image/teacher.jpg");
+    background-size:100% 100%;  /*背景图片自适应*/
+    width:50vw;
+    height: 50vw;
+    border-radius:800px;
+    border:5px solid yellow;
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /*height: 40%;*/
+    /*width: 50%;*/
+    margin: -10% 0 0 -25%;
+    z-index: -1;
+}
+
+/*label{*/
+    /*padding:2vw;*/
+    /*background-color: white;*/
+    /*opacity: 0.8;*/
+    /*border-radius:10px;*/
+    /*width:30vw;*/
+    /*z-index: 99;*/
+    /*font-size: 3vw;*/
+    /*position: absolute;*/
+/*}*/
+
+/*.ok{*/
+    /*z-index: 99;*/
+    /*/!*opacity: 0.8;*!/*/
+    /*background-color: white;*/
+    /*width:12vw;*/
+    /*font-size: 3vw;*/
+    /*height:10vw;*/
+    /*position: absolute;*/
+/*}*/
+.select{
+    border:2px solid yellow;
+}
+.display{
+    /*background-color: yellowgreen;*/
+    position: absolute;
+    bottom:0;
+    width: 99%;
+    padding-left:1%;
+    border-radius:10px;
+    background:rgba(0,0,0,0.8);
+}
+.display p{
+    display: inline;
+    font-size: 6vw;
+    font-weight: bold;
+    color: white;
+}
+.ok{
+    position: absolute;
+    right:0;
+    bottom:0;
+    background-color: white;
+    width:30%;
+    top:0;
+}
+.text{
+    display: none;
+}
+
+
+@-webkit-keyframes bounce-down0 {
+    25% {
+        -webkit-transform: translateY(-3px);
+    }
+    50%, 100% {
+        -webkit-transform: translateY(0);
+    }
+    75% {
+        -webkit-transform: translateY(3px);
+    }
+}
+@keyframes bounce-down0 {
+    25% {
+        transform: translateY(-3px);
+    }
+    50%, 100% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(3px);
+    }
+}
+
+@-webkit-keyframes bounce-down1 {
+    25% {
+        -webkit-transform: translateX(-3px);
+    }
+    50%, 100% {
+        -webkit-transform: translateX(0);
+    }
+    75% {
+        -webkit-transform: translateX(3px);
+    }
+}
+@keyframes bounce-down1 {
+    25% {
+        transform: translateX(-3px);
+    }
+    50%, 100% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(3px);
+    }
+}

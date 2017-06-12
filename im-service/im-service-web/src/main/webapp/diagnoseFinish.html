@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="format-detection" content="email=no"/>
+<title></title>
+<link href="/static/css/finish_style.css" rel="stylesheet" type="text/css" />
+<script type="application/javascript" src="static/js/cookie_openid.js"></script>
+</head>
+
+<body>
+<div class="whole">
+
+   <!--头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="/static/image/head.jpg" />
+        </div>
+        <div class="t_tit">
+            <p>学习诊断</p>
+        </div>
+    </div>
+    <!--原始分和质性描述-->
+    <h2>结&nbsp;&nbsp;&nbsp;果</h2>
+    <div class="finalComment">
+        <input type="button" class="comment weidu" name="0" value="分心抑制" />
+        <input type="button" class="comment weidu" name="1" value="要点提取" />
+        <input type="button" class="comment weidu" name="2" value="信息加工" />
+        <input type="button" class="comment weidu" name="3" value="焦虑应对" />
+        <input type="button" class="finish comment" value="完成" />
+    </div>
+    <div class="detail" style="display: none;">
+        <p class="title"></p>
+        <p class="p1"><span class="score_label">得分：</span><span class="score"></span></p>
+        <p class="comment_label">描述：</p>
+        <p class="comment_detal"></p>
+        <input type="button" class="back" value="返回"/>
+    </div>
+
+    <!--内容信息-->
+    <div class="content" style="display:none">
+    	<div class="finish_ion">
+        	<div class="ion">
+               <img src="/static/image/wancheng.png" />
+            </div>
+            <div class="wz">
+            	<p>调研已经完成,感谢您的耐心回答！</p>
+            </div>
+            <div class="botton_t">
+            	<input type="button" id="btn_a" value="分享" />
+            </div>
+        </div>
+    </div>
+    <div class="ts_mask">
+    	<div class="share">
+           <img src="/static/image/share_t.png" />
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script>
+$(document).ready(function() {
+    var score=[0,0,0,0];//用于存储获得的四个维度的得分
+    var comment=["","","",""]; //用来存储获得的四个维度的描述
+
+    $.ajax({
+        type: "GET",
+        url: "../starsea/diagnose/getFinalCommentByOpenId",  //查询数据库接口
+        dataType: "json",
+        data: {
+          openId: getCookie("openid")
+//            openId:"o45t9wZx7eQo5VIB4nTY_76TCW4w"
+        },
+        asc:false,
+        success:function(data){
+           for(var i=0;i<data['msg']['msg'].length;i++) {
+               score[i]= data['msg']['msg'][i]['score'];
+               comment[i]="&nbsp;&nbsp;&nbsp;"+data['msg']['msg'][i]['content'];
+           }
+        }
+    });
+
+    $(".finish").click(function(){
+       $(".finalComment").css("display","none");
+       $(".content").css("display","block");
+       $("h2").css("display","none");
+    });
+    $(".weidu").click(function(){
+       var title=$(this).val();
+       var pos=$(this).attr("name");
+       $(".title").html(title);
+       $(".score").html(score[pos]);
+       $(".comment_detal").html(comment[pos]);
+       $(".finalComment").css("display","none");
+       $("h2").css("display","none");
+       $(".detail").css("display","block");
+    });
+    $(".back").click(function(){
+       $(".detail").css("display","none");
+        $(".finalComment").css("display","block");
+        $("h2").css("display","block");
+    });
+
+    $("#btn_a").click(function(){
+		$(".ts_mask").fadeIn(1500);
+		});
+	$(".ts_mask").click(function(){
+		$(this).fadeOut(1500);
+		});
+});
+</script>
+</body>
+</html>

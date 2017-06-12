@@ -1,0 +1,801 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="static/js/highcharts.js"></script>
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
+    <script type="text/javascript" src="static/js/childrenzhexian.js"></script>
+    <link href="static/css/childrenzhexian.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        body{
+            background-color: #f05150;
+        }
+    </style>
+</head>
+
+
+<body>
+<!--<div id="line" style="min-width:100vw;height:60vw;margin-top: 10vw;"></div>-->
+<!--<div id="rabar" style="min-width: 100vw;height: 60vw;margin-top: 10vw"></div>-->
+
+<div class="whole">
+    <!--首页头部信息-->
+
+
+    <!--首页时间维度选择-->
+    <div class="method">
+        <!--<button id="button_method1">年度分析</button>-->
+        <button id="button_method1" style="opacity: 1" flag="1">一周分析</button>
+        <button id="button_method2" flag="0">一月分析</button>
+    </div>
+
+
+    <!--一周分析-->
+    <div class="week">
+        <div class="con">
+            <!--<div id="rabar3" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>-->
+            <div class="line" id="line1" style="display:block;min-width:100%;height:95vw;margin-top: 5vw;"></div>
+            <!--<div class="line" id="line2" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line3" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line4" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line5" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+        </div>
+    </div>
+
+    <!--一月分析-->
+    <!--<div class="month1">-->
+        <!--<div class="con">-->
+            <!--<div class="line" id="line6" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line7" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line8" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line9" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--<div class="line" id="line10" style="min-width:100vw;height:60vw;margin-top: 5vw;"></div>-->
+            <!--&lt;!&ndash;<div id="rabar2" style="min-width: 100vw;height: 60vw;margin-top: 5vw;"></div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="tail">
+        <button id="c1" style="opacity: 1" class="a">自主力</button>
+        <button id="c2">专注力</button>
+        <button id="c3">意志力</button>
+        <button id="c4">情绪力</button>
+        <button id="c5">人际力</button>
+        <button id="c6">返回</button>
+    </div>
+
+    <!--提示遮罩层1,正在获取数据-->
+    <div class="ts_mask">
+        <div class="tishi">
+            <div class="qd"></div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
+
+<script>
+    var category = ['自主力', '专注力', '意志力', '情绪', '人际'];//存放用户选中的五大重点
+    var f=0;//判断是周还是月 0周 1月
+    var data=[];//动态添加折线图数据
+    var title="";//折线图标题
+    //图表的主题
+    Highcharts.theme = {
+        colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+            "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+        credits: {
+            enabled: false   //右下角不显示LOGO
+        },
+        chart: {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, 'rgb(96, 96, 96)'],
+                    [1, 'rgb(16, 16, 16)']
+                ]
+            },
+            borderWidth: 0,
+            borderRadius: 0,
+            plotBackgroundColor: null,
+            plotShadow: false,
+            plotBorderWidth: 0
+        },
+        title: {
+            style: {
+                color: '#FFF',
+                font: '4vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#DDD',
+                font: '1.5vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+            }
+        },
+        xAxis: {
+            gridLineWidth: 0,
+            lineColor: '#999',
+            tickColor: '#999',
+            labels: {
+                style: {
+                    color: '#999',
+                    fontWeight: 'bold',
+                }
+            },
+            title: {
+                style: {
+                    color: '#AAA',
+                    font: 'bold 5vw Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            alternateGridColor: null,
+            minorTickInterval: null,
+            gridLineColor: 'rgba(255, 255, 255, .1)',
+            minorGridLineColor: 'rgba(255,255,255,0.07)',
+            lineWidth: 0,
+            tickWidth: 0,
+            labels: {
+                style: {
+                    color: '#999',
+                    fontWeight: 'bold',
+                }
+            },
+            title: {
+                style: {
+                    color: '#AAA',
+                    font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                }
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#CCC'
+            },
+            itemHoverStyle: {
+                color: '#FFF'
+            },
+            itemHiddenStyle: {
+                color: '#333'
+            }
+        },
+        labels: {
+            style: {
+                color: '#CCC'
+            }
+        },
+        tooltip: {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, 'rgba(96, 96, 96, .8)'],
+                    [1, 'rgba(16, 16, 16, .8)']
+                ]
+            },
+            borderWidth: 0,
+            style: {
+                color: '#FFF'
+            }
+        },
+        plotOptions: {
+            series: {
+                nullColor: '#444444'
+            },
+            line: {
+                dataLabels: {
+                    color: '#CCC'
+                },
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            spline: {
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            scatter: {
+                marker: {
+                    lineColor: '#333'
+                }
+            },
+            candlestick: {
+                lineColor: 'white'
+            }
+        },
+        toolbar: {
+            itemStyle: {
+                color: '#CCC'
+            }
+        },
+        navigation: {
+            buttonOptions: {
+                symbolStroke: '#DDDDDD',
+                hoverSymbolStroke: '#FFFFFF',
+                theme: {
+                    fill: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [
+                            [0.4, '#606060'],
+                            [0.6, '#333333']
+                        ]
+                    },
+                    stroke: '#000000'
+                }
+            }
+        },
+        // scroll charts
+        rangeSelector: {
+            buttonTheme: {
+                fill: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0.4, '#888'],
+                        [0.6, '#555']
+                    ]
+                },
+                stroke: '#000000',
+                style: {
+                    color: '#CCC',
+                    fontWeight: 'bold'
+                },
+                states: {
+                    hover: {
+                        fill: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0.4, '#BBB'],
+                                [0.6, '#888']
+                            ]
+                        },
+                        stroke: '#000000',
+                        style: {
+                            color: 'white'
+                        }
+                    },
+                    select: {
+                        fill: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0.1, '#000'],
+                                [0.3, '#333']
+                            ]
+                        },
+                        stroke: '#000000',
+                        style: {
+                            color: 'yellow'
+                        }
+                    }
+                }
+            },
+            inputStyle: {
+                backgroundColor: '#333',
+                color: 'silver'
+            },
+            labelStyle: {
+                color: 'silver'
+            }
+        },
+        navigator: {
+            handles: {
+                backgroundColor: '#666',
+                borderColor: '#AAA'
+            },
+            outlineColor: '#CCC',
+            maskFill: 'rgba(16, 16, 16, 0.5)',
+            series: {
+                color: '#7798BF',
+                lineColor: '#A6C7ED'
+            }
+        },
+        scrollbar: {
+            barBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0.4, '#888'],
+                    [0.6, '#555']
+                ]
+            },
+            barBorderColor: '#CCC',
+            buttonArrowColor: '#CCC',
+            buttonBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0.4, '#888'],
+                    [0.6, '#555']
+                ]
+            },
+            buttonBorderColor: '#CCC',
+            rifleColor: '#FFF',
+            trackBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#000'],
+                    [1, '#333']
+                ]
+            },
+            trackBorderColor: '#666'
+        },
+        // special colors for some of the demo examples
+        legendBackgroundColor: 'rgba(48, 48, 48, 0.8)',
+        background2: 'rgb(70, 70, 70)',
+        dataLabelsColor: '#444',
+        textColor: '#E0E0E0',
+        maskColor: 'rgba(255,255,255,0.3)'
+    };
+    // Apply the theme
+    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+
+    $(document).ready(function () {
+        allWeek();
+        if(select=="class") {//班
+            title='全班学生自主力一周分析';
+            for (var i = 0; i < childrenName_t.length;i++) {
+                data[i]={name:"",data:""};
+                data[i].name=childrenName_t[i];
+                data[i].data=zizhu_wt[i];
+                for(var j=0;j<data[i].data.length;j++){
+                    data[i].data[j]=parseInt(data[i].data[j]);
+                }
+            }
+
+        }else if(select=="school"){//校
+            title='全校学生自主力一周分析';
+            for (var i = 0; i < childrenName_a.length;i++) {
+                data[i]={name:"",data:""};
+                data[i].name=childrenName_a[i];
+                data[i].data=zizhu_wa[i];
+                for(var j=0;j<data[i].data.length;j++){
+                    data[i].data[j]=parseInt(data[i].data[j]);
+                }
+            }
+        }
+        $('#line1').highcharts({
+            chart: {type: 'line'},
+            title: {text: title, y: 10},
+//			subtitle: {text: 'Source: Teacher and Parents'},
+            xAxis: {
+                categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+            },
+            yAxis: {
+                title: {text: '分数'},
+                categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                lineWidth: 1
+            },
+            series: data
+            //series结束
+        });//#line结束
+
+        $('#c6').click(function(){
+           window.location.href="picture_self.html"
+        });
+        //选择一周或者一月分析
+        $('#button_method2').click(function () {
+            f=1;
+            $('#button_method1').attr('flag', '0');
+            $('#button_method1').css('opacity', '0.5');
+            $('#button_method2').attr('flag', '1');
+            $(this).css('opacity', '1');
+            if(date_m.length==0){
+                allMonth();
+            }
+            display();
+        });
+        $('#button_method1').click(function () {
+            f=0;
+            $('#button_method2').attr('flag', '0');
+            $('#button_method2').css('opacity', '0.5');
+            $('#button_method1').attr('flag', '1');
+            $(this).css('opacity', '1');
+            if(date_w.length==0){
+                allWeek();
+            }
+            display();
+        });
+
+        $('.tail button').click(function(){
+            $('button').removeClass("a");
+            $(this).addClass("a");
+            $('.tail button').css('opacity', '0.5');
+            $(this).css('opacity', '1');
+
+            display();
+        });
+
+
+        //选择一个重点
+//        $('#c1').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line6').css('display', 'block')
+////            }
+////            else {
+////                $('#line1').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zizhu_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zizhu_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生自主力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zizhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生自主力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zizhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//
+//
+//
+//        $('#c2').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line7').css('display', 'block')
+////            }
+////            else {
+////                $('#line2').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生专注力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//        $('#c3').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+////            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+////            if ($('#button_method2').attr('flag') == 1) {
+////                $('#line8').css('display', 'block')
+////            }
+////            else {
+////                $('#line3').css('display', 'block')
+////            }
+//            if(f==0) {//周
+//                if(select=="class") {//班
+//                    title="全班学生意志力一周分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=yizhi_wt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生意志力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=yizhi_wa[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        categories: [date_w[0], date_w[1], date_w[2], date_w[3], date_w[4], date_w[5], date_w[6]]
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }else if(f==1){//月
+//                if(select=="class") {//班
+//                    title="全班学生专注力一月分析";
+//                    for (var i = 0; i < childrenName_t.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_t[i];
+//                        data[i].data=zhuanzhu_mt[i];
+//                        for(var j=0;j<data[i].data.length;j++){
+//                            data[i].data[j]=parseInt(data[i].data[j]);
+//                        }
+//                    }
+//                }else if(select=="school"){//校
+//                    title="全校学生专注力一周分析";
+//                    for (var i = 0; i < childrenName_a.length;i++) {
+//                        data[i]={name:"",data:""};
+//                        data[i].name=childrenName_a[i];
+//                        data[i].data=zhuanzhu_ma[i];
+//                    }
+//                }
+//
+//                $('#line1').highcharts({
+//                    chart: {type: 'line'},
+//                    title: {text: title, y: 10},
+////			subtitle: {text: 'Source: Teacher and Parents'},
+//                    xAxis: {
+//                        tickInterval: 4,
+//                        categories: [date_m[0],date_m[1],date_m[2],date_m[3],date_m[4],date_m[5],date_m[6],date_m[7],date_m[8],date_m[9],date_m[10],date_m[11],date_m[12],date_m[13],date_m[14],date_m[15],date_m[16],date_m[17],date_m[18],date_m[19],date_m[20],date_m[21],date_m[22],date_m[23],date_m[24],date_m[25],date_m[26],date_m[27],date_m[28],date_m[29]],
+//                    },
+//                    yAxis: {
+//                        title: {text: '分数'},
+//                        categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//                        lineWidth: 1
+//                    },
+//                    series: data
+//                    //series结束
+//                });//#line结束
+//            }
+//        });
+//        $('#c4').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+//            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+//            if ($('#button_method2').attr('flag') == 1) {
+//                $('#line9').css('display', 'block')
+//            }
+//            else {
+//                $('#line4').css('display', 'block')
+//            }
+//        });
+//        $('#c5').click(function () {
+//            $('button').removeClass("a");
+//            $(this).addClass('a');
+//            $('.line').css('display', 'none');
+//            $('.tail button').css('opacity', '0.5');
+//            $(this).css('opacity', '1');
+//            if ($('#button_method2').attr('flag') == 1) {
+//                $('#line10').css('display', 'block')
+//            }
+//            else {
+//                $('#line5').css('display', 'block')
+//            }
+//        });
+//
+    });
+
+    function display(){
+        var zhongdian=$('.a').attr('id').substring(1);
+        var toData_wt=new Array();
+        var toData_wa=new Array();
+        var toData_mt=new Array();
+        var toData_ma=new Array();
+        var dateTu=new Array();
+        if(zhongdian=='1'){//自主力
+            zhongdian="自主力";
+            toData_wt=zizhu_wt;
+            toData_wa=zizhu_wa;
+            toData_mt=zizhu_mt;
+            toData_ma=zizhu_ma;
+        }else if(zhongdian=='2'){
+            zhongdian="专注力";
+            toData_wt=zhuanzhu_wt;
+            toData_wa=zhuanzhu_wa;
+            toData_mt=zhuanzhu_mt;
+            toData_ma=zhuanzhu_ma;
+        }else if(zhongdian=='3'){
+            zhongdian="意志力";
+            toData_wt=yizhi_wt;
+            toData_wa=yizhi_wa;
+            toData_mt=yizhi_mt;
+            toData_ma=yizhi_ma;
+        }else if(zhongdian=='4'){
+            zhongdian="情绪力";
+            toData_wt=qingxu_wt;
+            toData_wa=qingxu_wa;
+            toData_mt=qingxu_mt;
+            toData_ma=qingxu_ma;
+        }else if(zhongdian=='5'){
+            zhongdian="人际力";
+            toData_wt=renji_wt;
+            toData_wa=renji_wa;
+            toData_mt=renji_mt;
+            toData_ma=renji_ma;
+        }
+        if(f==0) {//周
+            if (select == "class") {//班
+                title = "全班学生" + zhongdian + "一周分析";
+                for (var i = 0; i < childrenName_t.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_t[i];
+                    data[i].data = toData_wt[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            } else if (select == "school") {//校
+                title = "全校学生" + zhongdian + "一周分析";
+                for (var i = 0; i < childrenName_a.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_a[i];
+                    data[i].data = toData_wa[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            }
+        }else if(f==1) {//月
+            if (select == "class") {//班
+                title = "全班学生" + zhongdian + "一月分析";
+                for (var i = 0; i < childrenName_t.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_t[i];
+                    data[i].data = toData_mt[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            } else if (select == "school") {//校
+                title = "全校学生" + zhongdian + "一月分析";
+                for (var i = 0; i < childrenName_a.length; i++) {
+                    data[i] = {name: "", data: ""};
+                    data[i].name = childrenName_a[i];
+                    data[i].data = toData_ma[i];
+                    for (var j = 0; j < data[i].data.length; j++) {
+                        data[i].data[j] = parseInt(data[i].data[j]);
+                    }
+                }
+            }
+        }
+        if(f==0){
+            dateTu=date_w;
+        }else if(f==1){
+            dateTu=date_m;
+        }
+        $('#line1').highcharts({
+            chart: {type: 'line'},
+            title: {text: title, y: 10},
+            xAxis: {
+                categories: dateTu
+            },
+            yAxis: {
+                title: {text: '分数'},
+                categories: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                lineWidth: 1
+            },
+            series: data
+            //series结束
+        });//#line结束
+    }
+</script>

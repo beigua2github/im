@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="format-detection" content="email=no"/>
+<title></title>
+<link href="/static/css/common_fourPoint.css" rel="stylesheet" type="text/css" />
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/cookie_openid.js"></script>
+<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+
+</head>
+<body>
+<!--头部信息-->
+<div class="head">
+    <div class="t_pic">
+        <img src="/static/image/head.jpg" />
+    </div>
+    <div class="t_tit">
+        <p>我的</p>
+    </div>
+</div>
+
+<div class="fourPoint div_1">
+    <input type="button" class="point p1" value="班级汇总" />
+    <input type="button" class="point p2" value="学校汇总" />
+    <input type="button" class="point p3" value="今日发现" />
+    <input type="button" class="point p6" value="返回" />
+</div>
+<div class="fourPoint div_2" style="display:none">
+    <input type="button" class="point p4" value="成长重点" />
+    <input type="button" class="point p5" value="学习策略" />
+    <input type="button" class="point p7" value="返回" />
+</div>
+<script>
+    $(document).ready(function(){
+        $('.p1').click(function(){
+            setCookie("ejia_table","class",1);
+            $('.div_1').css('display','none');
+            $('.div_2').css('display','block');
+//            window.location.href="growKeyMap.html";
+        });
+        $('.p2').click(function(){
+            setCookie("ejia_table","school",1);
+            $('.div_1').css('display','none');
+            $('.div_2').css('display','block');
+//            window.location.href="..";
+        });
+        $('.p3').click(function(){
+            window.location.href="newFind.html";
+        })
+        $('.p4').click(function(){
+            window.location.href="childrenzhexian.html";
+        })
+        $('.p5').click(function(){
+            window.location.href="..";
+        })
+        $('.p6').click(function(){
+            window.location.href="common_fourPoint.html";
+        })
+        $('.p7').click(function(){
+            window.location.reload();
+        })
+    });
+</script>
+</body>
+</html>

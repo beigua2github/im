@@ -5,5 +5,14 @@
 <configuration>
     <mappers>
         <mapper resource="config/mybatis/UserDao.xml"/>
+        <mapper resource="config/mybatis/DiagnoseDao.xml"/>
+        <mapper resource="config/mybatis/WatchDao.xml"/>
+        <mapper resource="config/mybatis/AdvantageDao.xml"/>
+        <mapper resource="config/mybatis/LabelDao.xml"/>
+        <mapper resource="config/mybatis/UserLabelDao.xml"/>
+        <mapper resource="config/mybatis/EnergyAreaDao.xml"/>
+        <mapper resource="config/mybatis/LabelToEnergyDao.xml"/>
+        <mapper resource="config/mybatis/UserEneryDao.xml"/>
+        <mapper resource="config/mybatis/LogDao.xml"/>
     </mappers>
 </configuration>

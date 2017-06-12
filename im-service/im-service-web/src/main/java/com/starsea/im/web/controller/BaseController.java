@@ -24,8 +24,8 @@ public class BaseController {
             String pwd = request.getParameter("pwd");
 
             if(userService.isExsit(1) == null){
-               return "includes/base";
+               return "base";
             }
-            return "includes/base";
+            return "base";
         }
 }

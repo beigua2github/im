@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="format-detection" content="email=no"/>
+<title></title>
+<link href="/static/css/common_fourPoint.css" rel="stylesheet" type="text/css" />
+<script src="static/js/jquery.min.js"></script>
+<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+
+</head>
+<body>
+<!--头部信息-->
+<div class="head">
+    <div class="t_pic">
+        <img src="/static/image/head.jpg" />
+    </div>
+    <div class="t_tit">
+        <p>学习分析</p>
+    </div>
+</div>
+
+<div class="fourPoint">
+    <input type="button" class="point p1" value="成长重点" />
+    <input type="button" class="point p2" value="学习策略" />
+    <input type="button" class="point p3" value="返回" />
+</div>
+<script>
+    $(document).ready(function(){
+        $('.p1').click(function(){
+            window.location.href="zhexiantu.html";
+        });
+        $('.p2').click(function(){
+            window.location.href="..";
+        });
+        $('.p3').click(function(){
+            window.location.href="common_fourPoint.html";
+        });
+    });
+</script>
+</body>
+</html>

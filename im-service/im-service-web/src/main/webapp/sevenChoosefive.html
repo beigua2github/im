@@ -1,0 +1,768 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/move.js"></script>
+    <script type="text/javascript" src="static/js/modernizr.min.js"></script>
+    <script type='text/javascript' src="static/js/jquery.min.js"></script>
+    <script type='text/javascript' src="static/js/bootstrap-slider.min.js"></script>
+    <!--<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+    <script src="static/js/cookie_openid.js"></script>
+
+    <link href="static/css/sevenChoosefive.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/default.css">
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link href="static/css/bootstrap-slider.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        button.label1_focus{  opacity: 0.4;  }
+        button.label2_focus{  opacity: 0.4;  }
+        button.label3_focus{  opacity: 0.4;  }
+        button.label4_focus{  opacity: 0.4;  }
+        button.label5_focus{  opacity: 0.4;  }
+        button.label1_reason{  opacity: 0.4;  }
+        button.label2_reason{  opacity: 0.4;  }
+        button.label3_reason{  opacity: 0.4;  }
+        button.label4_reason{  opacity: 0.4;  }
+        button.label5_reason{  opacity: 0.4;  }
+        button.click{  opacity: 1;  }
+    </style>
+
+</head>
+
+
+<body>
+<div class="whole">
+    <!--首页头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/head.jpg"/>
+        </div>
+        <div class="t_tit">
+            <p>请选择方法以确定五大重点</p>
+        </div>
+    </div>
+
+    <!--首页方法选择-->
+    <div class="method">
+        <button id="button_method1">A.后台分析得出五大重点</button>
+        <button id="button_method2">B.直接选择五大重点</button>
+    </div>
+
+
+    <!--提示遮罩层,正在提交数据-->
+    <div class="ts_mask2">
+        <div class="tishi2">
+            <div class="qd2"></div>
+        </div>
+    </div>
+
+
+    <!--原因遮罩层-->
+    <div class="reason1_mask">
+        <div class="reason1">
+            <div class="reason_conent">
+                <div id="reason1" >
+                    <h2>原因:</h2>
+                </div>
+            </div>
+            <div class="reason_tail">
+                <button class="back_reason" id="back_reason1">返回</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="reason2_mask">
+        <div class="reason2">
+            <div class="reason_conent">
+                <div id="reason2" >
+                    <h2>原因:</h2>
+                </div>
+            </div>
+            <div class="reason_tail">
+                <button class="back_reason" id="back_reason2">返回</button>
+            </div>
+        </div>
+    </div>
+    <div class="reason3_mask">
+        <div class="reason3">
+            <div class="reason_conent">
+                <div id="reason3" >
+                    <h2>原因:</h2>
+                </div>
+            </div>
+            <div class="reason_tail">
+                <button class="back_reason" id="back_reason3">返回</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="reason4_mask">
+        <div class="reason4">
+            <div class="reason_conent">
+                <div id="reason4" >
+                   <h2>原因:</h2>
+                </div>
+            </div>
+            <div class="reason_tail">
+                <button class="back_reason" id="back_reason4">返回</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="reason5_mask">
+        <div class="reason5">
+            <div class="reason_conent">
+                <div id="reason5">
+                    <h2>原因:</h2>
+                </div>
+            </div>
+            <div class="reason_tail">
+                <button class="back_reason" id="back_reason5">返回</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--方法A的遮罩层-->
+    <div class="method1_mask">
+        <div class="method1">
+
+            <div class="method_head">
+                <img src="static/image/category1.jpg"/>
+                <p>方法A:请选择一下任意标签</p>
+            </div>
+
+
+            <div class="method1_con">
+                <div id="point1">
+                    <h1>1.沟通</h1>
+                    <div class="focus" id="focus1">
+                        <h2>关注焦点:</h2>
+                    </div>
+                    <!--<button id="showreason1">点击查看原因</button>-->
+                </div>
+
+                <div id="point2">
+                    <h1>2.人际能力</h1>
+                    <div class="focus" id="focus2">
+                        <h2>关注焦点:</h2>
+                    </div>
+                    <!--<button id="showreason2">点击查看原因</button>-->
+                </div>
+
+                <div id="point3">
+                    <h1>3.人格</h1>
+                    <div class="focus" id="focus3">
+                        <h2>关注焦点</h2>
+                    </div>
+                    <!--<button id="showreason3">点击查看原因</button>-->
+                </div>
+
+                <div id="point4">
+                    <h1>4.学习力</h1>
+                    <div class="focus" id="focus4">
+                        <h2>关注焦点</h2>
+                    </div>
+                    <!--<button id="showreason4">点击查看原因</button>-->
+                </div>
+
+                <div id="point5">
+                    <h1>5.情绪</h1>
+                    <div class="focus" id="focus5">
+                        <h2>关注焦点</h2>
+                    </div>
+                    <!--<button id="showreason5">点击查看原因</button>-->
+                </div>
+
+                <div class="page">
+                    <a href="#point1" id="page1">[1]</a>
+                    <a href="#point2" id="page2">[2]</a>
+                    <a href="#point3" id="page3">[3]</a>
+                    <a href="#point4" id="page4">[4]</a>
+                    <a href="#point5" id="page5">[5]</a>
+                </div>
+            </div>
+
+
+
+            <div class="method_tail">
+                <button class="button_back" id="button_back1">返回</button>
+                <button class="button_save" id="button_save1">确定</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--方法B的遮罩层-->
+    <div class="method2_mask">
+        <div class="method2">
+
+            <div class="method_head">
+                <img src="static/image/category1.jpg"/>
+                <p>方法B:请选择4个维度</p>
+            </div>
+
+            <div class="method2_con">
+                <button class="button_c1 button_b" click="0" val="1">
+                    <img src="static/image/category7.jpg"><p>学习策略</p>
+                </button>
+                <button class="button_c2 button_b" click="0" val="2">
+                    <img src="static/image/category6.jpg"><p>学习认知</p>
+                </button>
+                <button class="button_c3 button_b" click="0" val="3">
+                    <img src="static/image/category3.jpg"><p>自主力</p>
+                </button>
+                <button class="button_c4 button_b" click="0" val="4">
+                    <img src="static/image/category4.jpg"><p>专注力</p>
+                </button>
+                <button class="button_c5 button_b" click="0" val="5">
+                    <img src="static/image/category5.jpg"><p>意志力</p>
+                </button>
+                <button class="button_c6 button_b" click="0" val="6">
+                    <img src="static/image/category1.jpg"><p>情绪力</p>
+                </button>
+                <button class="button_c7 button_b" click="0" val="7">
+                    <img src="static/image/category2.jpg"><p>人际力</p>
+                </button>
+            </div>
+
+            <div class="method_tail">
+                <button class="button_back" id="button_back2">返回</button>
+                <button class="button_save" id="button_save2">确定</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>
+
+
+<script>
+    //定义全局变量
+    //方法A的变量
+    //方法A存放成长重点的焦点
+    var category1_focus=['如何引导','任性','不听话'];
+    var category2_focus=['环境适应','被认可','不愿意打招呼','生存能力','竞争能力','自我保护力','不能守规矩'];
+    var category3_focus=['孤僻','自闭','忧郁','敏感','安全感','自觉性','小气','自尊心','责任心','同情心','忌妒','粘人','自卑','虚荣心','自私','胆小','脾气大'];
+    var category4_focus=['学得浅','兴趣或没动力','激励或压力','不去补习班','拖沓'];
+    var category5_focus=['易被消极情绪控制'];
+    //方法A存放成长重点的原因
+    var category1_reason=['不自信','不被尊重','不能倾听','话语理解','情绪调控（害怕、恐惧）','被忽视','遇到困境','没有支持'];
+    var category2_reason=['不自信','自尊心','沟通方式','自我中心','互动体验','感同身受','情绪调控','利他','关注与支持','守规矩','尊重','适宜','共识','执行','调整'];
+    var category3_reason=['自尊','责任','独立性','自我意识','勇气','韧性','安全感','爱'];
+    var category4_reason=['学习策略','学习探索动力','学习认知','专注力','意志力','速度慢','做不来','求关注','不喜欢这门课','身体不舒服'];
+    var category5_reason=['消极情绪','情绪表达方式','理解','沟通','发现','改进'];
+
+    //答题结果比对，  每选一个标签 判断在不在某个能量圈内，在的话该能量圈分数加1 跟有道上的不完全一样
+    var eneryArea_1=['D6','D7'];
+    var eneryArea_2=['A7','B19','E5','B17'];
+    var eneryArea_3=['BB','CC','D','B9','C8','B11','C21','C5','C24','C25','A4','B8','E5','C20','C19'];
+    var eneryArea_4=['C23'];
+    var eneryArea_5=['B21','B17','A10','E5','C23','B22'];
+    var eneryArea_6=['A8','B14','E5','E6'];
+    var eneryArea_7=['B10','B12','B20','E5','A6','B13','A5','A9','A11','B16','C18','B18','E4','B17','B15'];
+    //标签选择生成的 评分结果
+    var eneryArea=[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]];
+
+//    var label={A:0,B:0,C:0,D:0,E:0}; //用于存储eneryArea中出现的ABCDE，比如:能量圈有一个A，选标签中只要有一个是以A开头就在相应能量圈+1，
+
+    //方法B的变量
+//    var flag_array=new Array();//方法B存放七个维度是否选中的标记
+    var flag1=0, flag2=0, flag3=0, flag4=0, flag5=0, flag6=0, flag7=0;//七个维度是否选择的标记
+    var clicksum=0;//控制七个维度只能选择4个
+    var save2_click=0, save1_click=0;//控制方法A和B的提交次数
+    var result="";//方法B的选择结果
+
+
+
+    $(document).ready(function () {
+        //从数组中动态导入标签
+        function addlabel () {
+            //第一个成长重点
+            for (var i=1;i<=category1_focus.length;i++){
+                var tmp = '<button class="label1_focus" click="0" a="1" name="A'+i+'">'+category1_focus[i-1]+'</button>';$('#focus1').append(tmp);}
+            for (var i=4;i<category1_reason.length+4;i++){
+                var tmp = '<button class="label1_reason" click="0"  name="A'+i+'">'+category1_reason[i-4]+'</button>';$('#reason1').append(tmp);}
+
+            //第二个成长重点
+            for (var i=1;i<=category2_focus.length;i++){
+                var tmp = '<button class="label2_focus" click="0" a="2" name="B'+i+'">'+category2_focus[i-1]+'</button>';$('#focus2').append(tmp);}
+            for (var i=8;i<category2_reason.length+8;i++){
+                var tmp = '<button class="label2_reason" click="0" name="B'+i+'">'+category2_reason[i-8]+'</button>';$('#reason2').append(tmp);}
+            //第三个成长重点
+            for (var i=1;i<=category3_focus.length;i++){
+                var tmp =  '<button class="label3_focus" click="0" a="3" name="C'+i+'">'+category3_focus[i-1]+'</button>';$('#focus3').append(tmp);}
+            for (var i=18;i<category3_reason.length+18;i++){
+                var tmp = '<button class="label3_reason" click="0" name="C'+i+'">'+category3_reason[i-18]+'</button>';$('#reason3').append(tmp);}
+            //第四个成长重点
+            for (var i=1;i<=category4_focus.length;i++){
+                var tmp = '<button class="label4_focus" click="0" a="4" name="D'+i+'">'+category4_focus[i-1]+'</button>';$('#focus4').append(tmp);}
+            for (var i=6;i<category4_reason.length+6;i++){
+                var tmp = '<button class="label4_reason" click="0" name="D'+i+'">'+category4_reason[i-6]+'</button>';$('#reason4').append(tmp);}
+            //第五个成长重点
+            for (var i=1;i<=category5_focus.length;i++){
+                var tmp = '<button class="label5_focus" click="0" a="5" name="E'+i+'">'+category5_focus[i-1]+'</button>';$('#focus5').append(tmp);}
+            for (var i=2;i<category5_reason.length+2;i++){
+                var tmp = '<button class="label5_reason"click="0"  name="E'+i+'">'+category5_reason[i-2]+'</button>';$('#reason5').append(tmp);}
+        }
+        //判断元素是否在数组内
+        function isinArray(name,array){
+            for(var i=0;i<array.length;i++){
+                if(name==array[i]){
+                    return true;
+                }
+            }
+            return false;
+        }
+        //对生成的结果排序取得分最高的5个
+        function sort(array){
+//            alert(array);
+            var result='';
+            var temp = 0;
+            for (var i = 0; i < array.length; i++)
+            {
+                for (var j = 0; j < array.length - i-1; j++)
+                {
+                    if (array[j][1] < array[j + 1][1])
+                    {
+                        temp = array[j + 1];
+                        array[j + 1] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
+            for(var i=0;i<4;i++){
+                result+=array[i][0];
+            }
+            return result;
+        }
+
+        function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
+            var date = new Date();
+            var seperator1 = "-";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+
+        function buttonLabel(){
+            var name = $(this).attr('name');
+//            alert(name+"!!!");
+            if($(this).attr('click')==0) {
+                $(this).addClass('click');
+                if (isinArray(name,eneryArea_1)) {eneryArea[0][1] += 1;}
+                if (isinArray(name,eneryArea_2)) {eneryArea[1][1] += 1;}
+                if (isinArray(name,eneryArea_3)) {eneryArea[2][1] += 1;}
+                if (isinArray(name,eneryArea_4)) {eneryArea[3][1] += 1;}
+                if (isinArray(name,eneryArea_5)) {eneryArea[4][1] += 1;}
+                if (isinArray(name,eneryArea_6)) {eneryArea[5][1] += 1;}
+                if (isinArray(name,eneryArea_7)) {eneryArea[6][1] += 1;}
+                $(this).attr('click','1');
+            }else{
+                $(this).removeClass('click');
+                if (isinArray(name,eneryArea_1)) {eneryArea[0][1] -= 1;}
+                if (isinArray(name,eneryArea_2)) {eneryArea[1][1] -= 1;}
+                if (isinArray(name,eneryArea_3)) {eneryArea[2][1] -= 1;}
+                if (isinArray(name,eneryArea_4)) {eneryArea[3][1] -= 1;}
+                if (isinArray(name,eneryArea_5)) {eneryArea[4][1] -= 1;}
+                if (isinArray(name,eneryArea_6)) {eneryArea[5][1] -= 1;}
+                if (isinArray(name,eneryArea_7)) {eneryArea[6][1] -= 1;}
+                $(this).attr('click','0');
+            }
+        }
+        function buttonLbale_focus() {
+            var name = $(this).attr('name');
+            var a=$(this).attr('a');
+            if($(this).attr('click')==0) {
+                $(this).addClass('click');
+                if (isinArray(name,eneryArea_1)) {eneryArea[0][1] += 1;}
+                if (isinArray(name,eneryArea_2)) {eneryArea[1][1] += 1;}
+                if (isinArray(name,eneryArea_3)) {eneryArea[2][1] += 1;}
+                if (isinArray(name,eneryArea_4)) {eneryArea[3][1] += 1;}
+                if (isinArray(name,eneryArea_5)) {eneryArea[4][1] += 1;}
+                if (isinArray(name,eneryArea_6)) {eneryArea[5][1] += 1;}
+                if (isinArray(name,eneryArea_7)) {eneryArea[6][1] += 1;}
+                $(this).attr('click','1');
+                $(".reason"+a+"_mask").fadeIn();
+            }else{
+                $(this).removeClass('click');
+                if (isinArray(name,eneryArea_1)) {eneryArea[0][1] -= 1;}
+                if (isinArray(name,eneryArea_2)) {eneryArea[1][1] -= 1;}
+                if (isinArray(name,eneryArea_3)) {eneryArea[2][1] -= 1;}
+                if (isinArray(name,eneryArea_4)) {eneryArea[3][1] -= 1;}
+                if (isinArray(name,eneryArea_5)) {eneryArea[4][1] -= 1;}
+                if (isinArray(name,eneryArea_6)) {eneryArea[5][1] -= 1;}
+                if (isinArray(name,eneryArea_7)) {eneryArea[6][1] -= 1;}
+                $(this).attr('click','0');
+            }
+        }
+
+
+
+        addlabel();
+
+        //焦点标签选中
+        $('.label1_focus').click(buttonLbale_focus);//标签的点击事件
+        $('.label2_focus').click(buttonLbale_focus);//标签的点击事件
+        $('.label3_focus').click(buttonLbale_focus);//标签的点击事件
+        $('.label4_focus').click(buttonLbale_focus);//标签的点击事件
+        $('.label5_focus').click(buttonLbale_focus);//标签的点击事件
+        //原因标签选中
+        $('.label1_reason').click(buttonLabel);
+        $('.label2_reason').click(buttonLabel);
+        $('.label3_reason').click(buttonLabel);
+        $('.label4_reason').click(buttonLabel);
+        $('.label5_reason').click(buttonLabel);
+
+
+        //原因层返回按钮
+        $("#back_reason1").click(function () {$(".reason1_mask").fadeOut();});
+        $("#back_reason2").click(function () {$(".reason2_mask").fadeOut();});
+        $("#back_reason3").click(function () {$(".reason3_mask").fadeOut();});
+        $("#back_reason4").click(function () {$(".reason4_mask").fadeOut();});
+        $("#back_reason5").click(function () {$(".reason5_mask").fadeOut();});
+
+        //选择方法A
+        $("#button_method1").click(function () {
+            $(".method1_mask").fadeIn();
+            var page=1;
+            $("#page1").css('color','#000');
+        });
+
+        //选择第一页
+        $("#page1").click(function () {
+                $("#point1").css('display','block');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+                $("#page1").css('color','#000');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=1;
+            });
+        //选择第二页
+        $("#page2").click(function () {
+                $("#point1").css('display','none');
+                $("#point2").css('display','block');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#000');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=2;
+            });
+        //选择第三页
+        $("#page3").click(function () {
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','block');
+                $("#point4").css('display','none');
+                $("#point5").css('display','none');
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#000');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#fff');
+                page=3;
+            });
+        //选择第四页
+        $("#page4").click(function () {
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','block');
+                $("#point5").css('display','none');
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#000');
+                $("#page5").css('color','#fff');
+                page=4;
+            });
+        //选择第五页
+        $("#page5").click(function () {
+                $("#point1").css('display','none');
+                $("#point2").css('display','none');
+                $("#point3").css('display','none');
+                $("#point4").css('display','none');
+                $("#point5").css('display','block');
+                $("#page1").css('color','#fff');
+                $("#page2").css('color','#fff');
+                $("#page3").css('color','#fff');
+                $("#page4").css('color','#fff');
+                $("#page5").css('color','#000');
+                page=5;
+            });
+
+
+        //方法A的返回按钮
+        $("#button_back1").click(function () {
+            for(var i =0;i<7;i++){
+                eneryArea[i][1]=0;
+            }
+            $(".click").attr('click','0');
+            $(".click").removeClass("click");
+            $(".method1_mask").fadeOut();
+            $("#point1").css('display','block');
+            $("#point2").css('display','none');
+            $("#point3").css('display','none');
+            $("#point4").css('display','none');
+            $("#point5").css('display','none');
+            $("#page1").css('color','#000');
+            $("#page2").css('color','#fff');
+            $("#page3").css('color','#fff');
+            $("#page4").css('color','#fff');
+            $("#page5").css('color','#fff');
+        });
+        //方法A的确认按钮
+        $("#button_save1").click(function () {
+//            var a="能量圈1："+eneryArea[0][1]+"\n能量圈2："+eneryArea[1][1]+"\n能量圈3："+eneryArea[2][1]+
+//                    "\n能量圈4："+eneryArea[3][1]+"\n能量圈5："+eneryArea[4][1]+"\n能量圈6："+eneryArea[5][1]+"\n能量圈7："+eneryArea[6][1];
+//            alert(a);
+            if(save1_click==0){
+                $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+                //eneryArea进行排序 获得分数最高的前5个
+                var result=sort(eneryArea);
+
+                setCookie('enerySelect',result,0.1);
+                window.location.href = 'custom.html';
+
+//                alert(result);
+//                var openid=getCookie("openid");
+//                $.ajax({
+//                    url: '../starsea/userenery/addUserEnery',
+//                    data: {
+//                        openId:openid,
+//                        enerySelect:result,
+//                        evaluationTime: getNowFormatDate()
+//                    },
+//                    type: 'post',
+//                    cache: false,
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        console.log(data);
+//                        if (data.code == 200) {
+//                            $(".ts_mask2").fadeOut(1000);
+//                            //alert("success");
+//                            setCookie('enerySelect',result,0.1);
+//                            window.location.href = 'custom.html';
+//                        }
+//                        else {
+//                            alert("查询失败: " + data.msg);
+//                        }
+//                    },
+//                    error: function () {
+//                        alert("服务器处理异常");
+//                        $(".ts_mask2").fadeOut(1000);
+//                    }
+//                });
+            }
+
+        });
+
+
+
+        //选择方法B
+        $("#button_method2").click(function () {$(".method2_mask").fadeIn();});
+
+
+        //7个维度选择5个
+        $(".button_c1").click(function () {
+                if(flag1==0 && 4>clicksum){
+                    flag1 = 1; clicksum++;console.log(clicksum,flag1);
+                    $(".button_c1").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c1").css('opacity', '0.5');
+                    flag1=0;clicksum--;console.log(clicksum,flag1);
+                    $(this).attr('click','0');
+                }
+            });
+        $(".button_c2").click(function () {
+                if(flag2==0 && 4>clicksum){
+                    flag2 = 1; clicksum++;console.log(clicksum,flag2);
+                    $(".button_c2").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c2").css('opacity', '0.5');
+                    flag2=0;clicksum--;console.log(clicksum,flag2);
+                    $(this).attr('click','0');
+                }
+            });
+        $(".button_c3").click(function () {
+                if(flag3==0 && 4>clicksum){
+                    flag3 = 1; clicksum++;console.log(clicksum,flag3);
+                    $(".button_c3").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c3").css('opacity', '0.5');
+                    flag3=0;clicksum--;console.log(clicksum,flag3);
+                }
+            });
+        $(".button_c4").click(function () {
+                if(flag4==0 && 4>clicksum){
+                    flag4 = 1; clicksum++;console.log(clicksum,flag4);
+                    $(".button_c4").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c4").css('opacity', '0.5');
+                    flag4=0;clicksum--;console.log(clicksum,flag4);
+                    $(this).attr('click','0');
+                }
+            });
+        $(".button_c5").click(function () {
+                if(flag5==0 && 4>clicksum){
+                    flag5 = 1; clicksum++;console.log(clicksum,flag5);
+                    $(".button_c5").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c5").css('opacity', '0.5');
+                    flag5=0;clicksum--;console.log(clicksum,flag5);
+                    $(this).attr('click','0');
+                }
+            });
+        $(".button_c6").click(function () {
+                if(flag6==0 && 4>clicksum){
+                    flag6 = 1; clicksum++;console.log(clicksum,flag6);
+                    $(".button_c6").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0){
+                    $(".button_c6").css('opacity', '0.5');
+                    flag6=0;clicksum--;console.log(clicksum,flag6);
+                    $(this).attr('click','0');
+                }
+            });
+        $(".button_c7").click(function () {
+                if(flag7==0 && 4>clicksum){
+                    flag7 = 1; clicksum++;console.log(clicksum,flag7);
+                    $(".button_c7").css('opacity', '1');
+                    $(this).attr('click','1');
+                }
+                else if($(this).attr('click')==1 && clicksum>0) {
+                    $(".button_c7").css('opacity', '0.5');
+                    flag7=0;clicksum--;console.log(clicksum,flag7);
+                    $(this).attr('click','0');
+                }
+            });
+
+
+
+        //方法2的返回按钮
+        $("#button_back2").click(function () {
+            $(".method2_mask").fadeOut();
+            //所有选择全部重置
+            flag1=0;flag2=0;flag3=0;flag4=0;flag5=0;flag6=0;flag7=0;
+            clicksum=0;
+            result="";
+            $(".button_c1").attr('click',0);
+            $(".button_c2").attr('click',0);
+            $(".button_c3").attr('click',0);
+            $(".button_c4").attr('click',0);
+            $(".button_c5").attr('click',0);
+            $(".button_c6").attr('click',0);
+            $(".button_c7").attr('click',0);
+            $(".button_c1").css('opacity', '0.5');
+            $(".button_c2").css('opacity', '0.5');
+            $(".button_c3").css('opacity', '0.5');
+            $(".button_c4").css('opacity', '0.5');
+            $(".button_c5").css('opacity', '0.5');
+            $(".button_c6").css('opacity', '0.5');
+            $(".button_c7").css('opacity', '0.5');
+        });
+        //方法2的确认按钮
+        $("#button_save2").click(function () {
+            var num=0;
+            $(".button_b[click='1']").each(function(){
+                num++;
+            });
+            if(num!=4){
+                alert("请选择4个");
+            }else {
+                if (save2_click == 0) {//确保只提交一次
+                    save2_click++;
+                    $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+                    $(".button_b[click='1']").each(function () {
+                        result += $(this).attr('val');
+                    });
+
+                    setCookie('enerySelect',result,0.1);
+                    window.location.href = 'custom.html';
+
+//                    var openid=getCookie("openid");
+////                    alert(result);
+//                    //调用ajax传数据给后台
+//                    $.ajax({
+//                        url: '../starsea/userenery/addUserEnery',
+//                        data: {
+//                            openId:openid,
+//                            enerySelect:result,
+//                            evaluationTime: getNowFormatDate()
+//                        },
+//                        type: 'post',
+//                        cache: false,
+//                        dataType: 'json',
+//                        success: function (data) {
+//                            console.log(data);
+//                            if (data.code == 200) {
+//                                $(".ts_mask2").fadeOut(1000);
+//                                //alert("success");
+////                                setCookie('label_ejia','select',30);
+//                                setCookie('enerySelect',result,0.1);
+//                                window.location.href = 'custom.html';
+//                            }
+//                            else {
+//                                alert("查询失败: " + data.msg);
+//                            }
+//                        },
+//                        error: function () {
+//                            alert("服务器处理异常");
+//                            $(".ts_mask2").fadeOut(1000);
+//                        }
+//                    });
+                }
+            }
+        });
+    })
+</script>

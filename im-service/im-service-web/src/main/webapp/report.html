@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MarkdownPad Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+
+.indent{text-indent: 2em;}   
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1 align="center">家庭教育访谈报告</h1>
+<p class="indent">尊敬的XXX家长：</p>
+<p class="indent">您好！根据XX文化发展有限公司(下面简称XX文化)访谈主持者XXX老师跟您于 2015 年 12 月 27
+日 19:00-20:25 的访谈情况，特整理出本访谈报告。访谈报告基于您所回答或提供的信息而撰写。此次访谈报告的主要目的是对孩子的心理社会发展、所生活的社会生态系统(包括学校、家庭和社区等)以及家庭教养实施者对孩子的认知等有一个较全面的了解和评估，以增进作为机构的xx文化及作为家长的您对孩子教养实施的针对性。</p>
+<p class="indent">报告正文如下：</p>
+<p class="indent">心理社会发展优势。xxx在生活方面有独立意识，生活作息有规律；喜欢读书，涉猎面宽，阅读兴趣点广泛，喜欢玩玩具，独处时很自在也很享有；富于奇思妙想，对未来及生活的充满创意，有发明创造的指征；学习自觉性不断发展，在数学学习方面有优势，表现出较好的逻辑思维能力；学习中有诀窍意识，比如会通过组块化策略(将一串符号或数字分成若干段进行记忆)；注意力稳定，有良好的注意分配，注意切换比较灵活，在由动到静的切换方面，表现优秀；情绪一般情况下比较稳定，面对困难会想法去寻找解决之道；有较多朋友，在与朋友交往时，有明确的角色意识(比如被同学称为“老王”)和参与意识，会主动发起一些游戏或活动；在一些运动上（轮滑、足球等）有热情并乐于投身其中；自我疆界意识明显，但有时也跟妹妹分享玩具和共同游戏；在自己喜欢的任务上，表现出极强的抗干扰能力，能做到对身边发生的事情充耳不闻、视而不见。</p>
+<p class="indent">社会生态系统。家庭中，家长教育理念比较明确，认为讲道理很重要，遇到问题跟孩子一起商量解决方法；家长规则意识明确，认为立下的规则孩子一定要遵守执行；曾通过代币法、激励法等，引领孩子参与家务，收效不错；家长认为让孩子能预计到行为后果（比如不做某事会有什么结果），对于其及时完成任务至关重要；不提倡但不拒绝必要的体罚，随着孩子年龄的增长，目前已经较少使用体罚。在学校，师生关系不存在问题，教室里有较多玩得来的同伴。在社区，下课后到固定场所做功课，很享有课后的这段时光，学习自觉性进步明显。</p>
+<p class="indent">有待进一步发展的方面。沟通能力有较大的提升空间，比如对于自己不太感兴趣的人或话题，沟通中不看人脸，在“读心”或揣测他人心理的能力方面，有待进一步提升，宜提供更多语言交流的训练机会，增加其沟通的主动性；情绪虽相对稳定，但脾气也易失控，情绪自控力与沟通技巧两方面的问题易致其需求表达或问题协商时常出现急躁甚至暴跳如雷的情形；对任务完成情况的检查总结方面，尚需着力加以提升，宜锻炼其核查意识并形成习惯；学习或做事情的计划性、策略性有待增强，尚缺乏明确的复习或预习意识；在语文知识巩固，特别是趁热打铁及时复习、练习方面，宜进一步加强。</p>
+<p class="indent">家长方面。宜继续发扬规则引导式家教方式，保护并发挥好孩子的优势；在孩子完成学习任务的前提下，让其从事自己喜欢的阅读、玩玩具等活动；创设亲子互动活动，引领孩子正确表达自己的愿意和要求，做好情绪自控；表扬与活动激励相结合，引导孩子的行为动机逐渐从外部走向内部(这一点不宜太急，孩子这个年龄主要还是外部驱动式)；家庭可考虑每周一个亲子恳谈会，鼓励孩子做主角，家长倾听，锻炼孩子的叙事和沟通能力。</p>
+<p class="indent">阅加文化家庭教育访谈老师：_________________</p>
+<p class="indent">如果您对本访谈报告有任何问题，请致电(18616814906, Anna 老师)或发送电子邮箱(readplus@163.com)给阅加文化，我们会为您答疑解惑。</p>
+<p class="indent">阅加文化志于发展家庭积极教养文化，围绕亲子阅读和积极素养，强调互动体验和未来导向，专注打造中国城市家庭积极教养联盟(CCPPA)，</p>
+<p class="indent">倾力搭建家庭积极教养专业支持系统。CCPPA 包括中国家庭阅读联盟(CFRL)和中国儿童积极素养培育中心(CCPQC)。家庭阅读联盟主推游戏式阅读课和大带小亲子读书会，阅+基地设有服务社区的公益亲子图书馆，让孩子爱上阅读，在“悦”读中成长。儿童积极素养培育中心以积极心理和积极教育为理念，主营“全能侠”课程系列(OASES)以及学商、情商、财商、弹商等课程，变潜能为显能，铺就孩子未来价值通道。定期积极家庭教养父母沙龙帮助家长更自主自信地育儿。微信扫描右侧二维码关注阅加文化，就会定期接收到阅加研究及活动、课程等信息。</p>
+<p class="indent">地址: 上海市中谊路 888 弄 28 号别墅 邮编: 201101 1 / 1</p>
+<script src="static/js/cookie_openid.js"></script>
+<script>
+  setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",-1);
+//  setCookie("openid",'1',-1);
+  setCookie("role",'p',-1);
+  setCookie("label_ejia",'1',-1);
+</script>
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

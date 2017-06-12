@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/static/open/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- styles -->
+    <link href="/static/css/styles.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/open/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/cookie_openid.js"></script>
+</head>
+<body class="login-bg">
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="#">Ejia</a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-wrapper">
+                <div class="box">
+                    <div class="content-wrap">
+                        <h6>Ejia</h6>
+                        身份：&nbsp;&nbsp;&nbsp;家长：<input type="radio" checked="checked" name="power" value="家长" class="role b" />&nbsp;
+                        老师：<input type="radio" name="power" value="老师" class="role a" /><br/>
+                        <div class="username">孩子姓名：</div><input class="form-control" type="text" placeholder="Name" id="Name" >
+                        年龄：<input class="form-control" type="text" placeholder="Age" id="Age">
+                        性别：&nbsp;&nbsp;&nbsp;男：<input type="radio" checked="checked" class="sex" name="Sex" value="男" />&nbsp;
+                        女：<input type="radio" name="Sex" value="女" class="sex" /><br/>
+                        <div class="parent">年级：<input class="form-control" type="text" placeholder="Class" id="Class"></div>
+                        学校：<input class="form-control" type="text" placeholder="School" id="School">
+                        <div class="parent">评价人：<input class="form-control" type="text" placeholder="EvaluationPerson" id="EvaluationPerson"></div>
+                        邮箱:<input class="form-control" type="text" placeholder="EvaluationPerson" id="email">
+                        <div class="parent">辅导老师：<input type="text" class="form-control" id="teacher" placeholder="Teacher"  /></div>
+                        院系：<input class="form-control" type="text" placeholder="Organization" id="Organization">
+                        <div class="action">
+                            <a class="btn btn-primary signup" id="signupBtn">提 交</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type = "text/javascript">
+    if(getCookie("zhuce")=="yes"){
+        alert("已经注册");
+        WeixinJSBridge.invoke('closeWindow',{},function(res){});
+    }
+    $('.a').click(function(){
+        $('.parent').css('display','none');
+        $('.username').html("姓名：");
+    });
+    $('.b').click(function(){
+        $('.parent').css('display','block');
+        $('.username').html("孩子姓名：");
+    });
+    //setCookie("openid","o45t9wZx7eQo5VIB4nTY_76TCW4w",20);
+    $("#signupBtn").click(function() {
+        var openid=getCookie('openid');
+//        alert("注册:"+openid);
+        var teacher=$('#teacher').val();
+        var role=$('input.role:checked').val();
+        var myName= $("#Name").val();
+        var age= $("#Age").val();
+        var sex= $('input.sex:checked').val();
+        var school= $("#School").val();
+        var myClass= $("#Class").val();
+        var organization= $("#Organization").val();
+        var evaluationPerson= $("#EvaluationPerson").val();
+        var email= $("#email").val();
+
+
+        var f=0;
+
+        if(role=="家长"){
+            if(teacher&&role&&myName&&age&&sex&&school&&myClass&&organization&&evaluationPerson&&email){
+                f=1;
+            }else{
+                alert("请填写完整信息");
+            }
+        }else{
+            if(role&&myName&&age&&sex&&school&&email&&organization){
+                f=1;
+            }else{
+                alert("请填写完整信息");
+            }
+        }
+//        alert(role+sex);
+        if(f==1){
+            $.ajax({
+                url: '../starsea/user/signup',//插入数据的接口
+                data: {
+                    openId:openid,
+                    name:myName,
+                    age:age,
+                    sex:sex,
+                    school:school,
+                    myClass:myClass,
+                    organization:organization,
+                    evaluationPerson:evaluationPerson,
+                    role:role,
+                    email:email,
+                    teacher:teacher
+                },
+                type: 'post',
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert("注册完成");
+    //                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                        setCookie("zhuce","yes",10000);
+                        window.location.href="common_fourPoint.html";
+                    }
+                    else {
+                        alert("查询失败: " + data.msg);
+                    }
+                },
+                error: function () {
+                    alert("服务器处理异常");
+                }
+            });
+        }
+    });
+
+
+</script>
+</body>
+</html>

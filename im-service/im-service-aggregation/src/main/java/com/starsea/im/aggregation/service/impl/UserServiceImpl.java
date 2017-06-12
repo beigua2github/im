@@ -3,9 +3,11 @@ package com.starsea.im.aggregation.service.impl;
 import com.google.common.collect.Lists;
 import com.starsea.im.aggregation.aop.LogParams;
 import com.starsea.im.aggregation.dto.SearchDto;
+import com.starsea.im.aggregation.dto.StudyFormDto;
 import com.starsea.im.aggregation.dto.UserDto;
-import com.starsea.im.biz.entity.PageModel;
-import com.starsea.im.biz.entity.UserEntity;
+import com.starsea.im.aggregation.dto.WatchFormDto;
+import com.starsea.im.aggregation.transfor.Transformer;
+import com.starsea.im.biz.entity.*;
 import com.starsea.im.aggregation.service.UserService;
 import com.starsea.im.aggregation.transfor.UserTransfor;
 import com.starsea.im.biz.dao.UserDao;
@@ -39,6 +41,15 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    @LogParams
+    public UserDto queryUserByOpenId(String OpenId) {
+
+        UserEntity userEntity = userDao.queryUserByOpenId(OpenId);
+        UserDto userDto = new UserDto();
+        if(userEntity != null){ BeanUtils.copyProperties(userEntity, userDto);}
+        return userDto;
+    }
+
     @Override
     @LogParams
     public List<UserDto> querUsers() {
@@ -47,6 +58,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int insert() {
+
         return 0;
     }
 
@@ -61,4 +73,19 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    @Override
+    public int addUser(UserEntity userEntity){
+        return userDao.addUser(userEntity);
+    }
+
+    @Override
+    @LogParams
+    public List<UserEntity> queryChildrenUserByOpenId(String OpenId) {
+        UserEntity userEntity = userDao.queryUserByOpenId(OpenId);
+        String name=userEntity.getName();
+
+        List<UserEntity> userEntities=userDao.queryChildrenUsers(name);
+        return userEntities;
+//        return Lists.transform(userDao.queryChildrenUsers(), UserTransfor.INSTANCE);
+    }
 }

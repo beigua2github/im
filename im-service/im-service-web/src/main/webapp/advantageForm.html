@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title></title>
+    <link href="static/css/diagnose_style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
+</head>
+
+<body>
+<div class="whole">
+
+    <!--头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/head.jpg" />
+        </div>
+        <div class="t_tit">
+            <p>优势发现</p>
+        </div>
+    </div>
+
+    <!--选择单选题目-->
+    <div class="t_con">
+        <div class="con_tit">
+            <p id="title_txt">(1/25)&nbsp;单选题</p>
+            <p id="content_txt">孩子学习时状态</p>
+        </div>
+        <div class="con_con">
+            <ul>
+                <li>
+                    <div class="checkboxFour">
+                        <input type="checkbox" value="1" id="checkboxFourInput1" name="chkItem" />
+                        <label for="checkboxFourInput1"></label>
+                    </div>
+                    <p>不符合</p>
+                </li>
+                <li>
+                    <div class="checkboxFour">
+                        <input type="checkbox" value="1" id="checkboxFourInput2" name="chkItem" />
+                        <label for="checkboxFourInput2"></label>
+                    </div>
+                    <p>有点符合</p>
+                </li>
+                <li>
+                    <div class="checkboxFour">
+                        <input type="checkbox" value="1" id="checkboxFourInput3" name="chkItem" />
+                        <label for="checkboxFourInput3"></label>
+                    </div>
+                    <p>完全符合</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--上提下题按钮-->
+    <div class="t_btn">
+        <button id="botton_pre" type="button">上一题</button>
+        <button id="botton_next" type="button">下一题</button>
+    </div>
+    <!--提示遮罩层-->
+    <div class="ts_mask">
+        <div class="tishi">
+            <div class="qd"></div>
+        </div>
+    </div>
+
+    <!--提示遮罩层-->
+    <div class="ts_mask2">
+        <div class="tishi2">
+            <div class="qd2"></div>
+        </div>
+    </div>
+
+    <div class="ts_mask3">
+        <div class="tishi3">
+            <div class="qd3"></div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
+<script>
+//    setCookie("openid",'1',-1);
+//          setCookie("role",'p',-1);
+//          setCookie("label_ejia",'1',-1);
+    //点击下一题没选择时执行的动作
+    $(".qd").click(function(){
+        $(".ts_mask").fadeOut(1000);
+    });
+
+    $(".qd2").click(function(){
+        $(".ts_mask2").fadeOut(1000);
+    });
+
+    $(".qd3").click(function(){
+        $(".ts_mask3").fadeOut(1000);
+    });
+</script>
+
+
+<script>
+
+    //以下定义的是需要用到的变量
+    var one_click = 1;
+    var qs_id = 1;//问题的编号
+    var qs_array = new Array("体谅他人的感受","不安稳，过于活跃，不能长时间保持安静","常说自己头痛、肚子痛或身体不舒服","乐于跟他人分享（零食，玩具，笔，等）","常发脾气或易怒","离群独处，一个人玩耍","听话、顺从，通常依大人要求行事*","有很多担忧，经常表现出忧虑","如果有人受伤、难过或生病，乐意提供帮助","坐着时，不断摆弄手脚或扭动身子","至少有一个好朋友*","常与别的孩子吵架或欺负他们","经常不高兴，情绪低落或哭泣","一般来说，受别的孩子喜欢*","容易分心，不能全神贯注","在新环境中会紧张、爱粘人，容易失去信心","对年纪小的孩子和善","常撒谎或欺骗","受别的孩子作弄或欺负","常自愿帮助别人（家长、老师或其他孩子)","做事前会先想清楚*","从家里、学校或别处偷东西","跟成人相处比跟小孩相处融洽","对很多事物感到害怕，易受惊吓","做事情能做到底，注意力持久*");//用于存问题的数组
+    var pre_score = new Array(0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0);
+
+    var now_score = new Array();//用于记录学生的成绩
+    var child={openid:"",name:"",evaluationPerson:"",age:"",sex:"",myClass:"",school:"",organization:""};//用于获取历史信息要查询的值
+
+    function getNowFormatDate() {//获取当前时间,yyyy-MM-dd
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+
+    function change_checked_to_one(checkbox_id)
+    {
+        //让checkbox多选框变成单选
+        $(':checkbox[name=chkItem]').removeAttr('checked');
+        //$(checkbox_id).attr('checked','checked');
+        if(qs_id == 7 || qs_id == 11 ||qs_id == 14 || qs_id == 21 || qs_id == 25)
+        {
+            if(checkbox_id  == 1)
+            {
+                $("#checkboxFourInput3").attr('checked','checked');
+            }
+            else if (checkbox_id == 3)
+            {
+                $("#checkboxFourInput1").attr('checked','checked');
+            }
+            else
+            {
+                $("#checkboxFourInput2").attr('checked','checked');
+            }
+        }
+        else
+        {
+            $("#checkboxFourInput"+checkbox_id).attr('checked','checked');
+        }
+    }
+
+
+
+    //$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
+
+    $('#title_txt').html("("+qs_id+"/25)&nbsp;单选题");
+    $('#content_txt').html(qs_array[qs_id-1] );
+
+    $(function()
+    {
+        $(':checkbox[name=chkItem]').each(function()
+        {
+            //让checkbox多选框变成单选
+            $(this).click(function()
+            {
+                if($(this).attr('checked'))
+                {
+                    $(':checkbox[name=chkItem]').removeAttr('checked');
+                    $(this).attr('checked','true');
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $(".ts_mask").fadeIn(1000);//等待获取上次数据
+
+        judgeCookie(child);
+
+        now_score = pre_score;
+
+        $.ajax({
+            type: "GET",
+            url: "../starsea/advantage/getAdvantageFormByOpenId",
+            data: {
+                openId:child.openid
+//                name:encodeURI(child.name)
+            },
+            dataType: "json",
+            success:function(data){ //成功的处理函数
+                now_score = data['msg']['msg']['now_score'];
+                //alert(now_score);
+                if(now_score==null){
+                    now_score=[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
+                }
+                $("#checkboxFourInput"+(now_score[qs_id-1] +1)).attr("checked",'true');
+                $(".ts_mask").fadeOut(1000);
+            }
+        });
+        //now_score = pre_score;
+        //alert(now_score);
+        //$("#checkboxFourInput"+(now_score[qs_id-1] +1)).attr("checked",'true');
+        //$(".ts_mask").fadeOut(1000);
+
+//点击下一题判断语句
+        $("#botton_next").click(function()
+        {
+            if ($("#checkboxFourInput1").attr("checked"))
+            {
+                //alert("1");
+                if(qs_id == 7 || qs_id == 11 ||qs_id == 14 || qs_id == 21 || qs_id == 25)
+                {now_score[qs_id -1] = 2;}
+                else
+                {now_score[qs_id-1] = 0;}
+
+            }
+            else if ($("#checkboxFourInput2").attr("checked"))
+            {
+                //alert("2");
+                now_score[qs_id-1] = 1;
+            }
+            else if ($("#checkboxFourInput3").attr("checked"))
+            {
+                //alert("3");
+                if(qs_id == 7 || qs_id == 11 ||qs_id == 14 || qs_id == 21 || qs_id == 25)
+                {now_score[qs_id -1] = 0;}
+                else
+                {now_score[qs_id-1] = 2;}
+            }
+            else
+            {
+                $(".ts_mask3").fadeIn(1000);
+            }
+
+            if($("input[type=checkbox]:checked").length != 0)
+            {
+
+                //提交给后台
+                if(qs_id == 25 && one_click == 1)
+                {
+                    var age = 18;
+                    one_click++;
+                    $(".ts_mask2").fadeIn(1000);//提示正在提交数据
+
+                    //alert(now_score);
+
+                    $.ajax({
+                        url: '../starsea/advantage/addAdvantageForm',
+                        data: {
+                            openId:child.openid,
+                            school:child.school,
+                            myClass:child.myClass,
+                            name:child.name,
+                            sex:child.sex,
+                            age: child.age,
+                            now_score: now_score
+                        },
+                        type: 'post',
+                        cache: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.code == 200) {
+                                $(".ts_mask2").fadeOut(1000);
+                                //alert("success");
+                                window.location.href = '../advantageFinish.html';
+                            }
+                            else {
+                                alert("查询失败: " + data.msg);
+                            }
+                        },
+                        error: function () {
+                            alert("服务器处理异常");
+                        }
+                    });
+                }
+
+                if (qs_id < 25)
+                {
+                    qs_id++;
+                    $('#title_txt').html("("+qs_id+"/25)&nbsp;单选题");
+                    $('#content_txt').html(qs_array[qs_id-1]);
+                    if(qs_id == 25)
+                    {
+                        document.getElementById("botton_next").innerHTML = "提交";
+                    }
+                    change_checked_to_one(now_score[qs_id-1] + 1);
+                    //$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
+                }
+            }
+
+
+        });
+
+//点击上一题判断语句
+        $("#botton_pre").click(function()
+        {
+            if ($("#checkboxFourInput1").attr("checked"))
+            {
+                //alert("1");
+                if(qs_id == 7 || qs_id == 11 ||qs_id == 14 || qs_id == 21 || qs_id == 25)
+                {now_score[qs_id -1] = 2;}
+                else
+                {now_score[qs_id-1] = 0;}
+
+            }
+            else if ($("#checkboxFourInput2").attr("checked"))
+            {
+                //alert("2");
+                now_score[qs_id-1] = 1;
+            }
+            else if ($("#checkboxFourInput3").attr("checked"))
+            {
+                //alert("3");
+                if(qs_id == 7 || qs_id == 11 ||qs_id == 14 || qs_id == 21 || qs_id == 25)
+                {now_score[qs_id -1] = 0;}
+                else
+                {now_score[qs_id-1] = 2;}
+            }
+            else
+            {
+                $(".ts_mask").fadeIn(1000);
+            }
+
+            if($("input[type=checkbox]:checked").length != 0)
+            {
+                if (qs_id >1 )
+                {
+                    one_click=1;
+                    qs_id--;
+                    $('#title_txt').html("("+qs_id+"/25)&nbsp;单选题");
+                    $('#content_txt').html(qs_array[qs_id-1]);
+                    document.getElementById("botton_next").innerHTML = "下一题";
+                    change_checked_to_one(now_score[qs_id-1] +1);
+                    //$("#checkboxFourInput"+pre_score[qs_id-1]).attr("checked",'true');
+                }
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>

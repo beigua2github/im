@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title></title>
+    <link href="static/css/parentTest.css" rel="stylesheet" type="text/css" />
+    <script src="static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="static/js/cookie_openid.js"></script>
+
+</head>
+
+<body>
+<div class="whole">
+
+    <!--头部信息-->
+    <div class="head">
+        <div class="t_pic">
+            <img src="static/image/head.jpg" />
+        </div>
+        <div class="t_tit">
+            <p>家长教育效能评估</p>
+        </div>
+    </div>
+
+
+    <!--首页答题部分-->
+    <div class="div1">
+        <!--选择单选题目-->
+        <div class="t_con">
+            <div class="con_tit">
+                <p id="title_txt" name="1">(1/10)&nbsp;单选题</p>
+                <p id="content_txt"></p>
+            </div>
+            <div class="con_con">
+                <input type="radio" name="q"  id="q1" value="1" /><label class="s1" for="q1"></label><br/>
+                <input type="radio" name="q"  id="q2" value="2"/><label class="s2" for="q2"></label><br/>
+                <input type="radio" name="q"  id="q3" value="3"/><label class="s3" for="q3"></label>
+            </div>
+        </div>
+
+        <!--上提下题按钮-->
+        <div class="t_btn">
+            <button id="botton_pre" type="button">上一题</button>
+            <button id="botton_next" type="button">下一题</button>
+        </div>
+    </div>
+
+    <!--得分结果-->
+    <div class="detail" style="display: none;">
+        <p class="p1"><span class="score_label">得分：</span><span class="score"></span></p>
+        <p class="comment_label">描述：</p>
+        <p class="comment_detal"></p>
+        <button class="back">返回</button>
+    </div>
+
+</div>
+<script>
+    //点击下一题没选择时执行的动作
+    $(".qd").click(function(){
+        $(".ts_mask").fadeOut(1000);
+    });
+
+    $(".qd2").click(function(){
+        $(".ts_mask2").fadeOut(1000);
+    });
+
+    $(".qd3").click(function(){
+        $(".ts_mask3").fadeOut(1000);
+    });
+</script>
+<script>
+    var question=['周日全家都睡到自然醒，好舒适惬意。您还安排了中午与久未谋面的外地同学一起聚餐，餐馆也已经订好了，好期待。但孩子却告诉您，上周您答应陪他/她去博物馆的，显然孩子已经准备齐整了。这时您会怎么做？',
+        '晚上回来孩子和您都很开心，一天收获颇丰。但大家一起进晚餐时，您的配偶对于孩子参加的一个兴趣班提出了不同的看法。这时您会怎么做？',
+        '周一早晨，孩子穿衣起床磨磨蹭蹭，终于洗漱完毕，坐下吃早餐的时候，孩子嘟哝着说“不想上学”。这时您会怎么做？',
+        '晚饭之后，跟孩子聊学校的事，了解到孩子受到同伴的排斥，觉得自己在学校很孤单。这时您会怎么做？',
+        '晚上孩子做作业，您要对孩子的学习进行辅导。您通常用什么样的辅导方式？',
+        '孩子今天作业比较顺利，完成得比较早也比较好，离上床睡觉还有一些时间。这时您会怎么做？',
+        '到了学期中，孩子这段时间出现了学习没有计划，松懈拖沓的现象，而且家长的提醒似乎不怎么起作用了。这时您会怎么做？',
+        '您发现这段时间孩子的情绪不稳定，稍不如意就会乱发脾气。这种情况下您会怎么做？',
+        '如果您发现孩子在面对困难任务或挑战性的事情时，总是急头怪脑或者退缩不前。您会怎么做？',
+        '孩子明天要参加升学考试了，表现得有些紧张和焦虑，晚饭也没有好好吃，早早回自己房间了。这种情况下，您会怎么做？'];
+
+    var choose=[['A 取消跟同学的聚餐，陪孩子去博物馆','B 向孩子真诚道歉，并协商下周再去博物馆','C 尝试邀请孩子陪您参加聚餐，然后您再陪孩子去博物馆'],
+        ['A 不与配偶争辩，听他/她说完','B 听听孩子的想法，问孩子愿不愿意继续参加','C 提醒配偶有约在先——不守着孩子讨论这种事'],
+        ['A 听听孩子为什么不想去上学，尽量把原由都说出来','B 问问孩子不想上学校，那想做什么，让孩子明白上学的重要性','C 跟孩子约定，晚上回家可以一起详细讨论这件事'],
+        ['A 跟孩子讨论如何才能更好与同伴交往，并鼓励孩子的社会交往','B 拥抱孩子，玩个同伴交往的角色游戏，并讨论如何与人打交道','C 跟孩子一起从自身找原因，看看有哪些方面不受同伴欢迎'],
+        ['A 全程式辅导（一直贴身相陪）','B 两头式辅导（主要抓首和尾）','C 随机检查式（期间随机抽查）'],
+        ['A 让孩子自己支配睡前时间','B 给孩子适当加些练习题目','C 表扬孩子的高效率，让孩子决定是自己支配还是再学一会儿'],
+        ['A 告诉孩子您的担忧，重申原来的学习计划或调整学习计划以利于其更好执行','B 请孩子评估一下当前状况，与孩子一起重申或制订学习计划并设定目标','C 告诉孩子您很失望，跟孩子一起回顾这段状态不好的历程，让其回归到自觉的状态'],
+        ['A 尽量理解孩子的感受并表达这种理解，分享情绪调整的办法','B 让孩子冷静一下，冷处理，过一会儿孩子就会感受好一些了','C 坦率告诉孩子，这样的脾气人们不喜欢，这样会交不到朋友的'],
+        ['A 把他/她推出去，告诉他/她这些风浪必须自己面对','B 急躁也好、退缩也罢，是孩子怕失败的反映，设法告诉他/她尝试比结果更重要','C 为避免这种事情恶化，暂时让孩子远离这些刺激，先保护好孩子'],
+        ['A 跟孩子分享一下自己类似的体验','B 告诉孩子不用紧张，不要过于担心分数','C 让孩子早些休息，家里人要保持安静'],];
+    var comment=['经过测试，怎么说呢，也必须说：您的家庭教养能力实在是太弱了。您的家庭教育太不适合了，亲子关系会十分紧张，如何辅导孩子，促进其发展方面，您实在是找不到什么有效的、针对性的方法。您太需要进行一次系统的有关儿童心理和教育科学知识技能的学习与训练了。再不立马行动，随着孩子长大，您作为父母，可能真的在孩子教育方面“无所事事”了，说这些，真的不是耸人听闻啊。',
+    '经过测试，真的必须坦率地告诉您：您的父母教养能力太弱了。您与孩子的关系相当很不融洽，在如何教孩子、辅导孩子方面，常常是“好心办坏事儿”，结果与您期望的大相径庭。结果提示您非常需要进行儿童心理与教育科学知识方面的系统学习和训练，否则，随着孩子年龄再大一些，您会更加被动。要立马行动啊！',
+    '经过测试，不得不坦率地告诉您：您的父母教养能力很弱。您与孩子的关系很僵硬，您的言语对孩子而言，是适得其反，在如何教育孩子方面，您基本上没有什么掌控感。所以，系统、深入地学习和领会儿童心理与教育的基础知识，并在此基础上，掌握科学的家庭方法并尝试将其应用于家教实践中，对您来说，实在是太急迫了。不能等啊！不然等孩子长大些，您就更驾驭不了局面了。',
+    '经过测试，我们只能坦率地告诉您：您的父母教养能力相当差。您对于家庭教养常常不知该如何做，而且常常不能理解，为何孩子就不喜欢您的这种教养方式，甚至出现跟您对着干的情况，也许让您更伤心的是，虽为孩子的父母，孩子居然不愿跟您倾心相谈。这说明，您太需要系统学习有关儿童心理和教育科学的知识和技能了。不然，随着孩子年龄的增加，有更大的困惑与苦恼在等着您。学习和更新儿童心理与教育知识与智能，时不我待啊！',
+        '经过测试，您的父母教养能力为弱。您在亲子关系方面处理得不怎么好，而且在孩子成长与教育方面常常出力不讨好，在孩子学习与发展方面，您常常觉得困惑和苦恼。因此，您需要系统而继续地学习孩子心理与教育方面的科学知识，夯实家庭教养的技能。这样，才能改善亲子关系，让孩子的发展与教育保持在良性的轨道上。随着孩子年龄增长，提出的家庭教养要求越来越高。因此，亲爱的家长，不能迟疑啊！',
+    '经过测试，您的父母教养能力差强人意。您与子女的关系可能比较紧张，在实施自己的教养理念方面往往缺乏方法与技巧，经常会出现弄巧成拙的情况。系统进行孩子心理与教育科学方面的知识与技能训练，对您来说太重要了。不能再犹豫了！',
+    '经过测试，您的父母教养能力为及格。您在家庭教育方面虽然意识到要与孩子处好关系，但常常遇到不知所措的情形，在教育过程中，虽有想做好的意识，但常常事与愿违，出现不愿看到的结果。建议您在孩子发展与教育科学知识方面进行系统的、结构性的升级。不然，随着孩子成长，父母教养的针对性与效能性将遇到更严峻的挑战。为您加油。',
+    '经过测试，您的父母教养能力为中等。您在家庭教育方面有些力不从心，方法与技巧运用还不能称得上得心应手，与孩子的关系处理也说不上游刃有余，需要更新有关孩子心理及有效家庭教养方面的科学知识与技能学习。如果不能及时做好知识与方法的准备，随着孩子年龄增加，亲子关系可能会出现更紧张的书面。所以，请从做一名学习型的父母开始，既对孩子起到榜样示范作用，也的确是增进您家庭教养效能的必由之路。',
+    '经过测试，您的父母教养能力为良好。您在家庭教育方面尽心尽力，注意处理好与孩子的关系，通常情况下比较胜任。但是，仍有一定的提升空间。建议您能参加一些父母教养能力提升方面的系统训练，以增进您的父母教养效能。还有，随着孩子年龄的增加，一些现在有用的父母教养方式可能就不太适用，这更要求父母更新孩子发展与教育的系统知识与技能。',
+    '恭喜您，您荣获了父母教养达人称号！经过测试，您的父母教养能力为优秀。您在家庭中与孩子的关系相处得比较好，并注意用科学的方法实施家庭教育。随着孩子年龄增加，一些教养方法可能就需要升级，特别是对孩子的认识方面，需要持续不断的知识与技能补充。请继续保持这种优势。'];
+    var correct=['','3','2','3','2','2','3','2','1','2','1'];//正确答案
+    var score=0;//用于记录总分
+    var now=[''];//用于记录用户答案
+    var n=1; //用于记录当前浏览的题
+    $('#content_txt').html(question[0]);
+    $('.s1').html(choose[0][0]);
+    $('.s2').html(choose[0][1]);
+    $('.s3').html(choose[0][2]);
+
+    //上一题
+    $("#botton_pre").click(function(){
+        if($('#title_txt').attr('name')=='10'){
+            $('#botton_next').html("下一题");
+        }
+        if($('#title_txt').attr('name')!="1"){
+            n-=1;
+            if(now[n]==correct[n]){
+                score-=10;
+            }
+            $('#title_txt').attr('name',n);
+            $('#title_txt').html('('+n+'/10)&nbsp;单选题');
+            $('#content_txt').html(question[n-1]);
+            $('.s1').html(choose[n-1][0]);
+            $('.s2').html(choose[n-1][1]);
+            $('.s3').html(choose[n-1][2]);
+//            $('#q'+now[n]).attr('checked','checked');
+            $('#q'+now[n]).prop('checked',true);
+        }
+    });
+
+    //下一题
+    $("#botton_next").click(function(){
+        if($('input:checked').val()==undefined){
+            alert('请选择一项');
+        }else {
+            if ($('#title_txt').attr('name') == "9") {
+                $(this).html("提交");
+            }
+            if ($('#title_txt').attr('name') != "10") {
+                now[n] = $('input:checked').val();
+                if (now[n] == correct[n]) {
+                    score += 10;
+                }
+                n += 1;
+                $('#title_txt').attr('name', n);
+                $('#title_txt').html('(' + n + '/10)&nbsp;单选题');
+                $('#content_txt').html(question[n - 1]);
+                $('.s1').html(choose[n - 1][0]);
+                $('.s2').html(choose[n - 1][1]);
+                $('.s3').html(choose[n - 1][2]);
+            } else {
+                now[n] = $('input:checked').val();
+                if (now[n] == correct[n]) {
+                    score += 10;
+                }
+//                alert(now);
+//                alert(score);
+                $('.div1').css('display', 'none');
+                $('.detail').css('display', 'block');
+                if(score>=0&&score<=9){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[0]);
+                }else if(score>=10&&score<=19){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[1]);
+                }else if(score>=20&&score<=29){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[2]);
+                }else if(score>=30&&score<=39){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[3]);
+                }else if(score>=40&&score<=49){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[4]);
+                }else if(score>=50&&score<=59){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[5]);
+                }else if(score>=60&&score<=69){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[6]);
+                }else if(score>=70&&score<=79){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[7]);
+                }else if(score>=80&&score<=89){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[8]);
+                }else if(score>=90&&score<=100){
+                    $(".score").html(score);
+                    $(".comment_detal").html(comment[9]);
+                }
+
+            }
+            $('input:checked').removeAttr('checked');
+        }});
+    $('.back').click(function(){
+       window.location.href="positiveTest.html";
+    });
+</script>
+</body>
+</html>

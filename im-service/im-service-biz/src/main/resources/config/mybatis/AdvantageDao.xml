@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starsea.im.biz.dao.AdvantageDao">
+
+    <sql id = "keys">
+         OpenId,School,Class,Name,Sex, Age, Question1,  Question2,  Question3,  Question4,  Question5,  Question6,  Question7,
+         Question8,  Question9,  Question10,  Question11,  Question12,  Question13,  Question14,  Question15,
+        Question16,  Question17,  Question18,  Question19,  Question20,  Question21,  Question22,  Question23,
+         Question24,  Question25
+    </sql>
+
+    <sql id="key-value">
+        (
+        <include refid="keys"/>
+        )
+        VALUES
+        (
+        #{openId},#{school}, #{banji}, #{name}, #{sex}, #{age},
+        #{Question1},  #{Question2},  #{Question3},  #{Question4},  #{Question5},  #{Question6},  #{Question7},
+        #{Question8},  #{Question9},  #{Question10},  #{Question11},  #{Question12},  #{Question13},  #{Question14},
+        #{Question15},  #{Question16},  #{Question17},  #{Question18},  #{Question19},  #{Question20},  #{Question21},
+        #{Question22},  #{Question23},  #{Question24},  #{Question25}
+        )
+    </sql>
+
+    <insert id="addAdvantageForm" parameterType="AdvantageForm">
+        INSERT INTO test.advantage
+        <include refid="key-value"/>
+    </insert>
+
+    <select id="queryAdvantageForm" resultType="AdvantageForm">
+        SELECT * FROM test.advantage
+    </select>
+
+    <select id="queryAdvantageFormByName" resultType="AdvantageForm" >
+       SELECT * FROM test.advantage where Name = #{name} order by id desc limit 1
+    </select>
+
+    <select id="queryAdvantageFormByOpenId" resultType="AdvantageForm" >
+        SELECT * FROM test.advantage where OpenId = #{openId} order by id desc limit 1
+    </select>
+
+</mapper>
